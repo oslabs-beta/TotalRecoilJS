@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+    "name": "Recoil Dev Tools",
+    "version": "1.0.0.0",
+    "description": "A React Recoil Debugger",
+  
+    "permissions": [
+      "activeTab",
+      "<all_urls>"
+    ],
+  
+    "background": {
+      "scripts": ["background.js"]
+    },
+  
+    "web_accessible_resources": ["hook.js"],
+  
+    "devtools_page": "devtools-root.html"
+  }
