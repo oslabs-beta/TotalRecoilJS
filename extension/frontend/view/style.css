@@ -1,3 +1,7 @@
+* {
+  margin: auto;
+}
+
 svg {
     background-color: rgba(0, 0, 0, 0.205);
   }
@@ -13,7 +17,8 @@ svg {
       border: 3px solid rgb(236, 217, 217);
     color: rgb(0, 0, 0);
     cursor: pointer;
-    padding: 25px 40px;
+    padding: 10px 40px;
+    width: 40%;
     display: inline-block;
     margin: 15px ;
     text-transform: uppercase;
@@ -32,25 +37,37 @@ svg {
     width: 33%;
     padding: 5px;
     text-align: center;
+    margin-top: 0;
+
   }
   
   .atom-div  {
     border: 2px solid black;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
   }
   
   .atom-information {
     color: red;
-    margin-left: 30px;
+    margin-left: 10px;
     text-align: left;
+    padding: 0;
+    border-left: solid 2px black;
+    padding-left: 10px;
   }
   
   .s-margin {
     margin-left: 10px;
+    margin-right: 0px;
   }
   
   #currentComponent {
     position: absolute;
-    left: 60%;
+    left: 58%;
+  }
+
+  #total-recoil {
+    position: absolute;
+    left: 1%;
+    font-size: 28px;
   }
