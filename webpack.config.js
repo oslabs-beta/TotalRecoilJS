@@ -68,6 +68,10 @@ module.exports = {
           from: 'extension/frontend/view/view.html',
           to: '../extension/view.html',
         },
+        {
+          from: 'extension/frontend/view/style.css',
+          to: '../extension/style.css',
+        },
         // { from: 'extension/backend/hook.js', to: '../extension/hook.js' },
         {
           from: 'extension/backend/content_script.js',
