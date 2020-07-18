@@ -41,26 +41,31 @@ svg {
 
   }
   
+.h3 {
+  margin-left: 5px;
+  margin-right: 0;
+  width: 20%
+}
+
+.information {
+  width: 100%;
+}
+
   .atom-div  {
     border: 2px solid black;
     display: flex;
-    /* align-items: center; */
   }
   
   .atom-information {
     color: red;
-    margin-left: 10px;
+    margin-left: 0px;
     text-align: left;
-    padding: 0;
+    padding-left: 15px;
     border-left: solid 2px black;
-    padding-left: 10px;
+    width: 80%
   }
   
-  .s-margin {
-    margin-left: 10px;
-    margin-right: 0px;
-  }
-  
+
   #currentComponent {
     position: absolute;
     left: 58%;
