@@ -24,5 +24,8 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0",
     "webpack-extension-reloader": "^1.1.4"
+  },
+  "dependencies": {
+    "lodash.throttle": "^4.1.1"
   }
 }
