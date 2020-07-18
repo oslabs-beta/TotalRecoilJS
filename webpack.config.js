@@ -8,7 +8,7 @@ module.exports = {
     bundle: './extension/frontend/view/view.js',
     // "create-panel": './extension/devtools/create-panel.js'
     background: './extension/backend/background.js',
-    hook: './extension/backend/hook.js',
+    hook: './extension/backend/hook.ts',
   },
   // Location to bundle them to
   output: {
