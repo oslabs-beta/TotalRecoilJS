@@ -18,13 +18,14 @@ const atom = {
       count: 0
     }]
   },
-  username: 'anthh'
+  username: 'anthh',
+  todos: [{name: 'eat',isCompleted: true}]
 }
 
-const atom = {
+const atoms = {
 
 }
-
+discord dc?
 export const flare = {
   "name": "Top Level",
   "atom": ["todoListState"],

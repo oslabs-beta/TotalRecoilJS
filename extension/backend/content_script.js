@@ -4,12 +4,14 @@
 const time = 500;
 
 setTimeout(() => {
+  console.log('what is happening here')
   const script = document.createElement('script');
   script.src = chrome.extension.getURL('hook.js');
   document.head.appendChild(script);
 }, time);
 
 const sendMessage = (tree) => {
+  console.log('sending message from content_script.js')
   chrome.runtime.sendMessage(tree);
 };
 
@@ -21,4 +23,4 @@ function handleMessage(request, sender, sendResponse) {
   }
 }
 
-window.addEventListener('message', handleMessage);
+window.addEventListener('message',handleMessage);

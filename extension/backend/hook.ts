@@ -3,6 +3,7 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable func-names */
 /* eslint-disable no-underscore-dangle */
+
 const throttle = require('lodash.throttle');
 // need to define types here
 declare global {
@@ -261,12 +262,13 @@ function recurse(node: any, parentArr) {
   getState(node, component);
   getProps(node, component);
   getHooks(node, component);
+  getAtom(component);
   // insert component into parent's children array
   parentArr.push(component);
   // below functions must execute after inner recursion
   getChildren(node, component, parentArr);
   getStateType(component);
-  getAtom(component);
+
   // getAtomValues(currentState);
   // console.log('currentState after populating data: ', currentState)
   // parentArr.push(currentState);

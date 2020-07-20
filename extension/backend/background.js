@@ -1,7 +1,10 @@
-/* eslint-disable consistent-return */
+// /* eslint-disable consistent-return */
 const connectedTabs = {};
 
 chrome.runtime.onConnect.addListener((port) => {
+
+  
+
   const panelListener = (request, sender, sendResponse) => {
     if (request.name === 'connect' && request.tabID) {
       console.log('tab connected, tabs: ', connectedTabs);
@@ -16,6 +19,9 @@ chrome.runtime.onConnect.addListener((port) => {
   port.onMessage.addListener(panelListener);
   port.onDisconnect.addListener(function (port) {
     port.onMessage.removeListener(panelListener);
+
+
+    console.log('connecting',connectedTabs)
 
     const tabs = Object.keys(connectedTabs);
     for (let k = 0; k < tabs.length; k++) {
