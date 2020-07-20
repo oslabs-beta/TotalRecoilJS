@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // /* eslint-disable consistent-return */
 const connectedTabs = {};
 
@@ -60,3 +61,6 @@ chrome.tabs.onUpdated.addListener(function(tabId,changeInfo,tab){
     });
   }
 });
+=======
+/* eslint-disable */
+>>>>>>> e4ad8255f2151ceaa9fd94b6dcbb5f8f8311491c

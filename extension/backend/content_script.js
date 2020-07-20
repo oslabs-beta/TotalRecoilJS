@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-undef */
 
@@ -24,3 +25,6 @@ function handleMessage(request, sender, sendResponse) {
 }
 
 window.addEventListener('message',handleMessage);
+=======
+/* eslint-disable */
+>>>>>>> e4ad8255f2151ceaa9fd94b6dcbb5f8f8311491c
