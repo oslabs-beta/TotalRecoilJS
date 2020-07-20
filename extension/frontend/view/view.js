@@ -192,7 +192,9 @@ port.onMessage.addListener((message) => {
  
 })
 
-chrome.runtime.sendMessage({
-  name: 'inject-script',
-  tabID: chrome.devtools.inspectedWindow.tabId,
-});
+//SEEMS LIKE THE BOTTOM CODE IS NOT NEEDED
+
+// chrome.runtime.sendMessage({
+//   name: 'inject-script',
+//   tabID: chrome.devtools.inspectedWindow.tabId,
+// });
