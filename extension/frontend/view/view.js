@@ -39,9 +39,6 @@ function printAtomsToScreen(atoms) {
     let containerInfoDiv = document.createElement('div');
     containerInfoDiv.classList.add('atom-information');
 
-    let containerInfoDiv = document.createElement('div');
-    containerInfoDiv.classList.add('atom-information');
-
     let atomState = document.createElement('h3');
     atomState.classList.add('s-margin');
 
@@ -82,8 +79,6 @@ function createTree(flare) {
     .attr('height', svgHeight)
     .append('g')
     .attr('transform', 'translate(-30, 50)');
-
-  let tree = d3.tree().size([panelWidth - 80, treeHeight]);
 
   // gives coordinates to the nodes
   let tree = d3.tree().size([panelWidth - 80, treeHeight]);
@@ -183,7 +178,9 @@ port.onMessage.addListener((message) => {
   }
 });
 
-chrome.runtime.sendMessage({
-  name: 'inject-script',
-  tabID: chrome.devtools.inspectedWindow.tabId,
-});
+//SEEMS LIKE THE BOTTOM CODE IS NOT NEEDED
+
+// chrome.runtime.sendMessage({
+//   name: 'inject-script',
+//   tabID: chrome.devtools.inspectedWindow.tabId,
+// });
