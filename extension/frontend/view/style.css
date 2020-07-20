@@ -1,0 +1,78 @@
+* {
+  margin: auto;
+}
+
+svg {
+    background-color: rgba(0, 0, 0, 0.205);
+  }
+  
+  #main-container {
+    display: flex;
+  }
+  
+  button {
+    background: none;
+    font-family: inherit;
+    font-size: inherit;
+      border: 3px solid rgb(236, 217, 217);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    padding: 10px 40px;
+    width: 40%;
+    display: inline-block;
+    margin: 15px ;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  
+  button:hover {
+    color: #E50914;
+  }
+  
+  #info {
+    width: 33%;
+    padding: 5px;
+    text-align: center;
+    margin-top: 0;
+
+  }
+  
+.h3 {
+  margin-left: 5px;
+  margin-right: 0;
+  width: 20%
+}
+
+.information {
+  width: 100%;
+}
+
+  .atom-div  {
+    border: 2px solid black;
+    display: flex;
+  }
+  
+  .atom-information {
+    color: red;
+    margin-left: 0px;
+    text-align: left;
+    padding-left: 15px;
+    border-left: solid 2px black;
+    width: 80%
+  }
+  
+
+  #currentComponent {
+    position: absolute;
+    left: 58%;
+  }
+
+  #total-recoil {
+    position: absolute;
+    left: 1%;
+    font-size: 28px;
+  }
