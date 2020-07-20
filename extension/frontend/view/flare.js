@@ -18,10 +18,11 @@ const atom = {
       count: 0
     }]
   },
-  username: 'anthh'
+  username: 'anthh',
+  todos: [{name: 'eat',isCompleted: true}]
 }
 
-const atom = {
+const atoms = {
 
 }
 
