@@ -25,7 +25,7 @@ const atom = {
 const atoms = {
 
 }
-discord dc?
+
 export const flare = {
   "name": "Top Level",
   "atom": ["todoListState"],
