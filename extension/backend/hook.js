@@ -28,13 +28,15 @@ function patcher() {
     function newFunc(...args){
       const fiberDOM = args[1];
       const rootNode = fiberDOM.current.stateNode.current;
+      console.log('fibertree rootNode: ', rootNode);
       const treeArr = [];
       try {
         recurseThrottle(rootNode.child, treeArr);
-        console.log('arr before adding atom data: ', treeArr)
+        // console.log('arr before adding atom data: ', treeArr)
         const recoilCurrentState = {}
         getAtomValues(recoilCurrentState);
         treeArr.push(recoilCurrentState);
+        console.log('arr before sending to content script: ', treeArr);
         if (treeArr.length > 0) sendToContentScript(treeArr);
       } catch (err) {
         console.log('Error at onCommitFiberRoot:', err)
@@ -53,6 +55,7 @@ function getComponentData(node, arr) {
   const component = {};
   if(getName(node, component, arr) === -1) return;
   getState(node, component)
+  // console.log('component', component);
   getAtom(component)
   arr.push(component)
   //getchildren calls getComponentData (name, state, atom), pushes into nested "children" array
@@ -108,13 +111,16 @@ function getAtom(component) {
   
   // this will loop through component.state to get the atom data
   for(let i = 0; i < component.state.length; i++) {
-    if (component.state[i]['current'] instanceof Set || component.state[i]['current'] instanceof Map) {
-      // this code will give us the value from the set to add to our newly created set
-      const it = component.state[i]['current'].values();
-      let first = it.next();
-      atomArr.add(first.value);
+    if (!component.state) {
+      if (component.state[i]['current'] instanceof Set || component.state[i]['current'] instanceof Map) {
+        // if (component.state[i]['current'] instanceof Set) {
+        // this code will give us the value from the set to add to our newly created set
+        const it = component.state[i]['current'].values();
+        let first = it.next();
+        atomArr.add(first.value);
+      }
+      component.atoms = Array.from(atomArr);
     }
-    component.atoms = Array.from(atomArr);
   }
 }
 
@@ -148,6 +154,7 @@ function getAtomValues(recoilCurrentState) {
 }
 
 function cleanState(stateNode, depth = 0) {
+  // console.log('stateNode: ', stateNode);
   let result;
   if (depth > 10) return "Max recursion depth reached!"
   //checking if the stateNode is not an object or function, if it is not either return the stateNode
@@ -173,7 +180,12 @@ function cleanState(stateNode, depth = 0) {
     if (Array.isArray(stateNode)) {
       result = [];
       stateNode.forEach((el, index) => {
-        result[index] = cleanState(el, depth + 1)
+         if (el !== null) {
+          //  console.log('el', el)
+           result[index] = cleanState(el, depth + 1)
+         } else {
+          result[index] = el;
+         }
       })
     } else {
       result = {};
