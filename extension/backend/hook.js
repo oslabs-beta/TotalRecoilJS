@@ -38,7 +38,7 @@ function patcher() {
         if (treeArr.length > 0) sendToContentScript(treeArr);
       } catch (err) {
         console.log('Error at onCommitFiberRoot:', err)
-        senContentScript('Uh oh something went wrong with our application, please submit the issue on https://github.com/oslabs-beta/TotalRecoilJS')
+        sendToContentScript('Uh oh something went wrong with our application, please submit the issue on https://github.com/oslabs-beta/TotalRecoilJS')
       }
       return original(...args);
     }
