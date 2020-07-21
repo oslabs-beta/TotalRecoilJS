@@ -27,13 +27,14 @@ function patcher() {
   devTools.onCommitFiberRoot = (function (original) {
     function newFunc(...args){
       const fiberDOM = args[1];
+      console.log(fiberDOM);
       const rootNode = fiberDOM.current.stateNode.current;
       const treeArr = [];
       try {
         recurseThrottle(rootNode.child, treeArr);
         console.log('arr before adding atom data: ', treeArr)
         const recoilCurrentState = {}
-        throttledGetAtomValues(recoilCurrentState);
+        getAtomValues(recoilCurrentState);
         treeArr.push(recoilCurrentState);
         if (treeArr.length > 0) sendToContentScript(treeArr);
       } catch (err) {
@@ -48,7 +49,7 @@ function patcher() {
 }
 
 const recurseThrottle = throttle(getComponentData, 300);
-const throttledGetAtomValues = throttle(getAtomValues, 300);
+//const throttledGetAtomValues = throttle(getAtomValues, 300);
 
 function getComponentData(node, arr) {
   const component = {};
