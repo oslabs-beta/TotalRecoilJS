@@ -109,7 +109,7 @@ function getAtom(component) {
   
   // this will loop through component.state to get the atom data
   for(let i = 0; i < component.state.length; i++) {
-    if (component.state[i]['current'] instanceof Set) {
+    if (component.state[i]['current'] instanceof Set || component.state[i]['current'] instanceof Map) {
       // this code will give us the value from the set to add to our newly created set
       const it = component.state[i]['current'].values();
       let first = it.next();
@@ -135,13 +135,18 @@ function getChildren(node, component, arr) {
 
 function getAtomValues(recoilCurrentState) {
   // recoildebugstate has the atom data stored
-  let atomData = window.$recoilDebugStates[window.$recoilDebugStates.length - 1];
   const tempObj = {};
-  atomData['atomValues'].forEach((value, key) => {
-    // console.log('Key:', key, 'value:', value.contents);
-    tempObj[key] = value.contents;
-  })
-
+  if (
+    window.$recoilDebugStates &&
+    Array.isArray(window.$recoilDebugStates) &&
+    window.$recoilDebugStates.length
+  ) {
+    let atomData = window.$recoilDebugStates[window.$recoilDebugStates.length - 1];
+    atomData['atomValues'].forEach((value, key) => {
+      // console.log('Key:', key, 'value:', value.contents);
+      tempObj[key] = value.contents;
+    })
+  }
   recoilCurrentState.atomVal = tempObj;
 }
 
@@ -160,9 +165,13 @@ function cleanState(stateNode, depth = 0) {
     if (stateNode instanceof Set) {
       return stateNode;
     }
+    if (stateNode instanceof Map) {
+      return stateNode;
+    }
     if (stateNode.$$typeof && typeof stateNode.$$typeof === 'symbol') {
       //Realize includes edge case check for itemType!==string - when would this happen?
-      return `<${stateNode.type.name} />`;
+      // return `<${stateNode.type.name} />`;
+      return stateNode.type && typeof stateNode.type !== 'string' ? `<${stateNode.type.name} />` : 'React component';
     }
     if (Array.isArray(stateNode)) {
       result = [];
@@ -183,7 +192,8 @@ function cleanState(stateNode, depth = 0) {
   }
 }
 
-function sendToContentScript(tree) {
+function sendToContentScript(obj) {
+  const tree = JSON.parse(JSON.stringify(obj));
   window.postMessage({ tree }, '*');
 }
 
