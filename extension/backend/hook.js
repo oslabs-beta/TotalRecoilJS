@@ -8,58 +8,61 @@
 */
 
 /* eslint-disable */
-const throttle = require('lodash.throttle')
+const throttle = require('lodash.throttle');
 
 function patcher() {
-  
   // grabs the React DevTools from the browser
   const devTools = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
 
   // if conditions to check if devTools is running or the user application is react
-  if(!devTools) {
-    sendToContentScript('devTools is not activated, please activate!')
+  if (!devTools) {
+    sendToContentScript('devTools is not activated, please activate!');
   }
-  if(devTools.renderers && devTools.renderers.size < 1) {
-    sendToContentScript('The page is not using React or if it is using React please trigger a state change!')
+  if (devTools.renderers && devTools.renderers.size < 1) {
+    sendToContentScript(
+      'The page is not using React or if it is using React please trigger a state change!'
+    );
   }
 
   // adding/patching functionality to capture fiberTree data to the onCommitFiberRoot method in devTools
   devTools.onCommitFiberRoot = (function (original) {
-    function newFunc(...args){
+    function newFunc(...args) {
       const fiberDOM = args[1];
       const rootNode = fiberDOM.current.stateNode.current;
       const treeArr = [];
       try {
         recurseThrottle(rootNode.child, treeArr);
-        console.log('arr before adding atom data: ', treeArr)
-        const recoilCurrentState = {}
+        console.log('arr before adding atom data: ', treeArr);
+        const recoilCurrentState = {};
         getAtomValues(recoilCurrentState);
         treeArr.push(recoilCurrentState);
         if (treeArr.length > 0) sendToContentScript(treeArr);
       } catch (err) {
-        console.log('Error at onCommitFiberRoot:', err)
-        senContentScript('Uh oh something went wrong with our application, please submit the issue on https://github.com/oslabs-beta/TotalRecoilJS')
+        console.log('Error at onCommitFiberRoot:', err);
+        senContentScript(
+          'Uh oh something went wrong with our application, please submit the issue on https://github.com/oslabs-beta/TotalRecoilJS'
+        );
       }
       return original(...args);
     }
     return newFunc;
-  })(devTools.onCommitFiberRoot) // devTools.onCommitFiberRoot runs immediately after adding our new functionality to devTools.onCommitFiberRoot
-  
+  })(devTools.onCommitFiberRoot); // devTools.onCommitFiberRoot runs immediately after adding our new functionality to devTools.onCommitFiberRoot
 }
 
 const recurseThrottle = throttle(getComponentData, 300);
 
 function getComponentData(node, arr) {
   const component = {};
-  if(getName(node, component, arr) === -1) return;
-  getState(node, component)
-  getAtom(component)
-  arr.push(component)
+  if (getName(node, component, arr) === -1) return;
+  getState(node, component);
+  getAtom(component);
+  arr.push(component);
   //getchildren calls getComponentData (name, state, atom), pushes into nested "children" array
-  getChildren(node, component, arr)
+  getChildren(node, component, arr);
 }
 
 function getName(node, component, arr) {
+  console.log(node);
   if (!node.type || !node.type.name) {
     // if this is an HTML tag just keep recursing without saving the name
     if (node.child) getComponentData(node.child, arr);
@@ -73,12 +76,12 @@ function getName(node, component, arr) {
 function getState(node, component) {
   //checking for 3 conditions (if state exists, if its a linkedlist with state, if its not a linkedlist with state)
   //check if state exists in the node, if not just return and exit out of the function
-  if(!node.memoizedState) return;
+  if (!node.memoizedState) return;
   // check if the state is stored as a linkedlist
-  if(node.memoizedState.memoizedState !== undefined) {
+  if (node.memoizedState.memoizedState !== undefined) {
     //check if you're at the end of the linked list chain (.next = null)
     if (node.memoizedState.next === null) {
-      component.state = cleanState(node.memoizedState.memoizedState)
+      component.state = cleanState(node.memoizedState.memoizedState);
       return;
     }
     // initialize array because state is a linkedlist so you can store multiple states in the array
@@ -87,13 +90,13 @@ function getState(node, component) {
     return;
   }
   // if the state is not stored as a linkedlist, then run the clean state function
-  component.state = cleanState(node.memoizedState)
+  component.state = cleanState(node.memoizedState);
 
   function linkedListRecurse(node, treeArr) {
-    treeArr.push(cleanState(node.memoizedState))
+    treeArr.push(cleanState(node.memoizedState));
     //try the below without !== statement - what's the difference?
     if (node.next && node.memoizedState !== node.next.memoizedState) {
-      linkedListRecurse(node.next, treeArr) 
+      linkedListRecurse(node.next, treeArr);
     }
   }
 }
@@ -105,9 +108,9 @@ function getAtom(component) {
   }
   // Make a new Set
   const atomArr = new Set();
-  
+
   // this will loop through component.state to get the atom data
-  for(let i = 0; i < component.state.length; i++) {
+  for (let i = 0; i < component.state.length; i++) {
     if (component.state[i]['current'] instanceof Set) {
       // this code will give us the value from the set to add to our newly created set
       const it = component.state[i]['current'].values();
@@ -132,22 +135,24 @@ function getChildren(node, component, arr) {
 
 function getAtomValues(recoilCurrentState) {
   // recoildebugstate has the atom data stored
-  let atomData = window.$recoilDebugStates[window.$recoilDebugStates.length - 1];
+  let atomData =
+    window.$recoilDebugStates[window.$recoilDebugStates.length - 1];
   const tempObj = {};
   atomData['atomValues'].forEach((value, key) => {
     // console.log('Key:', key, 'value:', value.contents);
     tempObj[key] = value.contents;
-  })
+  });
 
   recoilCurrentState.atomVal = tempObj;
 }
 
 function cleanState(stateNode, depth = 0) {
   let result;
-  if (depth > 10) return "Max recursion depth reached!"
+  if (depth > 10) return 'Max recursion depth reached!';
   //checking if the stateNode is not an object or function, if it is not either return the stateNode
-  if (typeof stateNode !== 'object' && typeof stateNode !== 'function') return stateNode;
-  
+  if (typeof stateNode !== 'object' && typeof stateNode !== 'function')
+    return stateNode;
+
   if (stateNode === null) {
     return null;
   }
@@ -164,12 +169,12 @@ function cleanState(stateNode, depth = 0) {
     if (Array.isArray(stateNode)) {
       result = [];
       stateNode.forEach((el, index) => {
-        result[index] = cleanState(el, depth + 1)
-      })
+        result[index] = cleanState(el, depth + 1);
+      });
     } else {
       result = {};
       Object.keys(stateNode).forEach((key) => {
-        result[key] = cleanState(stateNode[key], depth + 1)
+        result[key] = cleanState(stateNode[key], depth + 1);
       });
     }
     return result;
