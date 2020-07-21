@@ -33,12 +33,12 @@ function patcher() {
         recurseThrottle(rootNode.child, treeArr);
         console.log('arr before adding atom data: ', treeArr)
         const recoilCurrentState = {}
-        getAtomValues(recoilCurrentState);
+        throttledGetAtomValues(recoilCurrentState);
         treeArr.push(recoilCurrentState);
         if (treeArr.length > 0) sendToContentScript(treeArr);
       } catch (err) {
         console.log('Error at onCommitFiberRoot:', err)
-        senContentScript('Uh oh something went wrong with our application, please submit the issue on https://github.com/oslabs-beta/TotalRecoilJS')
+        sendToContentScript('Uh oh something went wrong with our application, please submit the issue on https://github.com/oslabs-beta/TotalRecoilJS')
       }
       return original(...args);
     }
@@ -48,6 +48,7 @@ function patcher() {
 }
 
 const recurseThrottle = throttle(getComponentData, 300);
+const throttledGetAtomValues = throttle(getAtomValues, 300);
 
 function getComponentData(node, arr) {
   const component = {};
@@ -129,6 +130,8 @@ function getChildren(node, component, arr) {
   //if no more child or sibling nodes then return the children array
   if (children.length > 0) component.children = children;
 }
+
+
 
 function getAtomValues(recoilCurrentState) {
   // recoildebugstate has the atom data stored
