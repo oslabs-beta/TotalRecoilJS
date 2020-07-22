@@ -154,31 +154,34 @@ function getChildren(node, component, arr) {
 //   recoilCurrentState.atomVal = tempObj;
 // }
 
-function getAtomValues(obj, key, out) {
-
-  proto = Object.prototype,
-  ts = proto.toString,
-  hasOwn = proto.hasOwnProperty.bind(obj);
-  if ('[object Array]' !== ts.call(out)) out = [];
-  for (let i in obj) {
-    if (hasOwn(i)) {
-        if (i === key) {
-            out.push(obj[i]);
-        } else if ('[object Array]' === ts.call(obj[i]) || '[object Object]' === ts.call(obj[i])) {
-          getAtomValues(obj[i], key, out);
-        }
+function getAtomValues(obj, prop) {
+  var arr = [];
+  function recursivelyFindProp(o, keyToBeFound) {
+    if (typeof o !== 'object' || !o) {
+      return;
     }
+    Object.keys(o).forEach(function (key) {
+      if (key === keyToBeFound) {
+        arr.push(o[key])
+      } else {
+        if (typeof o[key] === 'object') {
+          recursivelyFindProp(o[key], keyToBeFound);
+        } 
+    }
+    });
   }
+  recursivelyFindProp(obj, prop);
   const result = {}
-  for (let i = 0; i < out.length; i++) {
-    if (out[i]) {
-      for (let [key, value] of out[i]) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i]) {
+      for (let [key, value] of arr[i]) {
         result[key] = value.contents;
       }
     }
   }
   return result;
-}
+
+} 
 
 function cleanState(stateNode, depth = 0) {
   // console.log('stateNode: ', stateNode);
