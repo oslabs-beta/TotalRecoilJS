@@ -25,7 +25,6 @@ const Container = () => {
 
         port.onMessage.addListener((message) => {
             if (message.length === 2){
-                // console.log('message received by panel', message);
                 setTree(message)
             }
         })

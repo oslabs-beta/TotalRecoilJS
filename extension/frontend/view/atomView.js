@@ -13,7 +13,6 @@ export const Atoms = (props) => {
                 let atomContainer = document.createElement('div')
                 atomContainer.classList.add('atom-div')
                 
-                console.log(prop)
                 // Set atomname text to prop which will be the name of the atom
                 const atomName = document.createElement('h3')
                 atomName.textContent = prop
@@ -23,12 +22,12 @@ export const Atoms = (props) => {
                 atomName.addEventListener('click',(e) => {
                     // console.log('is it working d3 blink')
                     let atom = e.target.innerHTML
-                      d3.selectAll('circle').style('fill', originalColor)
+                      d3.selectAll('circle').style('fill', originalColor).attr('r',5)
                     
                     let svg = d3.select('#canvas').selectAll('.node').each(function(e){
                       if (!e.data.atoms){}
                       else if(e.data.atoms.includes(atom)){
-                        d3.select(this).select('circle').style('fill','#eee')
+                        d3.select(this).select('circle').style('fill','#FF3A37').attr('r',10)
                       }
                       
                     })
@@ -37,10 +36,8 @@ export const Atoms = (props) => {
                 let atomState = document.createElement('h3')
                 atomState.classList.add('s-margin')
 
-
                 let text = JSON.stringify(atoms[prop])
                 atomState.textContent = `State : ${text}`
-
 
                 atomContainer.appendChild(atomName)
                 atomContainer.appendChild(atomState)
