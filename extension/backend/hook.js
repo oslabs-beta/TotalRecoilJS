@@ -172,11 +172,15 @@ function getAtomValues(obj, prop) {
     });
   }
   recursivelyFindProp(obj, prop);
-  const result = {}
+  const result = {
+    'atomVal': {
+
+    }
+  }
   for (let i = 0; i < arr.length; i++) {
     if (arr[i]) {
       for (let [key, value] of arr[i]) {
-        result[key] = value.contents;
+        result.atomVal[key] = value.contents;
       }
     }
   }
