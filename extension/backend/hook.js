@@ -11,21 +11,21 @@
 const throttle = require('lodash.throttle')
 
 function patcher() {
-  
+
   // grabs the React DevTools from the browser
   const devTools = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
 
   // if conditions to check if devTools is running or the user application is react
-  if(!devTools) {
+  if (!devTools) {
     sendToContentScript('devTools is not activated, please activate!')
   }
-  if(devTools.renderers && devTools.renderers.size < 1) {
+  if (devTools.renderers && devTools.renderers.size < 1) {
     sendToContentScript('The page is not using React or if it is using React please trigger a state change!')
   }
 
   // adding/patching functionality to capture fiberTree data to the onCommitFiberRoot method in devTools
   devTools.onCommitFiberRoot = (function (original) {
-    function newFunc(...args){
+    function newFunc(...args) {
       const fiberDOM = args[1];
       console.log(fiberDOM);
       const rootNode = fiberDOM.current.stateNode.current;
@@ -48,14 +48,14 @@ function patcher() {
     }
     return newFunc;
   })(devTools.onCommitFiberRoot) // devTools.onCommitFiberRoot runs immediately after adding our new functionality to devTools.onCommitFiberRoot
-  
+
 }
 
 const recurseThrottle = throttle(getComponentData, 300);
 
 function getComponentData(node, arr) {
   const component = {};
-  if(getName(node, component, arr) === -1) return;
+  if (getName(node, component, arr) === -1) return;
   getState(node, component)
   // console.log('component', component);
   getAtom(component)
@@ -78,9 +78,9 @@ function getName(node, component, arr) {
 function getState(node, component) {
   //checking for 3 conditions (if state exists, if its a linkedlist with state, if its not a linkedlist with state)
   //check if state exists in the node, if not just return and exit out of the function
-  if(!node.memoizedState) return;
+  if (!node.memoizedState) return;
   // check if the state is stored as a linkedlist
-  if(node.memoizedState.memoizedState !== undefined) {
+  if (node.memoizedState.memoizedState !== undefined) {
     //check if you're at the end of the linked list chain (.next = null)
     if (node.memoizedState.next === null) {
       component.state = cleanState(node.memoizedState.memoizedState)
@@ -98,7 +98,7 @@ function getState(node, component) {
     treeArr.push(cleanState(node.memoizedState))
     //try the below without !== statement - what's the difference?
     if (node.next && node.memoizedState !== node.next.memoizedState) {
-      linkedListRecurse(node.next, treeArr) 
+      linkedListRecurse(node.next, treeArr)
     }
   }
 }
@@ -110,9 +110,9 @@ function getAtom(component) {
   }
   // Make a new Set
   const atomArr = new Set();
-  
+
   // this will loop through component.state to get the atom data
-  for(let i = 0; i < component.state.length; i++) {
+  for (let i = 0; i < component.state.length; i++) {
     if (!component.state) {
       if (component.state[i]['current'] instanceof Set || component.state[i]['current'] instanceof Map) {
         // if (component.state[i]['current'] instanceof Set) {
@@ -167,8 +167,8 @@ function getAtomValues(obj, prop) {
       } else {
         if (typeof o[key] === 'object') {
           recursivelyFindProp(o[key], keyToBeFound);
-        } 
-    }
+        }
+      }
     });
   }
   recursivelyFindProp(obj, prop);
@@ -186,7 +186,7 @@ function getAtomValues(obj, prop) {
   }
   return result;
 
-} 
+}
 
 function cleanState(stateNode, depth = 0) {
   // console.log('stateNode: ', stateNode);
@@ -194,7 +194,7 @@ function cleanState(stateNode, depth = 0) {
   if (depth > 10) return "Max recursion depth reached!"
   //checking if the stateNode is not an object or function, if it is not either return the stateNode
   if (typeof stateNode !== 'object' && typeof stateNode !== 'function') return stateNode;
-  
+
   if (stateNode === null) {
     return null;
   }
@@ -215,12 +215,12 @@ function cleanState(stateNode, depth = 0) {
     if (Array.isArray(stateNode)) {
       result = [];
       stateNode.forEach((el, index) => {
-         if (el !== null) {
+        if (el !== null) {
           //  console.log('el', el)
-           result[index] = cleanState(el, depth + 1)
-         } else {
+          result[index] = cleanState(el, depth + 1)
+        } else {
           result[index] = el;
-         }
+        }
       })
     } else {
       result = {};

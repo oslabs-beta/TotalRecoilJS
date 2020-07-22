@@ -25,6 +25,9 @@ export const Tree = (props) => {
                 .append('svg')
                 .attr('width', panelWidth)
                 .attr('height', svgHeight)
+                .call(d3.zoom().on("zoom", function () {
+                    svg.attr("transform", d3.event.transform)
+                }))
                 .append('g')
                 .attr('transform', 'translate(-30, 30)');
 
