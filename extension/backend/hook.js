@@ -48,6 +48,7 @@ function getComponentData(node, arr) {
   const component = {};
   if (getName(node, component, arr) === -1) return;
   getState(node, component)
+  // console.log('component', component);
   getAtom(component)
   arr.push(component)
   //getchildren calls getComponentData (name, state, atom), pushes into nested "children" array
@@ -98,14 +99,17 @@ function getAtom(component) {
   const atomArr = new Set();
 
   // this will loop through component.state to get the atom data
-  for (let i = 0; i < component.state.length; i++) {
-    if (component.state[i]['current'] instanceof Set || component.state[i]['current'] instanceof Map) {
-      // this code will give us the value from the set to add to our newly created set
-      const it = component.state[i]['current'].values();
-      let first = it.next();
-      atomArr.add(first.value);
+  for(let i = 0; i < component.state.length; i++) {
+    if (!component.state) {
+      if (component.state[i]['current'] instanceof Set || component.state[i]['current'] instanceof Map) {
+        // if (component.state[i]['current'] instanceof Set) {
+        // this code will give us the value from the set to add to our newly created set
+        const it = component.state[i]['current'].values();
+        let first = it.next();
+        atomArr.add(first.value);
+      }
+      component.atoms = Array.from(atomArr);
     }
-    component.atoms = Array.from(atomArr);
   }
 }
 function getChildren(node, component, arr) {
@@ -137,31 +141,37 @@ function getChildren(node, component, arr) {
 //   recoilCurrentState.atomVal = tempObj;
 // }
 
-function getAtomValues(obj, key, out) {
-  proto = Object.prototype,
-  ts = proto.toString,
-  hasOwn = proto.hasOwnProperty.bind(obj);
-  if ('[object Array]' !== ts.call(out)) out = [];
-  for (let i in obj) {
-    if (hasOwn(i)) {
-        if (i === key) {
-            out.push(obj[i]);
-        } else if ('[object Array]' === ts.call(obj[i]) || '[object Object]' === ts.call(obj[i])) {
-          getAtomValues(obj[i], key, out);
-        }
+function getAtomValues(obj, prop) {
+  var arr = [];
+  function recursivelyFindProp(o, keyToBeFound) {
+    if (typeof o !== 'object' || !o) {
+      return;
     }
+    Object.keys(o).forEach(function (key) {
+      if (key === keyToBeFound) {
+        arr.push(o[key])
+      } else {
+        if (typeof o[key] === 'object') {
+          recursivelyFindProp(o[key], keyToBeFound);
+        } 
+    }
+    });
   }
+  recursivelyFindProp(obj, prop);
   const result = {}
-  for (let i = 0; i < out.length; i++) {
-    if (out[i]) {
-      for (let [key, value] of out[i]) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i]) {
+      for (let [key, value] of arr[i]) {
         result[key] = value.contents;
       }
     }
   }
   return result;
-}
+
+} 
+
 function cleanState(stateNode, depth = 0) {
+  // console.log('stateNode: ', stateNode);
   let result;
   if (depth > 10) return "Max recursion depth reached!"
   //checking if the stateNode is not an object or function, if it is not either return the stateNode
@@ -186,7 +196,12 @@ function cleanState(stateNode, depth = 0) {
     if (Array.isArray(stateNode)) {
       result = [];
       stateNode.forEach((el, index) => {
-        result[index] = cleanState(el, depth + 1)
+         if (el !== null) {
+          //  console.log('el', el)
+           result[index] = cleanState(el, depth + 1)
+         } else {
+          result[index] = el;
+         }
       })
     } else {
       result = {};
