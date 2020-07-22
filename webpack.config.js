@@ -5,7 +5,7 @@ const ExtensionReloader = require('webpack-extension-reloader');
 module.exports = {
   // Files to bundle
   entry: {
-    bundle: './extension/frontend/view/view.js',
+    bundle: './extension/frontend/view/reactview.js',
     // "create-panel": './extension/devtools/create-panel.js'
     background: './extension/backend/background.js',
     hook: './extension/backend/hook.js',
@@ -43,6 +43,19 @@ module.exports = {
             exclude: /node_modules/,
           },
         ],
+      },
+      {
+        test: /\.jsx?/,
+        exclude: /(node_modules)/,
+        resolve: {
+          extensions: ['.js', '.jsx'],
+        },
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
       },
     ],
   },
