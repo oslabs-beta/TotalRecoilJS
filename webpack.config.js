@@ -89,7 +89,7 @@ module.exports = {
         {
           from: 'extension/backend/content_script.js',
           to: '../extension/content_script.js',
-        }
+        },
       ],
     }),
     // Enables hot reloading - use npm run dev command
@@ -103,8 +103,8 @@ module.exports = {
   ],
 
   optimization: {
-    minimize: false
+    minimize: false,
   },
-  
+
   devtool: 'cheap-module-source-map', // Needed as to stop Chrome eval errors when using dev server
 };
