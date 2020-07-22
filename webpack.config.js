@@ -5,7 +5,7 @@ const ExtensionReloader = require('webpack-extension-reloader');
 module.exports = {
   // Files to bundle
   entry: {
-    bundle: './extension/frontend/view/reactview.js',
+    bundle: './extension/frontend/view/view.js',
     // "create-panel": './extension/devtools/create-panel.js'
     background: './extension/backend/background.js',
     hook: './extension/backend/hook.js',
