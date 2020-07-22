@@ -28,14 +28,15 @@ function patcher() {
     function newFunc(...args){
       const fiberDOM = args[1];
       const rootNode = fiberDOM.current.stateNode.current;
-      console.log('fibertree rootNode: ', rootNode);
+      // console.log('fibertree rootNode: ', rootNode);
       const treeArr = [];
       try {
         recurseThrottle(rootNode.child, treeArr);
         // console.log('arr before adding atom data: ', treeArr)
-        const recoilCurrentState = {}
-        getAtomValues(recoilCurrentState);
-        treeArr.push(recoilCurrentState);
+        // const recoilCurrentState = {}
+        // getAtomValues(recoilCurrentState);
+        const atomState = {};
+        treeArr.push(getAtomValues(treeArr[0], 'atomValues'));
         console.log('arr before sending to content script: ', treeArr);
         if (treeArr.length > 0) sendToContentScript(treeArr);
       } catch (err) {
@@ -136,21 +137,47 @@ function getChildren(node, component, arr) {
   if (children.length > 0) component.children = children;
 }
 
-function getAtomValues(recoilCurrentState) {
-  // recoildebugstate has the atom data stored
-  const tempObj = {};
-  if (
-    window.$recoilDebugStates &&
-    Array.isArray(window.$recoilDebugStates) &&
-    window.$recoilDebugStates.length
-  ) {
-    let atomData = window.$recoilDebugStates[window.$recoilDebugStates.length - 1];
-    atomData['atomValues'].forEach((value, key) => {
-      // console.log('Key:', key, 'value:', value.contents);
-      tempObj[key] = value.contents;
-    })
+// function getAtomValues(recoilCurrentState) {
+//   // recoildebugstate has the atom data stored
+//   const tempObj = {};
+//   if (
+//     window.$recoilDebugStates &&
+//     Array.isArray(window.$recoilDebugStates) &&
+//     window.$recoilDebugStates.length
+//   ) {
+//     let atomData = window.$recoilDebugStates[window.$recoilDebugStates.length - 1];
+//     atomData['atomValues'].forEach((value, key) => {
+//       // console.log('Key:', key, 'value:', value.contents);
+//       tempObj[key] = value.contents;
+//     })
+//   }
+//   recoilCurrentState.atomVal = tempObj;
+// }
+
+function getAtomValues(obj, key, out) {
+
+  proto = Object.prototype,
+  ts = proto.toString,
+  hasOwn = proto.hasOwnProperty.bind(obj);
+  if ('[object Array]' !== ts.call(out)) out = [];
+  for (let i in obj) {
+    if (hasOwn(i)) {
+        if (i === key) {
+            out.push(obj[i]);
+        } else if ('[object Array]' === ts.call(obj[i]) || '[object Object]' === ts.call(obj[i])) {
+          getAtomValues(obj[i], key, out);
+        }
+    }
   }
-  recoilCurrentState.atomVal = tempObj;
+  const result = {}
+  for (let i = 0; i < out.length; i++) {
+    if (out[i]) {
+      for (let [key, value] of out[i]) {
+        result[key] = value.contents;
+      }
+    }
+  }
+  return result;
 }
 
 function cleanState(stateNode, depth = 0) {
