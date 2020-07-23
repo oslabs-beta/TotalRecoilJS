@@ -12,8 +12,10 @@ import Atoms from '../atomView'
 const Navbar = (props) => (
   <Router>
     <header className='navbar'>
-      <Link to="/tab1"><div className='navbaritem'>Tab 1</div></Link>
-      <Link to="/tab2"><div className='navbaritem'>Tab 2</div></Link>
+      <div id='link-container'>
+        <Link to="/tab1"><div className='navbaritem'>Tab 1</div></Link>
+        <Link to="/tab2"><div className='navbaritem' id='tab2'>Tab 2</div></Link>
+      </div>
       <Switch>
         <Route path="/tab1">
           <Atoms tree={props.tree} />
