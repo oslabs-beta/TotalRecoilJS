@@ -29,9 +29,9 @@ export const Tree = (props) => {
                     svg.attr('transform', d3.event.transform)
                 }))
                 .append('g')
-                .attr('transform', 'translate(-30, 30)');
+                .attr('transform', 'translate(100, -60)');
 
-            let tree = d3.tree().size([panelWidth - 80, treeHeight]);
+            let tree = d3.tree().size([panelWidth, treeHeight]);
             tree(root)
 
             const nodes = root.descendants()
@@ -41,10 +41,10 @@ export const Tree = (props) => {
                 .enter()
                 .append('g')
                 .attr('class', 'node')
-                .attr('transform', (d) => 'translate(' + d.x + ',' + d.y + ')')
+                .attr('transform', (d) => 'translate(' + d.y + ',' + d.x + ')')
 
             node.append('circle')
-                .attr('r', 5)
+                .attr('r', 6)
                 .attr('fill', 'steelblue')
 
             node.append('text')
@@ -62,8 +62,8 @@ export const Tree = (props) => {
                 .join('path')
                 .attr('class', 'link')
                 .attr('d', d3.linkVertical()
-                    .x(d => d.x)
-                    .y(d => d.y))
+                    .x(d => d.y)
+                    .y(d => d.x))
                 .attr("fill", "none")
                 .attr("stroke", "green")
                 .attr("stroke-opacity", 0.4)
