@@ -6,7 +6,15 @@ svg {
     background-color: rgba(177, 21, 21, 0.205);
   }
   
-  
+circle {
+  fill: #fff;
+  /* fill: none; */
+  stroke: steelblue;
+  stroke-width: 3px;
+  pointer-events: all;
+}
+
+
 button {
     background: none;
     font-family: inherit;
