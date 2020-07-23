@@ -3,18 +3,15 @@
 }
 
 svg {
-    background-color: rgba(0, 0, 0, 0.205);
+    background-color: rgba(177, 21, 21, 0.205);
   }
   
-  #main-container {
-    display: flex;
-  }
   
-  button {
+button {
     background: none;
     font-family: inherit;
     font-size: inherit;
-      border: 3px solid rgb(236, 217, 217);
+    border: 3px solid rgb(236, 217, 217);
     color: rgb(0, 0, 0);
     cursor: pointer;
     padding: 10px 40px;
@@ -27,19 +24,36 @@ svg {
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
-  }
+}
   
-  button:hover {
-    color: #E50914;
-  }
+button:hover {
+  color: #E50914;
+}
   
-  #info {
-    width: 33%;
-    padding: 5px;
-    text-align: center;
-    margin-top: 0;
+#info {
+  width: 33%;
+  padding: 5px;
+  text-align: center;
+  margin-top: 0;
+}
 
-  }
+#main-container {
+  display: flex;
+}
+
+#canvas {
+  margin: 0;
+}
+
+#atoms {
+  width: 100%;
+  text-align: left;
+}
+
+.s-margin {
+  border-left: solid 5px black;
+  margin-left: 10px;
+}
   
 .h3 {
   margin-left: 5px;
