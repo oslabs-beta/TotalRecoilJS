@@ -13,6 +13,7 @@ export const Tree = (props) => {
             const root = d3.hierarchy(props.tree[0])
 
             const panelWidth = Math.floor(window.innerWidth * 0.5);
+          
 
 
             // Find out the height of the tree and size the svg accordingly (each level havin 95px)
@@ -20,6 +21,7 @@ export const Tree = (props) => {
             const treeHeight = dataHeight * 95;
             // console.log('windowHeight:',window.innerHeight,'treeHeight:', treeHeight,'dataHeight',dataHeight)
             const svgHeight = Math.max(window.innerHeight, treeHeight)
+            console.log(window.innerHeight);
 
             const svg = d3.select('#canvas')
                 .append('svg')
