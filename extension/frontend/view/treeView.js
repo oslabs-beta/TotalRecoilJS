@@ -27,8 +27,8 @@ export const Tree = (props) => {
                 .append('svg')
                 .attr('width', panelWidth)
                 .attr('height', svgHeight)
-                .call(d3.zoom().on("zoom", function () {
-                    svg.attr("transform", d3.event.transform)
+                .call(d3.zoom().on('zoom', function () {
+                    svg.attr('transform', d3.event.transform)
                 }))
                 .append('g')
                 .attr('transform', 'translate(-30, 30)');
@@ -55,7 +55,9 @@ export const Tree = (props) => {
                 .text(function (d) {
                     return d.data.name
                 })
-
+            node.on('mouseover', (e) => {
+                console.log('data:', e.data.state[e.data.state.length - 1][1][0])
+            })
             const links = root.links()
             const link = svg.selectAll('.link')
                 .data(links)
