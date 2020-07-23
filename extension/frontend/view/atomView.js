@@ -60,7 +60,6 @@ export const Atoms = (props) => {
   return (
     <div>
       <div id='atoms'></div>
-      <h1>ATOMS TEST</h1>
     </div>
   )
 }
