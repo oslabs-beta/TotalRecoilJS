@@ -43,6 +43,7 @@ function patcher() {
   })(devTools.onCommitFiberRoot) // devTools.onCommitFiberRoot runs immediately after adding our new functionality to devTools.onCommitFiberRoot
 
 }
+
 const recurseThrottle = throttle(getComponentData, 300);
 function getComponentData(node, arr) {
   const component = {};
@@ -99,7 +100,7 @@ function getAtom(component) {
   const atomArr = new Set();
 
   // this will loop through component.state to get the atom data
-  for(let i = 0; i < component.state.length; i++) {
+  for (let i = 0; i < component.state.length; i++) {
     if (!component.state) {
       if (component.state[i]['current'] instanceof Set || component.state[i]['current'] instanceof Map) {
         // if (component.state[i]['current'] instanceof Set) {
@@ -153,22 +154,26 @@ function getAtomValues(obj, prop) {
       } else {
         if (typeof o[key] === 'object') {
           recursivelyFindProp(o[key], keyToBeFound);
-        } 
-    }
+        }
+      }
     });
   }
   recursivelyFindProp(obj, prop);
-  const result = {}
+  const result = {
+    'atomVal': {
+
+    }
+  }
   for (let i = 0; i < arr.length; i++) {
     if (arr[i]) {
       for (let [key, value] of arr[i]) {
-        result[key] = value.contents;
+        result.atomVal[key] = value.contents;
       }
     }
   }
   return result;
 
-} 
+}
 
 function cleanState(stateNode, depth = 0) {
   // console.log('stateNode: ', stateNode);
@@ -196,12 +201,12 @@ function cleanState(stateNode, depth = 0) {
     if (Array.isArray(stateNode)) {
       result = [];
       stateNode.forEach((el, index) => {
-         if (el !== null) {
+        if (el !== null) {
           //  console.log('el', el)
-           result[index] = cleanState(el, depth + 1)
-         } else {
+          result[index] = cleanState(el, depth + 1)
+        } else {
           result[index] = el;
-         }
+        }
       })
     } else {
       result = {};
