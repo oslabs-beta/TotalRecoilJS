@@ -27,10 +27,18 @@ export const Atoms = (props) => {
 
           d3.select('#canvas').selectAll('.node').each(function (e) {
             console.log('data atoms', e.data);
+            // atom key w/ new data
+            let atomKey = e.data.state[e.data.state.length - 1][1][0].key;
             if (!e.data.atoms) { }
             else if (e.data.atoms.includes(atom)) {
               d3.select(this).select('circle').style('fill', '#FF3A37').attr('r', 10)
             }
+            // TODO: NEW DATA
+            // if (e.data.state.length) {
+            //   if (e.data.state[e.data.state.length - 1][1][0].key) {
+            //     d3.select(this).select('circle').style('fill', '#FF3A37').attr('r', 10)
+            //   }
+            // }
 
           })
         })
@@ -51,7 +59,6 @@ export const Atoms = (props) => {
 
   return (
     <div>
-      <Navbar />
       <div id='atoms'></div>
       <h1>ATOMS TEST</h1>
     </div>
