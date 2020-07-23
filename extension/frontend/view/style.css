@@ -2,6 +2,13 @@
   margin: auto;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+  width: 100%;
+  border: black solid 1px;
+}
+
 svg {
     background-color: rgba(177, 21, 21, 0.205);
   }
@@ -45,10 +52,15 @@ button:hover {
   margin: 0;
 }
 
+#canvas:hover {
+  cursor: move;
+}
+
 #atoms {
   width: 100%;
   text-align: left;
 }
+
 
 .s-margin {
   border-left: solid 5px black;
@@ -90,3 +102,25 @@ button:hover {
     left: 1%;
     font-size: 28px;
   }
+
+/* navbar */ 
+.navbar {
+  margin: 0;
+  width: 100%;
+}
+  
+.navbaritem {
+  width: 100%;
+}
+
+#tab2 {
+ 
+}
+
+#link-container {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px black solid;
+  text-align: center;
+  font-size: 20px;
+}

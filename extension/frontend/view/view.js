@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import Tree from './treeView';
-import Atoms from './atomView'
+import Atoms from './atomView';
+import Navbar from './Components/Navbar'
 
 const App = () => {
   return (
@@ -33,7 +34,8 @@ const Container = () => {
   return (
     <div id='main-container'>
       <Tree tree={tree} />
-      <Atoms tree={tree} />
+      <Navbar tree={tree} />
+      {/* <Atoms tree={tree} /> */}
     </div>
   )
 }
