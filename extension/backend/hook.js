@@ -101,7 +101,6 @@ function getAtom(component) {
 
   // this will loop through component.state to get the atom data
   for (let i = 0; i < component.state.length; i++) {
-    if (!component.state) {
       if (component.state[i]['current'] instanceof Set || component.state[i]['current'] instanceof Map) {
         // if (component.state[i]['current'] instanceof Set) {
         // this code will give us the value from the set to add to our newly created set
@@ -110,7 +109,16 @@ function getAtom(component) {
         atomArr.add(first.value);
       }
       component.atoms = Array.from(atomArr);
-    }
+      if (component.atoms.length === 0) {
+        delete component.atoms;
+      } else {
+        for (const el of component.atoms) {
+          if (typeof el !== 'string') {
+            let index = component.atoms.indexOf(el);
+            component.atoms.splice(index, 1);
+          }
+        }
+      }
   }
 }
 function getChildren(node, component, arr) {
