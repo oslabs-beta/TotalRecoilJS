@@ -13,6 +13,7 @@ export const Tree = (props) => {
             const root = d3.hierarchy(props.tree[0])
 
             const panelWidth = Math.floor(window.innerWidth * 0.5);
+          
 
 
             // Find out the height of the tree and size the svg accordingly (each level havin 95px)
@@ -20,6 +21,7 @@ export const Tree = (props) => {
             const treeHeight = dataHeight * 95;
             // console.log('windowHeight:',window.innerHeight,'treeHeight:', treeHeight,'dataHeight',dataHeight)
             const svgHeight = Math.max(window.innerHeight, treeHeight)
+            console.log(window.innerHeight);
 
             const svg = d3.select('#canvas')
                 .append('svg')
@@ -42,14 +44,16 @@ export const Tree = (props) => {
                 .append('g')
                 .attr('class', 'node')
                 .attr('transform', (d) => 'translate(' + d.y + ',' + d.x + ')')
+                // swap places of dx and dy, to change orientation of tree
 
             node.append('circle')
                 .attr('r', 6)
                 .attr('fill', 'steelblue')
 
             node.append('text')
-                .attr('x', 10)
-                .attr('y', 5)
+                .attr("dy", "0.31em")
+                .attr("x", d => d._children ? -6 : 6)
+                .attr("text-anchor", d => d._children ? "end" : "start")
                 .text(function (d) {
                     return d.data.name
                 })
@@ -62,6 +66,7 @@ export const Tree = (props) => {
                 .join('path')
                 .attr('class', 'link')
                 .attr('d', d3.linkVertical()
+                // swap places of dx and dy, to change orientation of tree
                     .x(d => d.y)
                     .y(d => d.x))
                 .attr("fill", "none")

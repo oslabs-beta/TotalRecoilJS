@@ -6,6 +6,7 @@
 */
 /* eslint-disable */
 const throttle = require('lodash.throttle')
+
 function patcher() {
 
   // grabs the React DevTools from the browser
@@ -27,10 +28,8 @@ function patcher() {
       try {
         recurseThrottle(rootNode.child, treeArr);
         // console.log('arr before adding atom data: ', treeArr)
-        // const recoilCurrentState = {}
-        // getAtomValues(recoilCurrentState);
-        const atomState = {};
         treeArr.push(getAtomValues(treeArr[0], 'atomValues'));
+        treeArr.push(getSelectorAtomLink(treeArr[0], 'nodeToNodeSubscriptions'))
         console.log('arr before sending to content script: ', treeArr);
         if (treeArr.length > 0) sendToContentScript(treeArr);
       } catch (err) {
@@ -49,7 +48,6 @@ function getComponentData(node, arr) {
   const component = {};
   if (getName(node, component, arr) === -1) return;
   getState(node, component)
-  // console.log('component', component);
   getAtom(component)
   arr.push(component)
   //getchildren calls getComponentData (name, state, atom), pushes into nested "children" array
@@ -133,25 +131,9 @@ function getChildren(node, component, arr) {
   if (children.length > 0) component.children = children;
 }
 
-// function getAtomValues(recoilCurrentState) {
-//   // recoildebugstate has the atom data stored
-//   const tempObj = {};
-//   if (
-//     window.$recoilDebugStates &&
-//     Array.isArray(window.$recoilDebugStates) &&
-//     window.$recoilDebugStates.length
-//   ) {
-//     let atomData = window.$recoilDebugStates[window.$recoilDebugStates.length - 1];
-//     atomData['atomValues'].forEach((value, key) => {
-//       // console.log('Key:', key, 'value:', value.contents);
-//       tempObj[key] = value.contents;
-//     })
-//   }
-//   recoilCurrentState.atomVal = tempObj;
-// }
-
 function getAtomValues(obj, prop) {
-  var arr = [];
+  const arr = [];
+  //this function populates the array with the data as map object that is found in tree
   function recursivelyFindProp(o, keyToBeFound) {
     if (typeof o !== 'object' || !o) {
       return;
@@ -172,9 +154,11 @@ function getAtomValues(obj, prop) {
 
     }
   }
+  
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i]) {
-      for (let [key, value] of arr[i]) {
+    let mapData = arr[i]
+    if (mapData) {
+      for (let [key, value] of mapData) {
         result.atomVal[key] = value.contents;
       }
     }
@@ -183,8 +167,105 @@ function getAtomValues(obj, prop) {
 
 }
 
+function getSelectorAtomLink(obj, prop) {
+  let arr = [];
+  function recursivelyFindProp(o, keyToBeFound) {
+    if (typeof o !== 'object' || !o) {
+      return;
+    }
+    Object.keys(o).forEach(function (key) {
+      if (key === keyToBeFound) {
+        arr.push(o[key])
+      } else {
+        if (typeof o[key] === 'object') {
+          recursivelyFindProp(o[key], keyToBeFound);
+        }
+      }
+    });
+  }
+  recursivelyFindProp(obj, prop);
+  const result = {
+    'name': 'Selector Tree',
+    'children': []
+  }
+  result.children.push({ name: 'NonSelectorAtoms', children: []})
+  const newArr = arr.filter((item, index) => arr.indexOf(item) === index)
+  for (let i = 0; i < newArr.length; i++) {
+    let mapData = newArr[i]
+    if (mapData) {
+      for (let [key, value] of mapData) {
+        let tempArr = [...value]
+        for (let el of tempArr) {
+          let tempObj = {
+            name: '',
+            children: []
+          }
+          tempObj.name = el;
+          tempObj.children.push({name: key, value: 100});
+          result.children.push(tempObj);
+        }
+      }
+    }
+  }
+
+  let atomsAndSelectors = []
+  function getNonSelectorAtoms(result, obj) {
+    findNested(obj, 'nodeToComponentSubscriptions')
+    if(atomsAndSelectors.length > 0) {
+      let atomsAndSelectorsArr = [...atomsAndSelectors[0].keys()]
+      for (const el of atomsAndSelectorsArr) {
+        if (!doesNestedValueExist(result, el)) {
+          result.children[0].children.push({name: el, value: 100});
+        } 
+      }
+    }
+  }
+
+  function doesNestedValueExist(obj, text) {
+    var exists = false;
+    var keys = Object.keys(obj);
+    for(var i = 0; i < keys.length; i++) {
+      var key = keys[i];
+      var type = typeof obj[key];
+      if(type === 'object') {
+        exists = doesNestedValueExist(obj[key], text);
+      } else if(type === 'array') {
+        for(var j = 0; j < obj[key].length; j++) {
+          exists = doesNestedValueExist(obj[key][j], text);
+      
+          if(exists) {
+            break;
+          }
+        }
+      } else if(type === 'string') {
+        exists = obj[key].indexOf(text) > -1;
+      }
+      if(exists) {
+        break;
+      }
+    }
+    return exists;
+  };
+
+  function findNested(o, keyToBeFound) {
+    if (typeof o !== 'object' || !o) {
+      return;
+    }
+    Object.keys(o).forEach(function (key) {
+      if (key === keyToBeFound) {
+        atomsAndSelectors.push(o[key]);
+      } else {
+        if (typeof o[key] === 'object') {
+          findNested(o[key], keyToBeFound);
+        }
+      }
+    });
+  }
+  getNonSelectorAtoms(result, obj)
+  return result;
+}
+
 function cleanState(stateNode, depth = 0) {
-  // console.log('stateNode: ', stateNode);
   let result;
   if (depth > 10) return "Max recursion depth reached!"
   //checking if the stateNode is not an object or function, if it is not either return the stateNode
@@ -210,7 +291,6 @@ function cleanState(stateNode, depth = 0) {
       result = [];
       stateNode.forEach((el, index) => {
         if (el !== null) {
-          //  console.log('el', el)
           result[index] = cleanState(el, depth + 1)
         } else {
           result[index] = el;

@@ -26,7 +26,7 @@ const Container = () => {
     })
 
     port.onMessage.addListener((message) => {
-      if (message.length === 2) {
+      if (message.length === 3) {
         setTree(message)
       }
 
@@ -46,13 +46,6 @@ const Container = () => {
     </div>
   )
 }
-
-
-
-
-
-
-
 
 ReactDOM.render(<App />, document.getElementById('root'))
 
