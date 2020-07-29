@@ -4,6 +4,15 @@
   font-size: 18px;
 }
 
+/* body {
+  display: flex;
+} */
+
+#graph{
+  border: dotted;
+  width: 100%;
+}
+
 a {
   text-decoration: none;
   color: black;
@@ -13,7 +22,7 @@ a {
 
 svg {
     /* background-color: rgba(177, 21, 21, 0.205); */
-    background-color: #f4f4f4;
+    background-color: snow;
     border-right: solid black 1px;
   }
   
@@ -49,19 +58,30 @@ button:hover {
   color: #E50914;
 }
   
+
+/* inside main container: canvas and navbar
+   basically, the navbar is the info display panel
+*/
+#main-container {
+  display: flex;
+  border: solid blue;
+  justify-content: flex-end;
+  /* width: 100% */
+}
+
 #info {
   width: 33%;
   padding: 5px;
   text-align: center;
   margin-top: 0;
+
 }
 
-#main-container {
-  display: flex;
-}
 
 #canvas {
   margin: 0;
+  border: dotted;
+  width: 70%;
 }
 
 #canvas:hover {
@@ -125,7 +145,7 @@ h3 {
 /* navbar */ 
 .navbar {
   margin: 0;
-  width: 100%;
+  width: 30%;
 }
   
 .navbaritem {
