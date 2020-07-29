@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import Tree from './treeView';
 import Atoms from './atomView';
 import Navbar from './Components/Navbar'
+import GraphPanel from './Components/GraphPanel'
 
 const App = () => {
   return (
-    <div>
+    <div id="container-wrapper">
       <Container />
     </div>
   )
@@ -28,12 +29,18 @@ const Container = () => {
       if (message.length === 3) {
         setTree(message)
       }
+
     })
+   
+  
   }, [])
 
+  // change tree component to the GraphPanel component
+  // pass props: tree and selector tree
   return (
     <div id='main-container'>
-      <Tree tree={tree} />
+      <GraphPanel tree={tree} />
+      {/* <Tree tree={tree} /> */}
       <Navbar tree={tree} />
       {/* <Atoms tree={tree} /> */}
     </div>
