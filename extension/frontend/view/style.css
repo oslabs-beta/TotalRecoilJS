@@ -8,10 +8,7 @@
   display: flex;
 } */
 
-#graph{
-  border: dotted;
-  width: 100%;
-}
+
 
 a {
   text-decoration: none;
@@ -59,7 +56,8 @@ button:hover {
 }
   
 
-/* inside main container: canvas and navbar
+/* inside main container: canvas and navbar*
+    *now its graphDisplays and navbar
    basically, the navbar is the info display panel
 */
 #main-container {
@@ -68,6 +66,17 @@ button:hover {
   justify-content: flex-end;
   /* width: 100% */
 }
+
+
+
+.graphDisplays {
+  width: 50%;
+}
+#graph-options {
+  display: flex;
+}
+
+
 
 #info {
   width: 33%;
@@ -81,7 +90,7 @@ button:hover {
 #canvas {
   margin: 0;
   border: dotted;
-  width: 50%;
+  width: 100%;
 }
 
 #canvas:hover {
