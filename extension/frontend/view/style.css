@@ -81,7 +81,7 @@ button:hover {
 #canvas {
   margin: 0;
   border: dotted;
-  width: 70%;
+  width: 50%;
 }
 
 #canvas:hover {
@@ -145,7 +145,7 @@ h3 {
 /* navbar */ 
 .navbar {
   margin: 0;
-  width: 30%;
+  width: 50%;
 }
   
 .navbaritem {
