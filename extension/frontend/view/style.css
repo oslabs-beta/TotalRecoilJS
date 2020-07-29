@@ -54,6 +54,8 @@ button:hover {
 
 #canvas {
   margin: 0;
+  width: 50%;
+  height: 100%;
 }
 
 #canvas:hover {
@@ -75,8 +77,6 @@ button:hover {
 }
   
 h3 {
-  /* margin-left: 5px;
-  margin-right: 0; */
   margin: 0px;
   margin-left: 5px;
   width: 25%;
@@ -117,7 +117,7 @@ h3 {
 /* navbar */ 
 .navbar {
   margin: 0;
-  width: 100%;
+  width: 50%;
 }
   
 .navbaritem {
