@@ -6,6 +6,7 @@
 */
 /* eslint-disable */
 const throttle = require('lodash.throttle')
+
 function patcher() {
 
   // grabs the React DevTools from the browser
@@ -22,7 +23,7 @@ function patcher() {
     function newFunc(...args) {
       const fiberDOM = args[1];
       const rootNode = fiberDOM.current.stateNode.current;
-      // console.log('fibertree rootNode: ', rootNode);
+      console.log('fibertree rootNode: ', rootNode);
       const treeArr = [];
       try {
         recurseThrottle(rootNode.child, treeArr);
@@ -31,6 +32,7 @@ function patcher() {
         // getAtomValues(recoilCurrentState);
         const atomState = {};
         treeArr.push(getAtomValues(treeArr[0], 'atomValues'));
+        treeArr.push(getSelectorAtomLink(treeArr[0], 'nodeToNodeSubscriptions'))
         console.log('arr before sending to content script: ', treeArr);
         if (treeArr.length > 0) sendToContentScript(treeArr);
       } catch (err) {
@@ -151,7 +153,46 @@ function getChildren(node, component, arr) {
 // }
 
 function getAtomValues(obj, prop) {
-  var arr = [];
+  console.log('state data', obj)
+  const arr = [];
+  //this function populates the array with the data as map object that is found in tree
+  function recursivelyFindProp(o, keyToBeFound) {
+    if (typeof o !== 'object' || !o) {
+      return;
+    }
+    Object.keys(o).forEach(function (key) {
+      if (key === keyToBeFound) {
+        arr.push(o[key])
+      } else {
+        if (typeof o[key] === 'object') {
+          recursivelyFindProp(o[key], keyToBeFound);
+        }
+      }
+    });
+  }
+  recursivelyFindProp(obj, prop);
+  console.log('arr inside getAtomValues', arr)
+  const result = {
+    'atomVal': {
+
+    }
+  }
+  
+  for (let i = 0; i < arr.length; i++) {
+    let mapData = arr[i]
+    if (mapData) {
+      for (let [key, value] of mapData) {
+        result.atomVal[key] = value.contents;
+      }
+    }
+  }
+  return result;
+
+}
+
+function getSelectorAtomLink(obj, prop) {
+  console.log('state data', obj)
+  const arr = [];
   function recursivelyFindProp(o, keyToBeFound) {
     if (typeof o !== 'object' || !o) {
       return;
@@ -168,14 +209,15 @@ function getAtomValues(obj, prop) {
   }
   recursivelyFindProp(obj, prop);
   const result = {
-    'atomVal': {
+    'stuff': {
 
     }
   }
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i]) {
-      for (let [key, value] of arr[i]) {
-        result.atomVal[key] = value.contents;
+    let mapData = arr[i]
+    if (mapData) {
+      for (let [key, value] of mapData) {
+        result.stuff[key] = [...value];
       }
     }
   }
