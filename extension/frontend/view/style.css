@@ -15,6 +15,7 @@ svg {
     /* background-color: rgba(177, 21, 21, 0.205); */
     background-color: #f4f4f4;
     border-right: solid black 1px;
+    width:100%
   }
   
   
@@ -56,6 +57,7 @@ button:hover {
   margin: 0;
   width: 50%;
   height: 100%;
+  border: solid black 1px;
 }
 
 #canvas:hover {
@@ -134,6 +136,15 @@ h3 {
   color: black;
 }
 
+#history-tab {
+  max-height: 100%;
+}
+
+#history-info {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 250px;
+}
 
 #tab2 {
  
