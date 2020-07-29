@@ -27,22 +27,24 @@ export const Atoms = (props) => {
 
           d3.select('#canvas').selectAll('.node').each(function (e) {
             console.log('data atoms', e.data);
+            // atom key w/ new data
             if (!e.data.atoms) { }
             else if (e.data.atoms.includes(atom)) {
-              d3.select(this).select('circle').style('fill', '#FF3A37').attr('r', 10)
+              d3.select(this).select('circle').style('fill', '#00FFFF').attr('r', 10)
             }
-
           })
         })
-
-        let atomState = document.createElement('h3')
-        atomState.classList.add('s-margin')
-
+        //create dropdown using summary and details HTML elements
+        let atomState = document.createElement('summary')
+        let atomInfo = document.createElement('details');
+        atomInfo.classList.add('s-margin')
         let text = JSON.stringify(atoms[prop])
-        atomState.textContent = `State : ${text}`
+        atomState.textContent = `State`
+        atomInfo.textContent = `${text}`
+        atomInfo.appendChild(atomState);
 
         atomContainer.appendChild(atomName)
-        atomContainer.appendChild(atomState)
+        atomContainer.appendChild(atomInfo)
         masterContainer.appendChild(atomContainer)
       }
 
@@ -51,9 +53,7 @@ export const Atoms = (props) => {
 
   return (
     <div>
-      <Navbar />
       <div id='atoms'></div>
-      <h1>ATOMS TEST</h1>
     </div>
   )
 }
