@@ -13,8 +13,8 @@ const Navbar = (props) => (
   <Router>
     <header className='navbar'>
       <div id='link-container'>
-        <Link to="/tab1"><div className='navbaritem'>Tab 1</div></Link>
-        <Link to="/tab2"><div className='navbaritem' id='tab2'>Tab 2</div></Link>
+        <Link to="/tab1"><div className='navbaritem'>Current Atom Values</div></Link>
+        <Link to="/tab2"><div className='navbaritem' id='tab2'>History</div></Link>
       </div>
       <Switch>
         <Route path="/tab1">

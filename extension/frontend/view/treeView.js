@@ -31,9 +31,9 @@ export const Tree = (props) => {
                     svg.attr('transform', d3.event.transform)
                 }))
                 .append('g')
-                .attr('transform', 'translate(-30, 30)');
+                .attr('transform', 'translate(100, -60)');
 
-            let tree = d3.tree().size([panelWidth - 80, treeHeight]);
+            let tree = d3.tree().size([panelWidth, treeHeight]);
             tree(root)
 
             const nodes = root.descendants()
@@ -47,7 +47,7 @@ export const Tree = (props) => {
                 // swap places of dx and dy, to change orientation of tree
 
             node.append('circle')
-                .attr('r', 5)
+                .attr('r', 6)
                 .attr('fill', 'steelblue')
 
             node.append('text')
