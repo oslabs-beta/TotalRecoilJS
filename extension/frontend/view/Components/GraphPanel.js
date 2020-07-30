@@ -6,26 +6,24 @@ import {
   Link
 } from "react-router-dom";
 
-
-import Atoms from '../atomView'
-import SelectorTree from '../selectorAtomView'
-import Tree from '../treeView';
+import SelectorTree from '../SelectorTree'
+import TreeView from '../TreeView';
 
 
 const GraphPanel = (props) => (
-  
+
   <Router>
     <div className='graphDisplays'>
       <div id='graph-options'>
-        <Link to="/componentTree"><div className='componentTreeBtn'>Component Tree</div></Link>
+        <Link to="/"><div className='componentTreeBtn'>Component Tree</div></Link>
         <Link to="/stateTree"><div className='stateTreeBtn'>Selectors and Atoms</div></Link>
       </div>
       <Switch>
-        <Route path="/componentTree">
-          <Tree tree={props.tree} />
-        </Route>
         <Route path="/stateTree">
           <SelectorTree tree={props.tree} />
+        </Route>
+        <Route path="/">
+          <TreeView tree={props.tree} />
         </Route>
       </Switch>
     </div>

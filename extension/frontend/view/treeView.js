@@ -3,7 +3,7 @@ import * as d3 from '../../libraries/d3.js';
 
 
 
-export const Tree = (props) => {
+export const TreeView = (props) => {
     useEffect(() => {
         if (props.tree) {
             console.log('props tree', props.tree[0])
@@ -13,7 +13,7 @@ export const Tree = (props) => {
             const root = d3.hierarchy(props.tree[0])
 
             const panelWidth = Math.floor(window.innerWidth * 0.5);
-          
+
 
 
             // Find out the height of the tree and size the svg accordingly (each level havin 95px)
@@ -44,7 +44,7 @@ export const Tree = (props) => {
                 .append('g')
                 .attr('class', 'node')
                 .attr('transform', (d) => 'translate(' + d.y + ',' + d.x + ')')
-                // swap places of dx and dy, to change orientation of tree
+            // swap places of dx and dy, to change orientation of tree
 
             node.append('circle')
                 .attr('r', 6)
@@ -66,7 +66,7 @@ export const Tree = (props) => {
                 .join('path')
                 .attr('class', 'link')
                 .attr('d', d3.linkVertical()
-                // swap places of dx and dy, to change orientation of tree
+                    // swap places of dx and dy, to change orientation of tree
                     .x(d => d.y)
                     .y(d => d.x))
                 .attr("fill", "none")
@@ -78,9 +78,8 @@ export const Tree = (props) => {
 
     return (
         <div id='canvas'>
-            {/* <div id='canvas'></div> */}
         </div>
     )
 }
 
-export default Tree
+export default TreeView;
