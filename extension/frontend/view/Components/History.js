@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-
-
 const History = ({ tree }) => {
   // display new history every time tree updates
   const [history, setHistory] = useState([]);
   const [count, setCount] = useState(0);
-  // TEST: max history length 3
-  // setHistory([...history, tree])
   useEffect(() => {
     let lastHistory;
-    let stringTree = JSON.stringify(tree[1].atomVal);
+    let stringTree = tree ? JSON.stringify(tree[1].atomVal) : null;
     if (history.length) {
       lastHistory = JSON.stringify(history[history.length - 1].tree[1].atomVal);
     }
@@ -31,17 +27,14 @@ const History = ({ tree }) => {
     if (hist.tree[1].atomVal) {
       snap = hist.tree[1].atomVal;
     }
-    return <p>{hist.count}: {JSON.stringify(snap)}</p>
-  })
+    return <p>History {hist.count}: {JSON.stringify(snap)}</p>
+  }).reverse();
 
   // display new history every time tree updates
   return (
     <div id="history-tab">
       <div id="history-info">
-        <p>History</p>
-        {/* {history.map((hist) => {
-          return <p>{hist.count}:</p>
-        })} */}
+        <h3>History</h3>
         {historyMap}
       </div>
     </div>

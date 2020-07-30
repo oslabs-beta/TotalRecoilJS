@@ -89,32 +89,32 @@ h3 {
   width: 100%;
 }
 
-  .atom-div  {
-    border: 2px solid black;
-    display: flex;
-    margin-top: 5px;
-  }
+.atom-div  {
+  border: 2px solid black;
+  display: flex;
+  margin-top: 5px;
+}
   
-  .atom-information {
-    color: red;
-    margin-left: 0px;
-    text-align: left;
-    padding-left: 15px;
-    border-left: solid 2px black;
-    width: 80%
-  }
+.atom-information {
+  color: red;
+  margin-left: 0px;
+  text-align: left;
+  padding-left: 15px;
+  border-left: solid 2px black;
+  width: 80%
+}
   
 
-  #currentComponent {
-    position: absolute;
-    left: 58%;
-  }
+#currentComponent {
+  position: absolute;
+  left: 58%;
+}
 
-  #total-recoil {
-    position: absolute;
-    left: 1%;
-    font-size: 28px;
-  }
+#total-recoil {
+  position: absolute;
+  left: 1%;
+  font-size: 28px;
+}
 
 /* navbar */ 
 .navbar {
@@ -137,13 +137,13 @@ h3 {
 }
 
 #history-tab {
-  max-height: 100%;
+  height: 100%;
 }
 
 #history-info {
   overflow-y: scroll;
   overflow-x: hidden;
-  max-height: 250px;
+  max-height: 80%;
 }
 
 #tab2 {
