@@ -14,13 +14,13 @@ export const SelectorTree = (props) => {
         if (props.tree) {
           
 
-          console.log('props tree', props.tree[0])
+          console.log('props tree', props.tree[2])
           document.querySelector('#canvas').innerHTML = ''
 
-          const h1 = document.querySelector('#canvas');
-          const title = document.createElement('h1');
-          title.innerHTML = 'short';
-          h1.appendChild(title);
+          // const h1 = document.querySelector('#canvas');
+          // const title = document.createElement('h1');
+          // title.innerHTML = 'short';
+          // h1.appendChild(title);
           
           // -------------------------------------------
 
@@ -64,7 +64,7 @@ export const SelectorTree = (props) => {
 
 
   // change flare to data: there are 2 places
-  const root = partition(props.tree[0]);
+  const root = partition(props.tree[2]);
 
   // root.attr('value', d => 100);
   console.log('root: ', root);

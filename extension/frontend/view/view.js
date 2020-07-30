@@ -26,6 +26,7 @@ const Container = () => {
     })
 
     port.onMessage.addListener((message) => {
+
       if (message.length === 3) {
         setTree(message)
       }

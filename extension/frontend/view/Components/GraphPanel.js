@@ -5,8 +5,8 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import About from './About'
-import Users from './Users'
+
+
 import Atoms from '../atomView'
 import SelectorTree from '../selectorAtomView'
 import Tree from '../treeView';
@@ -25,7 +25,7 @@ const GraphPanel = (props) => (
           <Tree tree={props.tree} />
         </Route>
         <Route path="/stateTree">
-          <SelectorTree />
+          <SelectorTree tree={props.tree} />
         </Route>
       </Switch>
     </div>
