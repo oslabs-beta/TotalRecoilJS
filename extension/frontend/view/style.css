@@ -4,6 +4,12 @@
   font-size: 18px;
 }
 
+/* body {
+  display: flex;
+} */
+
+
+
 a {
   text-decoration: none;
   color: black;
@@ -13,12 +19,20 @@ a {
 
 svg {
     /* background-color: rgba(177, 21, 21, 0.205); */
-    background-color: #f4f4f4;
+    background-color: snow;
     border-right: solid black 1px;
     width:100%
   }
   
-  
+circle {
+  fill: #fff;
+  /* fill: none; */
+  stroke: steelblue;
+  stroke-width: 3px;
+  pointer-events: all;
+}
+
+
 button {
     background: none;
     font-family: inherit;
@@ -42,16 +56,37 @@ button:hover {
   color: #E50914;
 }
   
+
+/* inside main container: canvas and navbar*
+    *now its graphDisplays and navbar
+   basically, the navbar is the info display panel
+*/
+#main-container {
+  display: flex;
+  border: solid blue;
+  justify-content: flex-end;
+  /* width: 100% */
+}
+
+
+
+.graphDisplays {
+  width: 50%;
+}
+#graph-options {
+  display: flex;
+}
+
+
+
 #info {
   width: 33%;
   padding: 5px;
   text-align: center;
   margin-top: 0;
+
 }
 
-#main-container {
-  display: flex;
-}
 
 #canvas {
   margin: 0;
