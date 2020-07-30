@@ -3,7 +3,7 @@ import * as d3 from '../../libraries/d3.js';
 import Navbar from './Components/Navbar'
 
 
-export const Atoms = (props) => {
+export const AtomView = (props) => {
   useEffect(() => {
     if (props.tree) {
       const masterContainer = document.querySelector('#atoms')
@@ -35,19 +35,19 @@ export const Atoms = (props) => {
           })
         })
         //create dropdown using summary and details HTML elements
-        let atomState = document.createElement('summary')
+        let atomState = document.createElement('summary');
         let atomInfo = document.createElement('details');
-        atomInfo.classList.add('s-margin')
-        let text = JSON.stringify(atoms[prop])
-        atomState.textContent = `State`
-        atomInfo.textContent = `${text}`
+        atomInfo.classList.add('s-margin');
+
+        let text = JSON.stringify(atoms[prop]);
+        atomState.textContent = `State`;
+        atomInfo.textContent = `${text}`;
         atomInfo.appendChild(atomState);
 
         atomContainer.appendChild(atomName)
         atomContainer.appendChild(atomInfo)
         masterContainer.appendChild(atomContainer)
       }
-
     }
   })
 
@@ -58,4 +58,4 @@ export const Atoms = (props) => {
   )
 }
 
-export default Atoms
+export default AtomView;
