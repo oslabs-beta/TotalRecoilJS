@@ -6,7 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import About from './About'
-import Users from './Users'
+import History from './History'
 import Atoms from '../atomView'
 
 const Navbar = (props) => (
@@ -21,7 +21,7 @@ const Navbar = (props) => (
           <Atoms tree={props.tree} />
         </Route>
         <Route path="/tab2">
-          <Users />
+          <History tree={props.tree} />
         </Route>
       </Switch>
     </header>

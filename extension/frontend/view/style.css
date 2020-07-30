@@ -21,6 +21,7 @@ svg {
     /* background-color: rgba(177, 21, 21, 0.205); */
     background-color: snow;
     border-right: solid black 1px;
+    width:100%
   }
   
 circle {
@@ -89,8 +90,9 @@ button:hover {
 
 #canvas {
   margin: 0;
-  border: dotted;
-  width: 100%;
+  width: 50%;
+  height: 100%;
+  border: solid black 1px;
 }
 
 #canvas:hover {
@@ -112,8 +114,6 @@ button:hover {
 }
   
 h3 {
-  /* margin-left: 5px;
-  margin-right: 0; */
   margin: 0px;
   margin-left: 5px;
   width: 25%;
@@ -124,32 +124,32 @@ h3 {
   width: 100%;
 }
 
-  .atom-div  {
-    border: 2px solid black;
-    display: flex;
-    margin-top: 5px;
-  }
+.atom-div  {
+  border: 2px solid black;
+  display: flex;
+  margin-top: 5px;
+}
   
-  .atom-information {
-    color: red;
-    margin-left: 0px;
-    text-align: left;
-    padding-left: 15px;
-    border-left: solid 2px black;
-    width: 80%
-  }
+.atom-information {
+  color: red;
+  margin-left: 0px;
+  text-align: left;
+  padding-left: 15px;
+  border-left: solid 2px black;
+  width: 80%
+}
   
 
-  #currentComponent {
-    position: absolute;
-    left: 58%;
-  }
+#currentComponent {
+  position: absolute;
+  left: 58%;
+}
 
-  #total-recoil {
-    position: absolute;
-    left: 1%;
-    font-size: 28px;
-  }
+#total-recoil {
+  position: absolute;
+  left: 1%;
+  font-size: 28px;
+}
 
 /* navbar */ 
 .navbar {
@@ -171,6 +171,15 @@ h3 {
   color: black;
 }
 
+#history-tab {
+  height: 100%;
+}
+
+#history-info {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 80%;
+}
 
 #tab2 {
  

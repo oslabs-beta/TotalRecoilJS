@@ -17,7 +17,7 @@ const port = chrome.runtime.connect({ name: 'test' })
 
 const Container = () => {
 
-  const [tree, setTree] = useState()
+  const [tree, setTree] = useState();
 
   useEffect(() => {
     port.postMessage({
@@ -42,7 +42,6 @@ const Container = () => {
       <GraphPanel tree={tree} />
       {/* <Tree tree={tree} /> */}
       <Navbar tree={tree} />
-      {/* <Atoms tree={tree} /> */}
     </div>
   )
 }

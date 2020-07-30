@@ -35,19 +35,19 @@ export const Atoms = (props) => {
           })
         })
         //create dropdown using summary and details HTML elements
-        let atomState = document.createElement('summary')
+        let atomState = document.createElement('summary');
         let atomInfo = document.createElement('details');
-        atomInfo.classList.add('s-margin')
-        let text = JSON.stringify(atoms[prop])
-        atomState.textContent = `State`
-        atomInfo.textContent = `${text}`
+        atomInfo.classList.add('s-margin');
+
+        let text = JSON.stringify(atoms[prop]);
+        atomState.textContent = `State`;
+        atomInfo.textContent = `${text}`;
         atomInfo.appendChild(atomState);
 
         atomContainer.appendChild(atomName)
         atomContainer.appendChild(atomInfo)
         masterContainer.appendChild(atomContainer)
       }
-
     }
   })
 
