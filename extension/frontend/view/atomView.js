@@ -3,7 +3,7 @@ import * as d3 from '../../libraries/d3.js';
 import Navbar from './Components/Navbar'
 
 
-export const Atoms = (props) => {
+export const AtomView = (props) => {
   useEffect(() => {
     if (props.tree) {
       const masterContainer = document.querySelector('#atoms')
@@ -58,4 +58,4 @@ export const Atoms = (props) => {
   )
 }
 
-export default Atoms
+export default AtomView;
