@@ -12,8 +12,8 @@ const Navbar = (props) => (
   <Router>
     <header className='navbar'>
       <div id='link-container'>
-        <Link to="/"><div className='navbaritem'>Current Atom Values</div></Link>
-        <Link to="/tab2"><div className='navbaritem' id='tab2'>History</div></Link>
+        <Link className='a-right' to="/"><div className='navbaritem'>Current Atom Values</div></Link>
+        <Link className='a-right' to="/tab2"><div className='navbaritem' id='tab2'>History</div></Link>
       </div>
       <Switch>
         <Route path="/tab2">
