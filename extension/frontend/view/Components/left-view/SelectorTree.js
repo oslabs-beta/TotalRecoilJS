@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import * as d3 from '../../libraries/d3.js';
+import * as d3 from '../../../../libraries/d3';
 
 /*
  instruction to swap trees
