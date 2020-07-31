@@ -18,22 +18,23 @@ export const AtomView = (props) => {
         const atomName = document.createElement('h3')
         atomName.textContent = prop
 
-        let originalColor;
+        // let originalColor;
 
-        atomName.addEventListener('click', (e) => {
-          console.log('is it working d3 blink')
-          let atom = e.target.innerHTML
-          d3.selectAll('circle').style('fill', originalColor).attr('r', 5)
+        // atomName.addEventListener('click', (e) => {
+        //   console.log('is it working d3 blink')
+        //   let atom = e.target.innerHTML
+        //   d3.selectAll('circle').style('fill', originalColor).attr('r', 5)
 
-          d3.select('#canvas').selectAll('.node').each(function (e) {
-            console.log('data atoms', e.data);
-            // atom key w/ new data
-            if (!e.data.atoms) { }
-            else if (e.data.atoms.includes(atom)) {
-              d3.select(this).select('circle').style('fill', '#00FFFF').attr('r', 10)
-            }
-          })
-        })
+        //   d3.select('#canvas').selectAll('.node').each(function (e) {
+        //     console.log('data atoms', e.data);
+        //     // atom key w/ new data
+        //     if (!e.data.atoms) { }
+        //     else if (e.data.atoms.includes(atom)) {
+        //       d3.select(this).select('circle').style('fill', '#00FFFF').attr('r', 10)
+        //     }
+        //   })
+        // })
+
         //create dropdown using summary and details HTML elements
         let atomState = document.createElement('summary');
         let atomInfo = document.createElement('details');

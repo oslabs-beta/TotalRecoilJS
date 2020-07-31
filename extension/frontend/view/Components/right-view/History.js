@@ -23,7 +23,7 @@ const History = ({ history }) => {
       <div id="history-info">
         <h3>History</h3>
         <p id='json'></p>
-        {console.log(historyMap,'history map')}
+        {console.log(historyMap,'history')}
         {historyMap}
       </div>
     </div>

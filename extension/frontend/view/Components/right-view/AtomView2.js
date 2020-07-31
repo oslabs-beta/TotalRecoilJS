@@ -21,7 +21,6 @@ export const AtomView2 = ({ tree }) => {
         
    if (tree) {
     const atoms = tree[1].atomVal
-  
     for (let prop in atoms){
         atomSelectors.push(
             <div className='atom-div'>
