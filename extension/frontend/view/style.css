@@ -24,9 +24,41 @@ svg {
     background-color: #f4f4f4;
     border-right: solid black 1px;
     width:100%;
-    height:100%
+    height:600px;
+    margin-top: 5%;
   }
+
+  .component-svg {
+    height: 100%;
+  }
+
+@media  (max-height: 800px){
+  svg {
+    height: 45%;
+    font-size: 100px;
+    margin-top: 2%;
+  }
+
+  .component-svg {
+    height: 100%;
+  }
+ 
+}
+
+@media (max-width: 1300px){
+  .atoms {
+    width: 98% !important;
+  }
+}
   
+.component-svg {
+  background-color: #f4f4f4;
+  border-right: solid black 1px;
+  width:100%;
+  height:100%;
+  margin: 0;
+}
+
 circle {
   fill: #fff;
   /* fill: none; */
@@ -99,7 +131,7 @@ button:hover {
   cursor: move;
 }
 
-#atoms {
+.atoms {
   width: 80%;
   text-align: left;
   margin-top: 5px;

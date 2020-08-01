@@ -14,7 +14,7 @@ const History = ({ history }) => {
     // creat p tag
     // let json = document.querySelector('#json')
     // json.innerHTML = prettyPrintJson.toHtml(snap)
-    return <summary>History {hist.count}: <details>{data}</details></summary>
+    return <summary>History{hist.count}: {data}</summary>
   });
 
   // display new history every time tree updates

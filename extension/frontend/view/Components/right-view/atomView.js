@@ -32,7 +32,7 @@ export const AtomView2 = ({ tree }) => {
 
   return (
     <div>
-      <div id='atoms'>{atomSelectors}</div>
+      <div className='atoms'>{atomSelectors}</div>
     </div>
   )
 }

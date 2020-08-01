@@ -31,6 +31,7 @@ export const TreeView = (props) => {
                 .call(d3.zoom().on('zoom', function () {
                     svg.attr('transform', d3.event.transform)
                 }))
+                .attr('class','component-svg')
                 .append('g')
                 .attr('transform', 'translate(187, -49)')
               
@@ -76,8 +77,6 @@ export const TreeView = (props) => {
                 .attr("stroke", "green")
                 .attr("stroke-opacity", 0.4)
                 .attr("stroke-width", 1.5)
-
-         
         }
     })
 
