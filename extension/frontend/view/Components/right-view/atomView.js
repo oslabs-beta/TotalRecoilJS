@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef, Fragment } from 'react';
 import * as d3 from '../../../../libraries/d3.js';
+import JSONPretty from 'react-json-pretty';
 import Navbar from './Navbar'
 
 
@@ -17,15 +18,17 @@ export const AtomView2 = ({ tree }) => {
             }
         })
     }
-      
+
+    
         
    if (tree) {
     const atoms = tree[1].atomVal
     for (let prop in atoms){
+        const data = <JSONPretty style={{fontSize: "3px"}} data={atoms[prop]}></JSONPretty>
         atomSelectors.push(
             <div className='atom-div'>
                 <h3 onClick={lightup}>{prop}</h3>
-                <summary className='s-margin'> <details >{JSON.stringify(atoms[prop])}</details></summary>
+                <summary className='s-margin'> <details >{data}</details></summary>
             </div>
         )}
     }

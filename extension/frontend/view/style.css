@@ -3,7 +3,8 @@
   padding: 0px;
   background-color: #f4f4f4;
   font-size: 18px;
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 /* body {
@@ -143,12 +144,7 @@ button:hover {
 }
 
 
-.s-margin {
-  border-left: solid 3px black;
-  margin-left: 10px;
-  padding-left: 5px;
-  width: 85%;
-}
+
   
 h3 {
   margin: 0px;
@@ -161,11 +157,7 @@ h3 {
   width: 100%;
 }
 
-.atom-div  {
-  border: 2px solid black;
-  display: flex;
-  margin-top: 5px;
-}
+
   
 .atom-information {
   color: red;
@@ -256,8 +248,25 @@ h3 {
 
 }
 
+/* ATOM PANEL */
+.atom-div  {
+  border: 2px solid black;
+  display: flex;
+  margin-top: 5px;
+  max-height: 50vh;
+ 
+}
 
-/* HISTORY JSON */
+.s-margin {
+  border-left: solid 3px black;
+  margin-left: 10px;
+  padding-left: 5px;
+  width: 85%;
+
+  overflow-y: scroll;
+}
+
+/* HISTORY JSON PANEL*/
 
 #history-info {
   overflow-y: scroll;
@@ -292,5 +301,9 @@ h3 {
   font-size: 12px;
 }
 .__json-main__ {
+  font-size: 12px;
+}
+
+.__json-pretty-error__ {
   font-size: 12px;
 }
