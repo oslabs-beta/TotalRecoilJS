@@ -1,7 +1,9 @@
 * {
-  margin: auto;
+  margin: 0px;
   background-color: #f4f4f4;
   font-size: 18px;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 /* body {
@@ -19,11 +21,44 @@
 
 svg {
     /* background-color: rgba(177, 21, 21, 0.205); */
-    background-color: snow;
+    background-color: #f4f4f4;
     border-right: solid black 1px;
-    width:100%
+    width:100%;
+    height:600px;
+    margin-top: 5%;
   }
+
+  .component-svg {
+    height: 100%;
+  }
+
+@media  (max-height: 800px){
+  svg {
+    height: 45%;
+    font-size: 100px;
+    margin-top: 2%;
+  }
+
+  .component-svg {
+    height: 100%;
+  }
+ 
+}
+
+@media (max-width: 1300px){
+  .atoms {
+    width: 98% !important;
+  }
+}
   
+.component-svg {
+  background-color: #f4f4f4;
+  border-right: solid black 1px;
+  width:100%;
+  height:100%;
+  margin: 0;
+}
+
 circle {
   fill: #fff;
   /* fill: none; */
@@ -96,7 +131,7 @@ button:hover {
   cursor: move;
 }
 
-#atoms {
+.atoms {
   width: 80%;
   text-align: left;
   margin-top: 5px;
@@ -174,7 +209,7 @@ h3 {
 
 #history-info {
   overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-x: scroll;
   max-height: 80%;
 }
 
@@ -189,9 +224,9 @@ h3 {
 
 .graph-button-1 {
   position: absolute;
-  top: 3%;
-  left: 1%;
-  padding: 5px;
+  top: 1%;
+  right: 50%;
+  padding: 2px;
   background: none;
   font-family: inherit;
   font-size: 14px;
@@ -203,43 +238,23 @@ h3 {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 500;
-  width: 10%;
-
+  width: 15%;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
 
 }
 
-.graph-button-2 {
-  position: absolute;
-  top: 15%;
-  left: 1%;
-  padding: 5px;
 
-  
-  background: none;
-  font-family: inherit;
-  font-size: 14px;
-  border: 2px solid rgb(0, 0, 0);
-  color: rgb(0, 0, 0);
-  cursor: pointer;
-  font-weight: 500;
-
-  display: inline-block;
-  margin: 5px 15px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  transition: all 0.3s;
-}
 
 .graph-container {
-  width: 50%
+  width: 50%;
+  margin: 0;
 }
 
 .h1-absolute {
   position: absolute;
+  left: 1%;
+  top: 1.5%;
+
 }

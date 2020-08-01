@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-import * as d3 from '../../libraries/d3.js';
+import * as d3 from '../../../../libraries/d3.js';
+import { scaleBand } from 'd3';
 
 
 
@@ -9,31 +10,34 @@ export const TreeView = (props) => {
             console.log('props tree', props.tree[0])
 
             document.querySelector('#canvas').innerHTML = ''
+           
 
             const root = d3.hierarchy(props.tree[0])
 
             const panelWidth = Math.floor(window.innerWidth * 0.5);
 
-
-
             // Find out the height of the tree and size the svg accordingly (each level havin 95px)
             const dataHeight = root.height;
-            const treeHeight = dataHeight * 95;
+            const treeHeight = dataHeight * 200;
             // console.log('windowHeight:',window.innerHeight,'treeHeight:', treeHeight,'dataHeight',dataHeight)
-            const svgHeight = Math.max(window.innerHeight, treeHeight)
+            // const svgHeight = Math.max(window.innerHeight, treeHeight)
+            const svgHeight = Math.max(treeHeight, window.innerHeight)
             console.log(window.innerHeight);
 
             const svg = d3.select('#canvas')
                 .append('svg')
                 .attr('width', panelWidth)
-                .attr('height', svgHeight)
+                .attr('height', svgHeight + 80)
                 .call(d3.zoom().on('zoom', function () {
                     svg.attr('transform', d3.event.transform)
                 }))
+                .attr('class','component-svg')
                 .append('g')
-                .attr('transform', 'translate(100, -60)');
+                .attr('transform', 'translate(187, -49)')
+              
+                ;
 
-            let tree = d3.tree().size([panelWidth, treeHeight]);
+            let tree = d3.tree().size([panelWidth - 80, treeHeight]);
             tree(root)
 
             const nodes = root.descendants()
