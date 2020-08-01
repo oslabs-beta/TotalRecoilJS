@@ -12,7 +12,7 @@ const port = chrome.runtime.connect({ name: 'test' })
 const Container = () => {
   const [tree, setTree] = useState();
   const [history, setHistory] = useState([]);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
 
   useEffect(() => {
     port.postMessage({
@@ -34,7 +34,7 @@ const Container = () => {
       lastHistory = JSON.stringify(history[history.length - 1].tree[1].atomVal);
     }
     if (lastHistory == stringTree) return;
-    if (history.length === 5) {
+    if (history.length === 7) {
       const historyCopy = [...history]
       historyCopy.shift();
       setHistory([...historyCopy, { count, tree }]);

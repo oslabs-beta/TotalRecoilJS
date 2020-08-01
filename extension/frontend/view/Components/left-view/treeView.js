@@ -18,9 +18,10 @@ export const TreeView = (props) => {
 
             // Find out the height of the tree and size the svg accordingly (each level havin 95px)
             const dataHeight = root.height;
-            const treeHeight = dataHeight * 95;
+            const treeHeight = dataHeight * 200;
             // console.log('windowHeight:',window.innerHeight,'treeHeight:', treeHeight,'dataHeight',dataHeight)
-            const svgHeight = Math.max(window.innerHeight, treeHeight)
+            // const svgHeight = Math.max(window.innerHeight, treeHeight)
+            const svgHeight = treeHeight
             console.log(window.innerHeight);
 
             const svg = d3.select('#canvas')
@@ -31,7 +32,7 @@ export const TreeView = (props) => {
                     svg.attr('transform', d3.event.transform)
                 }))
                 .append('g')
-                .attr('transform', 'translate(100, -60)');
+                .attr('transform', 'translate(0, 0)');
 
             let tree = d3.tree().size([panelWidth, treeHeight]);
             tree(root)

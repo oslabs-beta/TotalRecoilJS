@@ -1,7 +1,9 @@
 * {
-  margin: auto;
+  margin: 0px;
   background-color: #f4f4f4;
   font-size: 18px;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 /* body {
@@ -21,7 +23,8 @@ svg {
     /* background-color: rgba(177, 21, 21, 0.205); */
     background-color: #f4f4f4;
     border-right: solid black 1px;
-    width:100%
+    width:100%;
+    height:100%
   }
   
 circle {
@@ -174,7 +177,7 @@ h3 {
 
 #history-info {
   overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-x: scroll;
   max-height: 80%;
 }
 
@@ -187,7 +190,7 @@ h3 {
   font-size: 20px;
 }
 
-graph-button-1 {
+.graph-button-1 {
   position: absolute;
   top: 1%;
   right: 50%;
