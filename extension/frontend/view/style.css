@@ -10,6 +10,11 @@
   display: flex;
 } */
 
+/* .json-data {
+  font-size: 10px;
+} */
+ 
+
 
 
 .a-right {
@@ -211,6 +216,7 @@ h3 {
   overflow-y: scroll;
   overflow-x: scroll;
   max-height: 80%;
+  font-size: 12px !important;
 }
 
 
@@ -245,8 +251,6 @@ h3 {
 
 }
 
-
-
 .graph-container {
   width: 50%;
   margin: 0;
@@ -257,4 +261,32 @@ h3 {
   left: 1%;
   top: 1.5%;
 
+}
+
+
+/* HISTORY JSON */
+
+.__json-pretty__ {
+  font-size: 12px;
+}
+
+.__json-key__ {
+  font-size: 12px;
+}
+
+.__json-string__ {
+  font-size: 12px;
+}
+
+.__json-value__ {
+  font-size: 12px;
+}
+.__json-boolean__ {
+  font-size: 12px;
+}
+.__json-error__ {
+  font-size: 12px;
+}
+.__json-main__ {
+  font-size: 12px;
 }

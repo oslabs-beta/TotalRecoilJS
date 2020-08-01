@@ -4,10 +4,6 @@ import GraphPanel from './Components/left-view/GraphPanel'
 
 const port = chrome.runtime.connect({ name: 'test' })
 
-// context
-// const HistoryContext = React.createContext()
-
-
 
 const Container = () => {
   const [tree, setTree] = useState();
