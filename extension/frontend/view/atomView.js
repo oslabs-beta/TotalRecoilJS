@@ -3,7 +3,7 @@ import * as d3 from '../../libraries/d3.js';
 import Navbar from './Components/Navbar'
 
 
-export const Atoms = (props) => {
+export const AtomView = (props) => {
   useEffect(() => {
     if (props.tree) {
       const masterContainer = document.querySelector('#atoms')
@@ -28,32 +28,26 @@ export const Atoms = (props) => {
           d3.select('#canvas').selectAll('.node').each(function (e) {
             console.log('data atoms', e.data);
             // atom key w/ new data
-            let atomKey = e.data.state[e.data.state.length - 1][1][0].key;
             if (!e.data.atoms) { }
             else if (e.data.atoms.includes(atom)) {
-              d3.select(this).select('circle').style('fill', '#FF3A37').attr('r', 10)
+              d3.select(this).select('circle').style('fill', '#00FFFF').attr('r', 10)
             }
-            // TODO: NEW DATA
-            // if (e.data.state.length) {
-            //   if (e.data.state[e.data.state.length - 1][1][0].key) {
-            //     d3.select(this).select('circle').style('fill', '#FF3A37').attr('r', 10)
-            //   }
-            // }
-
           })
         })
+        //create dropdown using summary and details HTML elements
+        let atomState = document.createElement('summary');
+        let atomInfo = document.createElement('details');
+        atomInfo.classList.add('s-margin');
 
-        let atomState = document.createElement('h3')
-        atomState.classList.add('s-margin')
-
-        let text = JSON.stringify(atoms[prop])
-        atomState.textContent = `State : ${text}`
+        let text = JSON.stringify(atoms[prop]);
+        atomState.textContent = `State`;
+        atomInfo.textContent = `${text}`;
+        atomInfo.appendChild(atomState);
 
         atomContainer.appendChild(atomName)
-        atomContainer.appendChild(atomState)
+        atomContainer.appendChild(atomInfo)
         masterContainer.appendChild(atomContainer)
       }
-
     }
   })
 
@@ -64,4 +58,4 @@ export const Atoms = (props) => {
   )
 }
 
-export default Atoms
+export default AtomView;
