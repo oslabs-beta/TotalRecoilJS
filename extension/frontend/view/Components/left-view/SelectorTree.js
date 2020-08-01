@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import * as d3 from '../../libraries/d3.js';
+import * as d3 from '../../../../libraries/d3';
 
 /*
  instruction to swap trees
@@ -82,15 +82,15 @@ export const SelectorTree = (props) => {
       const svg = d3.select('#canvas')
         .append('svg')
         // .attr("viewBox", [0, 0, width * 10, width * 10])
-        .attr("viewBox", [0, 0, width, width])
+        .attr("viewBox", [0, 0, width + 70 , width + 70])
         .style("font", "10px sans-serif")
-
+        
       // g tag allows us to grab a whole of inner tags/elements 
       // then allowing us to do group transformation with them
       // as a 'group'
       // const g is the handle/variable name for that group of elements
       const g = svg.append("g")
-        .attr("transform", `translate(${width / 2},${width / 2})`);
+        .attr("transform", `translate(${width / 2 },${width / 2})`);
 
       //  ----- create svg ends -----
 
@@ -130,7 +130,7 @@ export const SelectorTree = (props) => {
         .attr("transform", d => labelTransform(d.current))
         .text(d => d.data.name)
 
-        .style('font-size', '20px')
+        .style('font-size', '25px')
 
       //  ----- create labels ends -----
 
