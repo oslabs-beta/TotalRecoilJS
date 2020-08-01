@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-const prettyPrintJson = require('pretty-print-json');
+// const prettyPrintJson = require('pretty-print-json');
+import JSONPretty from 'react-json-pretty';
 
 const History = ({ history }) => {
   const historyMap = history.map((hist) => {
@@ -10,12 +11,13 @@ const History = ({ history }) => {
       snap = hist.tree[1].atomVal;
     }
 
-    let data = JSON.stringify(snap)
+    const data = <JSONPretty style={{fontSize: "3px"}} data={snap}></JSONPretty>
     // creat p tag
     // let json = document.querySelector('#json')
     // json.innerHTML = prettyPrintJson.toHtml(snap)
     return <summary>History{hist.count}: {data}</summary>
   });
+
 
   // display new history every time tree updates
   return (

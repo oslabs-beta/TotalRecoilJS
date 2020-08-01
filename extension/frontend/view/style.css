@@ -1,14 +1,20 @@
 * {
   margin: 0px;
+  padding: 0px;
   background-color: #f4f4f4;
   font-size: 18px;
-  overflow-x: hidden;
   overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 /* body {
   display: flex;
 } */
+
+/* .json-data {
+  font-size: 10px;
+} */
+ 
 
 
 
@@ -138,12 +144,7 @@ button:hover {
 }
 
 
-.s-margin {
-  border-left: solid 3px black;
-  margin-left: 10px;
-  padding-left: 5px;
-  width: 85%;
-}
+
   
 h3 {
   margin: 0px;
@@ -156,11 +157,7 @@ h3 {
   width: 100%;
 }
 
-.atom-div  {
-  border: 2px solid black;
-  display: flex;
-  margin-top: 5px;
-}
+
   
 .atom-information {
   color: red;
@@ -203,15 +200,9 @@ h3 {
   color: black;
 }
 
-#history-tab {
-  height: 100%;
-}
 
-#history-info {
-  overflow-y: scroll;
-  overflow-x: scroll;
-  max-height: 80%;
-}
+
+
 
 
 #link-container {
@@ -245,8 +236,6 @@ h3 {
 
 }
 
-
-
 .graph-container {
   width: 50%;
   margin: 0;
@@ -257,4 +246,64 @@ h3 {
   left: 1%;
   top: 1.5%;
 
+}
+
+/* ATOM PANEL */
+.atom-div  {
+  border: 2px solid black;
+  display: flex;
+  margin-top: 5px;
+  max-height: 50vh;
+ 
+}
+
+.s-margin {
+  border-left: solid 3px black;
+  margin-left: 10px;
+  padding-left: 5px;
+  width: 85%;
+
+  overflow-y: scroll;
+}
+
+/* HISTORY JSON PANEL*/
+
+#history-info {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 80%;
+  /* font-size: 12px !important; */
+}
+
+#history-tab {
+  height: 105vh;
+}
+
+.__json-pretty__ {
+  font-size: 12px;
+}
+
+.__json-key__ {
+  font-size: 12px;
+}
+
+.__json-string__ {
+  font-size: 12px;
+}
+
+.__json-value__ {
+  font-size: 12px;
+}
+.__json-boolean__ {
+  font-size: 12px;
+}
+.__json-error__ {
+  font-size: 12px;
+}
+.__json-main__ {
+  font-size: 12px;
+}
+
+.__json-pretty-error__ {
+  font-size: 12px;
 }
