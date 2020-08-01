@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders & matches snapshot - componetAtomTree props 1`] = `
+<DocumentFragment>
+  <div
+    class="graph-container"
+  >
+    <h1
+      class="h1-absolute"
+    >
+      Component Tree
+    </h1>
+    <button
+      class="graph-button-1"
+    >
+      Change View
+    </button>
+    <div
+      id="canvas"
+    >
+      <svg
+        height="768"
+        width="512"
+      >
+        <g
+          transform="translate(100, -60)"
+        >
+          <g
+            class="node"
+            transform="translate(0,256)"
+          >
+            <circle
+              fill="steelblue"
+              r="6"
+            />
+            <text
+              dy="0.31em"
+              text-anchor="start"
+              x="6"
+            >
+              test App
+            </text>
+          </g>
+          <g
+            class="node"
+            transform="translate(95,256)"
+          >
+            <circle
+              fill="steelblue"
+              r="6"
+            />
+            <text
+              dy="0.31em"
+              text-anchor="start"
+              x="6"
+            >
+              test Recoil Root
+            </text>
+          </g>
+          <g
+            class="node"
+            transform="translate(190,128)"
+          >
+            <circle
+              fill="steelblue"
+              r="6"
+            />
+            <text
+              dy="0.31em"
+              text-anchor="start"
+              x="6"
+            >
+              Body
+            </text>
+          </g>
+          <g
+            class="node"
+            transform="translate(190,384)"
+          >
+            <circle
+              fill="steelblue"
+              r="6"
+            />
+            <text
+              dy="0.31em"
+              text-anchor="start"
+              x="6"
+            >
+              List
+            </text>
+          </g>
+          <path
+            class="link"
+            d="M0,256C0,256,95,256,95,256"
+            fill="none"
+            stroke="green"
+            stroke-opacity="0.4"
+            stroke-width="1.5"
+          />
+          <path
+            class="link"
+            d="M95,256C95,192,190,192,190,128"
+            fill="none"
+            stroke="green"
+            stroke-opacity="0.4"
+            stroke-width="1.5"
+          />
+          <path
+            class="link"
+            d="M95,256C95,320,190,320,190,384"
+            fill="none"
+            stroke="green"
+            stroke-opacity="0.4"
+            stroke-width="1.5"
+          />
+        </g>
+      </svg>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`renders & matches snapshot - no props 1`] = `
+<DocumentFragment>
+  <div
+    class="graph-container"
+  >
+    <h1
+      class="h1-absolute"
+    >
+      Component Tree
+    </h1>
+    <button
+      class="graph-button-1"
+    >
+      Change View
+    </button>
+    <div
+      id="canvas"
+    />
+  </div>
+</DocumentFragment>
+`;
