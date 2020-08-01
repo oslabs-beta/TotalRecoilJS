@@ -82,7 +82,7 @@ export const SelectorTree = (props) => {
       const svg = d3.select('#canvas')
         .append('svg')
         // .attr("viewBox", [0, 0, width * 10, width * 10])
-        .attr("viewBox", [0, 0, width, width])
+        .attr("viewBox", [0, 0, width + 100, width + 100])
         .style("font", "10px sans-serif")
 
       // g tag allows us to grab a whole of inner tags/elements 
@@ -90,7 +90,7 @@ export const SelectorTree = (props) => {
       // as a 'group'
       // const g is the handle/variable name for that group of elements
       const g = svg.append("g")
-        .attr("transform", `translate(${width / 2},${width / 2})`);
+        .attr("transform", `translate(${width / 2 + 100},${width / 2 + 100})`);
 
       //  ----- create svg ends -----
 
