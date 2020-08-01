@@ -4,20 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --verbose",
     "build": "webpack",
     "dev": "webpack --mode=development --watch"
   },
   "author": "AKKZS",
   "license": "ISC",
   "devDependencies": {
-    "@babel/preset-env": "^7.10.2",
     "@babel/polyfill": "^7.10.4",
+    "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.10.1",
-    "babel-jest": "^26.0.1",
+    "babel-jest": "^26.2.2",
     "copy-webpack-plugin": "^6.0.1",
     "css-loader": "^3.5.3",
-    "jest": "^26.0.1",
+    "jest": "^26.2.2",
     "sass": "^1.26.7",
     "sass-loader": "^8.0.2",
     "ts-loader": "^7.0.5",
@@ -28,11 +28,17 @@
     "webpack-extension-reloader": "^1.1.4"
   },
   "dependencies": {
+    "@babel/core": "^7.11.0",
+    "@babel/preset-typescript": "^7.10.4",
+    "@testing-library/jest-dom": "^5.11.2",
+    "@testing-library/react": "^10.4.7",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.1.0",
     "d3": "^5.16.0",
     "lodash.throttle": "^4.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "react-test-renderer": "^16.13.1"
   }
 }
