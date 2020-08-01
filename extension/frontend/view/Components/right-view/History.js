@@ -18,6 +18,7 @@ const History = ({ history }) => {
     return <summary>History{hist.count}: {data}</summary>
   });
 
+
   // display new history every time tree updates
   return (
     <div id="history-tab">

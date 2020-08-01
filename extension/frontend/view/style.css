@@ -1,9 +1,9 @@
 * {
   margin: 0px;
+  padding: 0px;
   background-color: #f4f4f4;
   font-size: 18px;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 /* body {
@@ -208,16 +208,9 @@ h3 {
   color: black;
 }
 
-#history-tab {
-  height: 100%;
-}
 
-#history-info {
-  overflow-y: scroll;
-  overflow-x: scroll;
-  max-height: 80%;
-  font-size: 12px !important;
-}
+
+
 
 
 #link-container {
@@ -265,6 +258,17 @@ h3 {
 
 
 /* HISTORY JSON */
+
+#history-info {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 80%;
+  /* font-size: 12px !important; */
+}
+
+#history-tab {
+  height: 105vh;
+}
 
 .__json-pretty__ {
   font-size: 12px;
