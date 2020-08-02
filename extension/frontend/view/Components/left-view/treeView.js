@@ -5,25 +5,21 @@ import { scaleBand } from 'd3';
 
 
 export const TreeView = (props) => {
+    
+    // on each state change, a tree will be rendered with all its nodes and links
     useEffect(() => {
         if (props.tree) {
-            console.log('props tree', props.tree[0])
-
+            
             document.querySelector('#canvas').innerHTML = ''
-           
 
             const root = d3.hierarchy(props.tree[0])
-
             const panelWidth = Math.floor(window.innerWidth * 0.5);
 
-            // Find out the height of the tree and size the svg accordingly (each level havin 95px)
+            // Find out the height of the tree and size the svg accordingly 
             const dataHeight = root.height;
             const treeHeight = dataHeight * 200;
-            // console.log('windowHeight:',window.innerHeight,'treeHeight:', treeHeight,'dataHeight',dataHeight)
-            // const svgHeight = Math.max(window.innerHeight, treeHeight)
             const svgHeight = Math.max(treeHeight, window.innerHeight)
-            console.log(window.innerHeight);
-
+    
             const svg = d3.select('#canvas')
                 .append('svg')
                 .attr('width', panelWidth)
@@ -33,9 +29,7 @@ export const TreeView = (props) => {
                 }))
                 .attr('class','component-svg')
                 .append('g')
-                .attr('transform', 'translate(187, -49)')
-              
-                ;
+                .attr('transform', 'translate(187, -49)');
 
             let tree = d3.tree().size([panelWidth - 80, treeHeight]);
             tree(root)
@@ -61,9 +55,7 @@ export const TreeView = (props) => {
                 .text(function (d) {
                     return d.data.name
                 })
-            node.on('mouseover', (e) => {
-                console.log('data:', e.data.state[e.data.state.length - 1][1][0])
-            })
+          
             const links = root.links()
             const link = svg.selectAll('.link')
                 .data(links)
