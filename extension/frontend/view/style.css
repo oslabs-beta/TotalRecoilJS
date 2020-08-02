@@ -7,36 +7,27 @@
   overflow-x: hidden;
 }
 
-/* body {
-  display: flex;
-} */
+h3 {
+  margin: 0px;
+  margin-left: 5px;
+  width: 25%;
+  cursor:pointer;
+}
 
-/* .json-data {
-  font-size: 10px;
-} */
- 
+/* SVG */
 
-
-
-.a-right {
-  text-decoration: none;
-  color: black;
-  width: 100%;
-  border: black solid 2px;
+.component-svg {
+  height: 100%;
 }
 
 svg {
-    /* background-color: rgba(177, 21, 21, 0.205); */
-    background-color: #f4f4f4;
-    border-right: solid black 1px;
-    width:100%;
-    height:600px;
-    margin-top: 5%;
-  }
-
-  .component-svg {
-    height: 100%;
-  }
+  /* background-color: rgba(177, 21, 21, 0.205); */
+  background-color: #f4f4f4;
+  border-right: solid black 1px;
+  width:100%;
+  height:600px;
+  margin-top: 5%;
+}
 
 @media  (max-height: 800px){
   svg {
@@ -74,58 +65,18 @@ circle {
 }
 
 
-button {
-    background: none;
-    font-family: inherit;
-    font-size: inherit;
-    border: 3px solid rgb(236, 217, 217);
-    color: rgb(0, 0, 0);
-    cursor: pointer;
-    padding: 10px 40px;
-    width: 40%;
-    display: inline-block;
-    margin: 15px ;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 700;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
-}
-  
-button:hover {
-  color: #E50914;
-}
-  
 
 /* inside main container: canvas and navbar*
     *now its graphDisplays and navbar
    basically, the navbar is the info display panel
 */
+
+/* CONTAINER.JS  */
 #main-container {
   display: flex;
-  /* width: 100% */
 }
 
-
-
-.graphDisplays {
-  width: 50%;
-}
-#graph-options {
-  display: flex;
-}
-
-
-
-#info {
-  width: 33%;
-  padding: 5px;
-  text-align: center;
-  margin-top: 0;
-
-}
-
+/* CANVAS */
 
 #canvas {
   margin: 0;
@@ -137,81 +88,7 @@ button:hover {
   cursor: move;
 }
 
-.atoms {
-  width: 80%;
-  text-align: left;
-  margin-top: 5px;
-}
-
-
-
-  
-h3 {
-  margin: 0px;
-  margin-left: 5px;
-  width: 25%;
-  cursor:pointer;
-}
-
-.information {
-  width: 100%;
-}
-
-
-  
-.atom-information {
-  color: red;
-  margin-left: 0px;
-  text-align: left;
-  padding-left: 15px;
-  border-left: solid 2px black;
-  width: 80%
-}
-  
-
-#currentComponent {
-  position: absolute;
-  left: 58%;
-}
-
-#total-recoil {
-  position: absolute;
-  left: 1%;
-  font-size: 28px;
-}
-
-/* navbar */ 
-.navbar {
-  margin: 0;
-  width: 50%;
-}
-  
-.navbaritem {
-  width: 100%;
-  font-size: 26px;
-  background-color: lightblue;
-}
-
-.navbaritem:hover {
-  color: #f4f4f4;
-}
-
-.navbaritem:active {
-  color: black;
-}
-
-
-
-
-
-
-#link-container {
-  display: flex;
-  width: 100%;
-  border-bottom: 1px black solid;
-  text-align: center;
-  font-size: 20px;
-}
+/* LEFT VIEW GRAPHPANEL */
 
 .graph-button-1 {
   position: absolute;
@@ -233,28 +110,76 @@ h3 {
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
-
 }
+
+button:hover {
+  color: #E50914;
+ }
+   
+
 
 .graph-container {
   width: 50%;
   margin: 0;
 }
 
+
 .h1-absolute {
   position: absolute;
   left: 1%;
   top: 1.5%;
-
 }
 
-/* ATOM PANEL */
+/* RIGHT VIEW NAVBAR */
+
+.a-right {
+  text-decoration: none;
+  color: black;
+  width: 100%;
+  border: black solid 2px;
+}
+
+.navbar {
+  margin: 0;
+  width: 50%;
+}
+  
+.navbaritem {
+  width: 100%;
+  font-size: 26px;
+  background-color: lightblue;
+}
+
+.navbaritem:hover {
+  color: #f4f4f4;
+}
+
+.navbaritem:active {
+  color: black;
+}
+
+
+#link-container {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px black solid;
+  text-align: center;
+  font-size: 20px;
+}
+
+
+/* RIGHT VIEW ATOM.JS */
 .atom-div  {
   border: 2px solid black;
   display: flex;
   margin-top: 5px;
   max-height: 50vh;
- 
+}
+
+.atoms {
+  width: 80%;
+  text-align: left;
+  margin-top: 5px;
 }
 
 .s-margin {
@@ -266,13 +191,12 @@ h3 {
   overflow-y: scroll;
 }
 
-/* HISTORY JSON PANEL*/
+/* RIGHT VIEW HISTORY.JS*/
 
 #history-info {
   overflow-y: scroll;
   overflow-x: hidden;
   max-height: 80%;
-  /* font-size: 12px !important; */
 }
 
 #history-tab {
