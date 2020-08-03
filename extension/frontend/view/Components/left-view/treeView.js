@@ -5,7 +5,8 @@ import { scaleBand } from 'd3';
 
 
 export const TreeView = (props) => {
-    
+    d3.select('#canvas')
+  
     // on each state change, a tree will be rendered with all its nodes and links
     useEffect(() => {
         if (props.tree) {
@@ -19,18 +20,30 @@ export const TreeView = (props) => {
             const dataHeight = root.height;
             const treeHeight = dataHeight * 200;
             const svgHeight = Math.max(treeHeight, window.innerHeight)
+        
+ 
+          
     
             const svg = d3.select('#canvas')
-                .append('svg')
-                .attr('width', panelWidth)
-                .attr('height', svgHeight + 80)
-                .call(d3.zoom().on('zoom', function () {
-                    svg.attr('transform', d3.event.transform)
-                }))
-                .attr('class','component-svg')
-                .append('g')
-                .attr('transform', 'translate(187, -49)');
-
+          
+            .append('svg')
+            .attr('width', panelWidth)
+            .attr('height', svgHeight + 80)
+           
+           
+            .call(d3.zoom()
+            .scaleExtent([.25,8])
+          
+           
+            .on('zoom', function () {
+                svg.attr('transform', d3.event.transform)
+            }))
+            .attr('class','component-svg')
+            .append('g')
+            .attr('transform', 'translate(187, -49)scale(.6,.6)')
+     
+            
+               
             let tree = d3.tree().size([panelWidth - 80, treeHeight]);
             tree(root)
 
