@@ -10,6 +10,7 @@ const Container = () => {
   const [history, setHistory] = useState([]);
   const [count, setCount] = useState(1);
 
+  // function is receiving fibernode state changes from backend and is saving that data to tree hook
   useEffect(() => {
     port.postMessage({
       name: 'connect',
@@ -23,6 +24,7 @@ const Container = () => {
     })
   }, [])
 
+  // parsing information for history tab
   useEffect(() => {
     let lastHistory;
     let stringTree = tree ? JSON.stringify(tree[1].atomVal) : null;
@@ -40,8 +42,6 @@ const Container = () => {
     setCount(count + 1);
   }, [tree])
 
-  // change tree component to the GraphPanel component
-  // pass props: tree and selector tree
   return (
     <div id='main-container'>
       <GraphPanel tree={tree} />

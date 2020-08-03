@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useRef, Fragment } from 'react';
 import * as d3 from '../../../../libraries/d3.js';
 import JSONPretty from 'react-json-pretty';
-import Navbar from './Navbar'
+
 
 
 export const AtomView2 = ({ tree }) => {
     const atomSelectors = []
     let originalColor;
 
+    // traverses through D3 tree and if a node includes the h3 inner html tag, that node will light up
     function lightup(e) {
         let atom = e.target.innerHTML
         d3.selectAll('circle').style('fill', originalColor).attr('r', 5)
@@ -19,8 +20,7 @@ export const AtomView2 = ({ tree }) => {
         })
     }
 
-    
-        
+    // will iterate through atoms object and render it on screen 
    if (tree) {
     const atoms = tree[1].atomVal
     for (let prop in atoms){
