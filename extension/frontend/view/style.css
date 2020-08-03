@@ -7,25 +7,11 @@
   overflow-x: hidden;
 }
 
-<<<<<<< HEAD
-h3 {
-  margin: 0px;
-  margin-left: 5px;
-  width: 25%;
-  cursor:pointer;
-}
-
-/* SVG */
-
-.component-svg {
-  height: 100%;
-=======
 .a-right {
   text-decoration: none;
   color: black;
   width: 100%;
   border: black solid 2px;
->>>>>>> a334e659693193d289edae979897aa1c2f95fadb
 }
 
 svg {
