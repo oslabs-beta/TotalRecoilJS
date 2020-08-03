@@ -8,6 +8,11 @@ export const AtomView2 = ({ tree }) => {
     const atomSelectors = []
     let originalColor;
 
+    let t = d3.transition()
+          .duration(1000)
+          .ease(d3.easeLinear);
+
+
     // traverses through D3 tree and if a node includes the h3 inner html tag, that node will light up
     function lightup(e) {
         let atom = e.target.innerHTML
@@ -15,7 +20,7 @@ export const AtomView2 = ({ tree }) => {
         d3.select('#canvas').selectAll('.node').each(function(e){
             if (!e.data.atoms) {}
             else if (e.data.atoms.includes(atom)) {
-                d3.select(this).select('circle').style('fill', '#00FFFF').attr('r', 10)
+                d3.select(this).select('circle').transition(t).style('fill', '#00FFFF').attr('r', 10)
             }
         })
     }
