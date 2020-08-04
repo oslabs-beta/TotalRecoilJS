@@ -138,7 +138,13 @@ button:hover {
   text-decoration: none;
   color: black;
   width: 100%;
-  border: #2c2f33 solid 2px;
+  border:black solid 2px;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.no-border-left {
+  border-left: 0;
+  border-radius: 0px 10px 10px 0px;
 }
 
 .navbar {
@@ -171,13 +177,18 @@ button:hover {
 
 
 /* RIGHT VIEW ATOM.JS */
-.atom-div  {
-  border: 2px solid black;
-  display: flex;
-  margin-top: 5px;
-  max-height: 50vh;
+
+.atom-container {
+  border: 2px black solid;
   border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.atom-div  {
+  max-height: 50vh;
   padding: 8px;
+  display: flex;
 }
 
 .atoms {
@@ -190,17 +201,26 @@ button:hover {
   position: absolute;
   left: 1%;
   top: 8%;
+}
 
+.h3-display-inline{
+  display: inline-block;
+}
+
+.h3-display-inline:hover {
+  cursor: pointer;
+  color: #F0DB4F;
+  transition: all .3s;
 }
 
 .s-margin {
-  border-left: solid 3px black;
+  /* border-left: solid 3px black;
   margin-left: 10px;
-  padding-left: 5px;
-  width: 85%;
-
+  padding-left: 5px; */
+  width: 100%;
   overflow-y: scroll;
 }
+
 
 /* RIGHT VIEW HISTORY.JS*/
 
@@ -256,3 +276,13 @@ button:hover {
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.5);
 }
+
+
+summary {
+  list-style-image: url(right-arrow.svg);
+}
+
+/* summary::-webkit-details-marker {
+  background: url(right-arrow.svg);
+  color: transparent;
+} */
