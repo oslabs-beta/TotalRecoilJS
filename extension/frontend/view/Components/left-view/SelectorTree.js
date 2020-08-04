@@ -112,7 +112,8 @@ export const SelectorTree = (props) => {
         .on("click", clicked);
 
       path.append("title")
-        .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
+        .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}`);
+        // .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
 
       //  ----- create paths ends -----    
 
@@ -151,6 +152,8 @@ export const SelectorTree = (props) => {
         // can work on getting name to center of parent circle
         // .text(d => d.data.name)
         // coming back to work on this
+      parent.append('title')
+        .text('Go Back');  
 
       //  ----- create top most level circle ends -----
 
@@ -207,7 +210,7 @@ export const SelectorTree = (props) => {
       }
 
       // line 230 238 toggle between px or em wrap
-      // extra wrap util
+      // extra personalized wrap util for wrapping text inside circular arc
       function wrap(text, width) {
         text.each(function() {
           let text = d3.select(this),
