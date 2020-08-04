@@ -83,6 +83,7 @@ circle {
   margin: 0;
   width: 100%;
   height: 100%;
+  border: dotted white;
 }
 
 #canvas:hover {
@@ -112,6 +113,7 @@ circle {
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
+  border: dotted white;
 }
 
 button:hover {
@@ -130,6 +132,7 @@ button:hover {
   position: absolute;
   left: 1%;
   top: 1.5%;
+  border: dotted white;
 }
 
 /* RIGHT VIEW NAVBAR */
@@ -177,6 +180,9 @@ button:hover {
 
 
 /* RIGHT VIEW ATOM.JS */
+.atom-values-tab {
+  height: 105vh;
+}
 
 .atom-container {
   border: 2px black solid;
@@ -195,6 +201,7 @@ button:hover {
   width: 80%;
   text-align: left;
   margin-top: 5px;
+
 }
 
 #atom-hover {
@@ -286,3 +293,29 @@ summary {
   background: url(right-arrow.svg);
   color: transparent;
 } */
+
+
+/* selector tree css vvv */
+
+.patharc {
+  fill: #333;
+  opacity: 0.3;
+  stroke: yellow;
+}
+
+.arclabels {
+  fill: white;
+}
+
+.selectorTreeHomeBtn {
+  fill: none;
+  stroke: gold;
+}
+
+/* font-size does not work in arclabels */
+tspan {
+  font-size: 2em;
+}
+
+
+/* selector tree css ^^^ */
