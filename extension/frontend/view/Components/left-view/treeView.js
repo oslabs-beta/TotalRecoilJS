@@ -40,9 +40,14 @@ export const TreeView = (props) => {
                     }))
                 .attr('class', 'component-svg')
                 .append('g')
-                .attr('transform', 'translate(20,40)scale(.5,.5)')
+                // .attr('transform', 'translate(20,40)scale(.5,.5)')
                 // 187,-49
-
+                if (window.innerHeight > 600){
+                    svg.attr('transform', 'translate(20,100)scale(.5,.5)')
+                  } else {
+                    svg.attr('transform', 'translate(200,-20)scale(.5,.5)')
+                  }
+  
 
 
             let tree = d3.tree().size([panelWidth - 80, treeHeight]);

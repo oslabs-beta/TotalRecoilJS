@@ -135,7 +135,7 @@ button:hover {
 
 .a-right {
   text-decoration: none;
-  color: black;
+  color: white;
   width: 100%;
   border:black solid 2px;
   border-radius: 10px 0px 0px 10px;
@@ -303,9 +303,10 @@ summary {
 /* selector tree css vvv */
 
 .patharc {
-  fill: #333;
+  fill: #7289DA;
   opacity: 0.3;
-  stroke: yellow;
+  stroke: #F0DB4F;
+  stroke-width: 3px;
 }
 
 .arclabels {
@@ -314,7 +315,8 @@ summary {
 
 .selectorTreeHomeBtn {
   fill: none;
-  stroke: gold;
+  stroke: #F0DB4F;
+  stroke-width: 5px;
 }
 
 /* font-size does not work in arclabels */
@@ -324,4 +326,9 @@ tspan {
 
 
 /* selector tree css ^^^ */
+
+
+.blue {
+  color: #7289DA;
+}
 
