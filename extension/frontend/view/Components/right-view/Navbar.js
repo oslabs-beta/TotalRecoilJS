@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  NavLink
 } from "react-router-dom";
 import History from './History'
 import AtomView from './atomView'
@@ -12,13 +13,16 @@ const Navbar = (props) => (
   <Router>
     <header className='navbar'>
       <div id='link-container'>
-        <Link className='a-right' to="/"><div className='navbaritem'>Atom Values</div></Link>
-        <Link className='a-right no-border-left' to="/tab2"><div className='navbaritem' id='tab2'>History</div></Link>
+        <NavLink activeClassName='a-right-active' className='a-right' to="/h">Atom Values</NavLink>
+        <NavLink activeClassName='a-right-active' className='a-right no-border-left' to="/tab2">History</NavLink>
       </div>
       <Switch>
         <Route path="/tab2">
           <History tree={props.tree} history={props.history} />
         </Route>\
+        <Route path="/h">
+          <AtomView tree={props.tree} />
+        </Route>
         <Route path="/">
           <AtomView tree={props.tree} />
         </Route>
