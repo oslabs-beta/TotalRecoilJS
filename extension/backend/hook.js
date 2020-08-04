@@ -189,7 +189,7 @@ function getSelectorAtomLink(obj, prop) {
     'name': 'Selector Tree',
     'children': []
   }
-  result.children.push({ name: 'NonSelectorAtoms', children: []})
+  result.children.push({ name: 'N/A', children: []})
   const newArr = arr.filter((item, index) => arr.indexOf(item) === index)
   for (let i = 0; i < newArr.length; i++) {
     let mapData = newArr[i]
