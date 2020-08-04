@@ -40,7 +40,8 @@ export const TreeView = (props) => {
                     }))
                 .attr('class', 'component-svg')
                 .append('g')
-                .attr('transform', 'translate(187, -49)scale(.6,.6)')
+                .attr('transform', 'translate(20,40)scale(.5,.5)')
+                // 187,-49
 
 
 
@@ -55,10 +56,11 @@ export const TreeView = (props) => {
                 .append('g')
                 .attr('class', 'node')
                 .attr('transform', (d) => 'translate(' + d.y + ',' + d.x + ')')
+                .attr('cursor','pointer')
             // swap places of dx and dy, to change orientation of tree
 
             node.append('circle')
-                .attr('r', 6)
+                .attr('r', 10)
                 .attr('fill', 'steelblue')
 
             node.append('text')
@@ -74,6 +76,9 @@ export const TreeView = (props) => {
                 const atoms = e.data.atoms
                 const name = e.data.name
                 setatomhover([atoms, name])
+            })
+            node.on('mouseout',(e) => {
+                setatomhover([])
             })
 
 

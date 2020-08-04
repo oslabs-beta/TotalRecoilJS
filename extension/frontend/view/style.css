@@ -24,10 +24,11 @@
 svg {
   /* background-color: rgba(177, 21, 21, 0.205); */
   background-color: rgb(53, 59, 70);
-  border-right: solid black 1px;
   width:100%;
   height:600px;
   margin-top: 5%;
+  /* transform: translate(1000,50)scale((.6,.6)) */
+  margin-left: 5%;
 }
 
 @media  (max-height: 800px){
@@ -39,6 +40,7 @@ svg {
 
   .component-svg {
     height: 100%;
+    /* transform: translate(187,-49)scale((.6,.6)); */
   }
  
 }
@@ -140,6 +142,18 @@ button:hover {
   width: 100%;
   border:black solid 2px;
   border-radius: 10px 0px 0px 10px;
+  padding: 5px;
+  font-size: 25px;
+}
+
+.a-right:hover {
+  color: #F0DB4F;
+  transition: all .3s;
+}
+
+
+.a-right-active {
+  color: #F0DB4F;
 }
 
 .no-border-left {
@@ -170,7 +184,6 @@ button:hover {
 #link-container {
   display: flex;
   width: 100%;
-  border-bottom: 1px black solid;
   text-align: center;
   font-size: 20px;
 }
