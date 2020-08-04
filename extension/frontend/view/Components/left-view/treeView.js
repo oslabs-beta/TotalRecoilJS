@@ -5,7 +5,7 @@ import { scaleBand } from 'd3';
 
 
 export const TreeView = (props) => {
-    d3.select('#canvas')
+    const [atomhover, setatomhover] = useState([])
   
     // on each state change, a tree will be rendered with all its nodes and links
     useEffect(() => {
@@ -64,10 +64,17 @@ export const TreeView = (props) => {
             node.append('text')
                 .attr("dy", "0.31em")
                 .attr("x", d => d._children ? -6 : 6)
+                .attr('fill', '#F0DB4F')
+                .style('font-size', '22px')
                 .attr("text-anchor", d => d._children ? "end" : "start")
                 .text(function (d) {
                     return d.data.name
                 })
+            node.on('mouseover',(e) => {
+                const atoms = e.data.atoms
+                const name = e.data.name
+                setatomhover([atoms, name])})
+           
           
             const links = root.links()
             const link = svg.selectAll('.link')
@@ -79,15 +86,28 @@ export const TreeView = (props) => {
                     .x(d => d.y)
                     .y(d => d.x))
                 .attr("fill", "none")
-                .attr("stroke", "green")
+                .attr("stroke", "white")
                 .attr("stroke-opacity", 0.4)
                 .attr("stroke-width", 1.5)
         }
-    })
-
+    }, [props.tree])
+ 
+    // let array = [];
+    // console.log(props.atomhover[0])
+    // props.atomhover[0].forEach((el) => {
+    //     array.push(<h1>{el}</h1>)
+    // })
+    
     return (
-        <div id='canvas'>
+        <div>
+            <div id='atom-hover'>
+                {atomhover[0] ? <h1> Atoms: {JSON.stringify(atomhover[0])}</h1> : <h1>No Atoms!</h1>}
+                {atomhover[1] ? <h1> Name: {atomhover[1]}</h1> : <h1></h1>}
+            </div>
+            <div id='canvas'></div>
+
         </div>
+     
     )
 }
 

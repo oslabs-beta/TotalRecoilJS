@@ -17,7 +17,7 @@ const Navbar = (props) => (
       </div>
       <Switch>
         <Route path="/tab2">
-          <History tree={props.tree} history={props.history}  />
+          <History tree={props.tree} history={props.history} />
         </Route>\
         <Route path="/">
           <AtomView tree={props.tree} />

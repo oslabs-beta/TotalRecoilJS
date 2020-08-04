@@ -30,7 +30,6 @@ const History = ({ history }) => {
   return (
     <div id="history-tab">
       <div id="history-info">
-        <h3>History</h3>
         <p id='json'></p>
         {historyMap}
         <div ref={messagesEnd}></div>
