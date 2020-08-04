@@ -149,7 +149,8 @@ export const SelectorTree = (props) => {
         .on("click", clicked)
 
         // can work on getting name to center of parent circle
-        .text(d => d.data.name)
+        // .text(d => d.data.name)
+        // coming back to work on this
 
       //  ----- create top most level circle ends -----
 
