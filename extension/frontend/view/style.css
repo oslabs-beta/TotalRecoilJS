@@ -83,7 +83,7 @@ circle {
   margin: 0;
   width: 100%;
   height: 100%;
-  border: dotted white;
+  
 }
 
 #canvas:hover {
@@ -113,7 +113,7 @@ circle {
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
-  border: dotted white;
+ 
 }
 
 button:hover {
@@ -132,7 +132,7 @@ button:hover {
   position: absolute;
   left: 1%;
   top: 1.5%;
-  border: dotted white;
+
 }
 
 /* RIGHT VIEW NAVBAR */
