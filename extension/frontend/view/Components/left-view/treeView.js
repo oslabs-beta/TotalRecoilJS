@@ -5,37 +5,44 @@ import { scaleBand } from 'd3';
 
 
 export const TreeView = (props) => {
+    const [atomhover, setatomhover] = useState([])
+
+    // on each state change, a tree will be rendered with all its nodes and links
     useEffect(() => {
         if (props.tree) {
-            console.log('props tree', props.tree[0])
 
             document.querySelector('#canvas').innerHTML = ''
-           
 
             const root = d3.hierarchy(props.tree[0])
-
             const panelWidth = Math.floor(window.innerWidth * 0.5);
 
-            // Find out the height of the tree and size the svg accordingly (each level havin 95px)
+            // Find out the height of the tree and size the svg accordingly 
             const dataHeight = root.height;
             const treeHeight = dataHeight * 200;
-            // console.log('windowHeight:',window.innerHeight,'treeHeight:', treeHeight,'dataHeight',dataHeight)
-            // const svgHeight = Math.max(window.innerHeight, treeHeight)
             const svgHeight = Math.max(treeHeight, window.innerHeight)
-            console.log(window.innerHeight);
+
+
+
 
             const svg = d3.select('#canvas')
+
                 .append('svg')
                 .attr('width', panelWidth)
                 .attr('height', svgHeight + 80)
-                .call(d3.zoom().on('zoom', function () {
-                    svg.attr('transform', d3.event.transform)
-                }))
-                .attr('class','component-svg')
+
+
+                .call(d3.zoom()
+                    .scaleExtent([.25, 8])
+
+
+                    .on('zoom', function () {
+                        svg.attr('transform', d3.event.transform)
+                    }))
+                .attr('class', 'component-svg')
                 .append('g')
-                .attr('transform', 'translate(187, -49)')
-              
-                ;
+                .attr('transform', 'translate(187, -49)scale(.6,.6)')
+
+
 
             let tree = d3.tree().size([panelWidth - 80, treeHeight]);
             tree(root)
@@ -57,13 +64,19 @@ export const TreeView = (props) => {
             node.append('text')
                 .attr("dy", "0.31em")
                 .attr("x", d => d._children ? -6 : 6)
+                .attr('fill', '#F0DB4F')
+                .style('font-size', '22px')
                 .attr("text-anchor", d => d._children ? "end" : "start")
                 .text(function (d) {
                     return d.data.name
                 })
             node.on('mouseover', (e) => {
-                console.log('data:', e.data.state[e.data.state.length - 1][1][0])
+                const atoms = e.data.atoms
+                const name = e.data.name
+                setatomhover([atoms, name])
             })
+
+
             const links = root.links()
             const link = svg.selectAll('.link')
                 .data(links)
@@ -74,15 +87,28 @@ export const TreeView = (props) => {
                     .x(d => d.y)
                     .y(d => d.x))
                 .attr("fill", "none")
-                .attr("stroke", "green")
+                .attr("stroke", "white")
                 .attr("stroke-opacity", 0.4)
                 .attr("stroke-width", 1.5)
         }
-    })
+    }, [props.tree])
+
+    // let array = [];
+    // console.log(props.atomhover[0])
+    // props.atomhover[0].forEach((el) => {
+    //     array.push(<h1>{el}</h1>)
+    // })
 
     return (
-        <div id='canvas'>
+        <div>
+            <div id='atom-hover'>
+                {atomhover[0] ? <h1> Atoms: {JSON.stringify(atomhover[0])}</h1> : <h1>No Atoms!</h1>}
+                {atomhover[1] ? <h1> Name: {atomhover[1]}</h1> : <h1></h1>}
+            </div>
+            <div id='canvas'></div>
+
         </div>
+
     )
 }
 

@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './Components/right-view/Navbar'
 import GraphPanel from './Components/left-view/GraphPanel'
-
+import * as d3 from '../../libraries/d3'
 const port = chrome.runtime.connect({ name: 'test' })
-
-// context
-// const HistoryContext = React.createContext()
-
 
 
 const Container = () => {
   const [tree, setTree] = useState();
   const [history, setHistory] = useState([]);
   const [count, setCount] = useState(1);
+  // const [atomhover, setatomhover] = useState([])
+  
 
+  // function is receiving fibernode state changes from backend and is saving that data to tree hook
   useEffect(() => {
     port.postMessage({
       name: 'connect',
@@ -25,8 +24,12 @@ const Container = () => {
         setTree(message)
       }
     })
+    
+    
   }, [])
+ 
 
+  // parsing information for history tab
   useEffect(() => {
     let lastHistory;
     let stringTree = tree ? JSON.stringify(tree[1].atomVal) : null;
@@ -44,12 +47,15 @@ const Container = () => {
     setCount(count + 1);
   }, [tree])
 
-  // change tree component to the GraphPanel component
-  // pass props: tree and selector tree
+    // const svg = d3.select('#canvas')
+    // const node = svg.selectAll('.node')
+    
+   
+
   return (
     <div id='main-container'>
       <GraphPanel tree={tree} />
-      <Navbar tree={tree} history={history}/>
+      <Navbar tree={tree} history={history} />
     </div>
   )
 }

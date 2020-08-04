@@ -1,16 +1,18 @@
+/* #2f3337 background color BLACK */
+/* White for text */
+/* gold for tabs */
+
+
 * {
   margin: 0px;
-  background-color: #f4f4f4;
+  padding: 0px;
+  background-color: rgb(53, 59, 70);
   font-size: 18px;
-  overflow-x: hidden;
   overflow-y: hidden;
+  overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
+  color: #f4f4f4;
 }
-
-/* body {
-  display: flex;
-} */
-
-
 
 .a-right {
   text-decoration: none;
@@ -20,17 +22,13 @@
 }
 
 svg {
-    /* background-color: rgba(177, 21, 21, 0.205); */
-    background-color: #f4f4f4;
-    border-right: solid black 1px;
-    width:100%;
-    height:600px;
-    margin-top: 5%;
-  }
-
-  .component-svg {
-    height: 100%;
-  }
+  /* background-color: rgba(177, 21, 21, 0.205); */
+  background-color: rgb(53, 59, 70);
+  border-right: solid black 1px;
+  width:100%;
+  height:600px;
+  margin-top: 5%;
+}
 
 @media  (max-height: 800px){
   svg {
@@ -52,7 +50,7 @@ svg {
 }
   
 .component-svg {
-  background-color: #f4f4f4;
+  background-color: rgb(53, 59, 70);
   border-right: solid black 1px;
   width:100%;
   height:100%;
@@ -68,58 +66,18 @@ circle {
 }
 
 
-button {
-    background: none;
-    font-family: inherit;
-    font-size: inherit;
-    border: 3px solid rgb(236, 217, 217);
-    color: rgb(0, 0, 0);
-    cursor: pointer;
-    padding: 10px 40px;
-    width: 40%;
-    display: inline-block;
-    margin: 15px ;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 700;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
-}
-  
-button:hover {
-  color: #E50914;
-}
-  
 
 /* inside main container: canvas and navbar*
     *now its graphDisplays and navbar
    basically, the navbar is the info display panel
 */
+
+/* CONTAINER.JS  */
 #main-container {
   display: flex;
-  /* width: 100% */
 }
 
-
-
-.graphDisplays {
-  width: 50%;
-}
-#graph-options {
-  display: flex;
-}
-
-
-
-#info {
-  width: 33%;
-  padding: 5px;
-  text-align: center;
-  margin-top: 0;
-
-}
-
+/* CANVAS */
 
 #canvas {
   margin: 0;
@@ -131,59 +89,64 @@ button:hover {
   cursor: move;
 }
 
-.atoms {
-  width: 80%;
-  text-align: left;
-  margin-top: 5px;
-}
+/* LEFT VIEW GRAPHPANEL */
 
-
-.s-margin {
-  border-left: solid 3px black;
-  margin-left: 10px;
-  padding-left: 5px;
-  width: 85%;
-}
-  
-h3 {
-  margin: 0px;
-  margin-left: 5px;
-  width: 25%;
-  cursor:pointer;
-}
-
-.information {
-  width: 100%;
-}
-
-.atom-div  {
-  border: 2px solid black;
-  display: flex;
-  margin-top: 5px;
-}
-  
-.atom-information {
-  color: red;
-  margin-left: 0px;
-  text-align: left;
-  padding-left: 15px;
-  border-left: solid 2px black;
-  width: 80%
-}
-  
-
-#currentComponent {
+.graph-button-1 {
   position: absolute;
-  left: 58%;
+  top: 1%;
+  right: 50%;
+  padding: 2px;
+  background: none;
+  font-family: inherit;
+  font-size: 14px;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 8px;
+  color: #f4f4f4;
+  cursor: pointer;
+  display: inline-block;
+  margin: 5px 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  width: 15%;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
 }
 
-#total-recoil {
+button:hover {
+  color: #F0DB4F;
+ }
+   
+
+
+.graph-container {
+  width: 50%;
+  margin: 0;
+}
+
+
+.h1-absolute {
   position: absolute;
   left: 1%;
-  font-size: 28px;
+  top: 1.5%;
 }
 
-/* navbar */ 
+/* RIGHT VIEW NAVBAR */
+
+.a-right {
+  text-decoration: none;
+  color: black;
+  width: 100%;
+  border:black solid 2px;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.no-border-left {
+  border-left: 0;
+  border-radius: 0px 10px 10px 0px;
+}
+
 .navbar {
   margin: 0;
   width: 50%;
@@ -192,7 +155,7 @@ h3 {
 .navbaritem {
   width: 100%;
   font-size: 26px;
-  background-color: lightblue;
+  background-color: rgb(53, 59, 70);
 }
 
 .navbaritem:hover {
@@ -201,16 +164,6 @@ h3 {
 
 .navbaritem:active {
   color: black;
-}
-
-#history-tab {
-  height: 100%;
-}
-
-#history-info {
-  overflow-y: scroll;
-  overflow-x: scroll;
-  max-height: 80%;
 }
 
 
@@ -222,39 +175,114 @@ h3 {
   font-size: 20px;
 }
 
-.graph-button-1 {
-  position: absolute;
-  top: 1%;
-  right: 50%;
-  padding: 2px;
-  background: none;
-  font-family: inherit;
-  font-size: 14px;
-  border: 2px solid rgb(0, 0, 0);
-  color: rgb(0, 0, 0);
-  cursor: pointer;
-  display: inline-block;
-  margin: 5px 15px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 500;
-  width: 15%;
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  transition: all 0.3s;
 
+/* RIGHT VIEW ATOM.JS */
+
+.atom-container {
+  border: 2px black solid;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
 }
 
-
-
-.graph-container {
-  width: 50%;
-  margin: 0;
+.atom-div  {
+  max-height: 50vh;
+  padding: 8px;
+  display: flex;
 }
 
-.h1-absolute {
+.atoms {
+  width: 80%;
+  text-align: left;
+  margin-top: 5px;
+}
+
+#atom-hover {
   position: absolute;
   left: 1%;
-  top: 1.5%;
-
+  top: 8%;
 }
+
+.h3-display-inline{
+  display: inline-block;
+}
+
+.h3-display-inline:hover {
+  cursor: pointer;
+  color: #F0DB4F;
+  transition: all .3s;
+}
+
+.s-margin {
+  /* border-left: solid 3px black;
+  margin-left: 10px;
+  padding-left: 5px; */
+  width: 100%;
+  overflow-y: scroll;
+}
+
+
+/* RIGHT VIEW HISTORY.JS*/
+
+#history-info {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 80%;
+}
+
+#history-tab {
+  height: 105vh;
+}
+
+.__json-pretty__ {
+  font-size: 12px;
+}
+
+.__json-key__ {
+  font-size: 12px;
+}
+
+.__json-string__ {
+  font-size: 12px;
+}
+
+.__json-value__ {
+  font-size: 12px;
+}
+.__json-boolean__ {
+  font-size: 12px;
+}
+.__json-error__ {
+  font-size: 12px;
+}
+.__json-main__ {
+  font-size: 12px;
+}
+
+.__json-pretty-error__ {
+  font-size: 12px;
+}
+
+/* SCROLL BAR STYLING */
+::-webkit-scrollbar {
+  width: 12px;  /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+  background: #f4f4f4;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+
+summary {
+  list-style-image: url(right-arrow.svg);
+}
+
+/* summary::-webkit-details-marker {
+  background: url(right-arrow.svg);
+  color: transparent;
+} */

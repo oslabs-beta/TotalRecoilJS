@@ -13,11 +13,11 @@ const Navbar = (props) => (
     <header className='navbar'>
       <div id='link-container'>
         <Link className='a-right' to="/"><div className='navbaritem'>Atom Values</div></Link>
-        <Link className='a-right' to="/tab2"><div className='navbaritem' id='tab2'>History</div></Link>
+        <Link className='a-right no-border-left' to="/tab2"><div className='navbaritem' id='tab2'>History</div></Link>
       </div>
       <Switch>
         <Route path="/tab2">
-          <History tree={props.tree} history={props.history}  />
+          <History tree={props.tree} history={props.history} />
         </Route>\
         <Route path="/">
           <AtomView tree={props.tree} />
