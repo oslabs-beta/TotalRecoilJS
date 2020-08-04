@@ -206,13 +206,22 @@ export const SelectorTree = (props) => {
         return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
       }
 
-      // line 219 227 toggle between px or em wrap
+      // line 230 238 toggle between px or em wrap
       // extra wrap util
       function wrap(text, width) {
         text.each(function() {
           let text = d3.select(this),
-              words = text.text().split(/\s+/).reverse(),
-              word,
+          // .text().match(/[A-Z][a-z]+|[0-9]+/g).join(" ");
+              // words is a string
+              words = text.text();
+              words = words.replace(words[0], words[0].toUpperCase());
+              console.log(words);
+              console.log(typeof words);
+              words = words
+              .match(/[A-Z][a-z]+|[0-9]+/g).join(" ")
+              .split(/\s+/).reverse();
+              // console.log(words);
+          let word,
               line = [],
               lineNumber = 0,
               lineHeight = 1, // ems
@@ -231,7 +240,6 @@ export const SelectorTree = (props) => {
           }
         });
       }
-
 
 
       //  ----- event handling functions ends -----
