@@ -112,7 +112,8 @@ export const SelectorTree = (props) => {
         .on("click", clicked);
 
       path.append("title")
-        .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
+        .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}`);
+        // .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
 
       //  ----- create paths ends -----    
 
@@ -151,6 +152,8 @@ export const SelectorTree = (props) => {
         // can work on getting name to center of parent circle
         // .text(d => d.data.name)
         // coming back to work on this
+      parent.append('title')
+        .text('Go Back');  
 
       //  ----- create top most level circle ends -----
 
@@ -206,13 +209,22 @@ export const SelectorTree = (props) => {
         return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
       }
 
-      // line 219 227 toggle between px or em wrap
-      // extra wrap util
+      // line 230 238 toggle between px or em wrap
+      // extra personalized wrap util for wrapping text inside circular arc
       function wrap(text, width) {
         text.each(function() {
           let text = d3.select(this),
-              words = text.text().split(/\s+/).reverse(),
-              word,
+          // .text().match(/[A-Z][a-z]+|[0-9]+/g).join(" ");
+              // words is a string
+              words = text.text();
+              words = words.replace(words[0], words[0].toUpperCase());
+              console.log(words);
+              console.log(typeof words);
+              words = words
+              .match(/[A-Z][a-z]+|[0-9]+/g).join(" ")
+              .split(/\s+/).reverse();
+              // console.log(words);
+          let word,
               line = [],
               lineNumber = 0,
               lineHeight = 1, // ems
@@ -231,7 +243,6 @@ export const SelectorTree = (props) => {
           }
         });
       }
-
 
 
       //  ----- event handling functions ends -----
