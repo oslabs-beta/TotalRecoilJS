@@ -43,7 +43,7 @@ export const AtomView2 = ({ tree }) => {
     }
 
     return (
-        <div>
+        <div class="atom-values-tab">
             <div className='atoms'>{atomSelectors}</div>
         </div>
     )

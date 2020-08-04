@@ -22,7 +22,7 @@ const History = ({ history }) => {
     // creat p tag
     // let json = document.querySelector('#json')
     // json.innerHTML = prettyPrintJson.toHtml(snap)
-    return <summary>History {hist.count}: {data}</summary>
+    return <summary><p className="blue">History {hist.count}: </p>{data}</summary>
   });
 
 
