@@ -44,8 +44,8 @@ export const SelectorTree = (props) => {
       const format = d3.format(",d");
       // console.log('format: ', format('123456'))
 
-      const width = 1200; // 932
-      const radius = width / 6;
+      const width = 932; // 932/1200
+      const radius = width / 6; // always divide by 6
 
 
       const arc = d3.arc()
@@ -82,7 +82,7 @@ export const SelectorTree = (props) => {
       const svg = d3.select('#canvas')
         .append('svg')
         // .attr("viewBox", [0, 0, width * 10, width * 10])
-        .attr("viewBox", [0, 0, width + 50 , width + 50])
+        .attr("viewBox", [0, 0, width + 70 , width + 70])
         .style("font", "10px sans-serif")
         
       // g tag allows us to grab a whole of inner tags/elements 
