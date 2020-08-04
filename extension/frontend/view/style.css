@@ -1,10 +1,17 @@
+/* #2f3337 background color BLACK */
+/* White for text */
+/* gold for tabs */
+
+
 * {
   margin: 0px;
   padding: 0px;
-  background-color: #f4f4f4;
+  background-color: #2f3337;
   font-size: 18px;
   overflow-y: hidden;
   overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
+  color: white;
 }
 
 .a-right {
@@ -16,7 +23,7 @@
 
 svg {
   /* background-color: rgba(177, 21, 21, 0.205); */
-  background-color: #f4f4f4;
+  background-color: #2f3337;
   border-right: solid black 1px;
   width:100%;
   height:600px;
@@ -43,7 +50,7 @@ svg {
 }
   
 .component-svg {
-  background-color: #f4f4f4;
+  background-color: #2f3337;
   border-right: solid black 1px;
   width:100%;
   height:100%;
