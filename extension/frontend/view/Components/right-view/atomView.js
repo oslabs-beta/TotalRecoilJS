@@ -26,6 +26,7 @@ export const AtomView2 = ({ tree }) => {
     }
 
     // will iterate through atoms object and render it on screen 
+    // each prop render should have its unique key
     if (tree) {
         const atoms = tree[1].atomVal
         for (let prop in atoms) {
@@ -43,7 +44,7 @@ export const AtomView2 = ({ tree }) => {
     }
 
     return (
-        <div>
+        <div className="atom-values-tab">
             <div className='atoms'>{atomSelectors}</div>
         </div>
     )
