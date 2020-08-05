@@ -9,8 +9,6 @@ const Container = () => {
   const [tree, setTree] = useState();
   const [history, setHistory] = useState([]);
   const [count, setCount] = useState(1);
-  // const [atomhover, setatomhover] = useState([])
-  
 
   // function is receiving fibernode state changes from backend and is saving that data to tree hook
   useEffect(() => {
@@ -24,10 +22,8 @@ const Container = () => {
         setTree(message)
       }
     })
-    
-    
   }, [])
- 
+
 
   // parsing information for history tab
   useEffect(() => {
@@ -46,11 +42,6 @@ const Container = () => {
     }
     setCount(count + 1);
   }, [tree])
-
-    // const svg = d3.select('#canvas')
-    // const node = svg.selectAll('.node')
-    
-   
 
   return (
     <div id='main-container'>

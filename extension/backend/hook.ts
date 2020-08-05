@@ -1,52 +1,76 @@
-/* 
-3 things to come back and check: 
-  if the export clean is needed - might not need this
-  if the string exception is needed when cleaning
-  if for the linkedListRecurse you need to check if the next node has the same state as the prev node
-*/
-/* eslint-disable */
 const throttle = require('lodash.throttle')
+
+//the export exists to indicate that the file is a module for typescript to allow the code to use global object
+export {};
+//define variable types for typscript here
+declare global {
+
+  interface devTools {
+    renderers: { size?: number };
+    // onCommitFiberRoot(any?);
+  }
+
+  interface Window {
+    __REACT_DEVTOOLS_GLOBAL_HOOK__: devTools;
+  }
+
+  interface Component {
+    name: any;
+    state?: any;
+    children?: any;
+    atoms?: any;
+  }
+
+
+}
 
 function patcher() {
 
   // grabs the React DevTools from the browser
-  const devTools = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
+  const devTools:any = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
   // if conditions to check if devTools is running or the user application is react
   if (!devTools) {
-    sendToContentScript('devTools is not activated, please activate!')
+    sendToContentScript('React DevTools is not activated, please activate React DevTools!')
   }
   if (devTools.renderers && devTools.renderers.size < 1) {
     sendToContentScript('The page is not using React or if it is using React please trigger a state change!')
   }
   // adding/patching functionality to capture fiberTree data to the onCommitFiberRoot method in devTools
   devTools.onCommitFiberRoot = (function (original) {
-    function newFunc(...args) {
+    function newFunc(...args:any) {
       const fiberDOM = args[1];
       console.log(fiberDOM);
       const rootNode = fiberDOM.current.stateNode.current;
-      // console.log('fibertree rootNode: ', rootNode);
-      const treeArr = [];
+      //create a new array that will be sent to the frontend after being populated with necessary data
+      const treeArr: any[] = [];
       try {
+        //this function collects the data for the component tree and stores atom names and state data
         recurseThrottle(rootNode.child, treeArr);
-        // console.log('arr before adding atom data: ', treeArr)
+        //this function below gets the atom value data for the right panel in UI
         treeArr.push(getAtomValues(treeArr[0], 'atomValues'));
+        //this function gets the link between selectors and atom for the selector/atom tree
         treeArr.push(getSelectorAtomLink(treeArr[0], 'nodeToNodeSubscriptions'))
-        console.log('arr before sending to content script: ', treeArr);
+        //if the data is populated correctly, the array will be sent to the content_script file in the backend
+        console.log('treearr sent to frontend', treeArr)
         if (treeArr.length > 0) sendToContentScript(treeArr);
       } catch (err) {
         console.log('Error at onCommitFiberRoot:', err)
-        sendToContentScript('Uh oh something went wrong with our application, please submit the issue on https://github.com/oslabs-beta/TotalRecoilJS')
+        sendToContentScript('Error: something went wrong with our application, please submit the issue on https://github.com/oslabs-beta/TotalRecoilJS')
       }
       return original(...args);
     }
     return newFunc;
-  })(devTools.onCommitFiberRoot) // devTools.onCommitFiberRoot runs immediately after adding our new functionality to devTools.onCommitFiberRoot
+    // Below syntax devTools.onCommitFiberRoot runs immediately after adding our new functionality to devTools.onCommitFiberRoot (and the input is the original function of onCommitFiberRoot)
+  })(devTools.onCommitFiberRoot)
 
 }
 
+//throttling the recusrive function getComponentData to run only once in 300 milliseconds, to improve performance as changes are made in the user application 
 const recurseThrottle = throttle(getComponentData, 300);
-function getComponentData(node, arr) {
-  const component = {};
+
+//recursive function (getComponentData) below traverses through the fiber tree and collects certain component,state, and atom data
+function getComponentData(node: any, arr: any[]) {
+  const component: Component = {name: ''};
   if (getName(node, component, arr) === -1) return;
   getState(node, component)
   getAtom(component)
@@ -54,7 +78,9 @@ function getComponentData(node, arr) {
   //getchildren calls getComponentData (name, state, atom), pushes into nested "children" array
   getChildren(node, component, arr)
 }
-function getName(node, component, arr) {
+
+//this function will get the same of the React components
+function getName(node: any, component: any, arr: Array<any>) {
   if (!node.type || !node.type.name) {
     // if this is an HTML tag just keep recursing without saving the name
     if (node.child) getComponentData(node.child, arr);
@@ -64,7 +90,9 @@ function getName(node, component, arr) {
     component.name = node.type.name;
   }
 }
-function getState(node, component) {
+
+//this functions gets all the data related to state in React fiber (and the data stored here is used later in other functions)
+function getState(node: any, component: any) {
   //checking for 3 conditions (if state exists, if its a linkedlist with state, if its not a linkedlist with state)
   //check if state exists in the node, if not just return and exit out of the function
   if (!node.memoizedState) return;
@@ -82,31 +110,35 @@ function getState(node, component) {
   }
   // if the state is not stored as a linkedlist, then run the clean state function
   component.state = cleanState(node.memoizedState)
-  function linkedListRecurse(node, treeArr) {
+  function linkedListRecurse(node: any, treeArr: any[]) {
     treeArr.push(cleanState(node.memoizedState))
-    //try the below without !== statement - what's the difference?
     if (node.next && node.memoizedState !== node.next.memoizedState) {
       linkedListRecurse(node.next, treeArr)
     }
   }
 }
-function getAtom(component) {
+
+//this function traverses through component.state property collected in the function getState and stores atom names
+function getAtom(component: Component) {
   // if component has no state there is not atom for it so just exit from the function;
   if (!component.state) {
     return;
   }
-  // Make a new Set
+  // Make a new empty Set
   const atomArr = new Set();
 
   // this will loop through component.state to get the atom data
   for (let i = 0; i < component.state.length; i++) {
       if (component.state[i]['current'] instanceof Set || component.state[i]['current'] instanceof Map) {
-        // if (component.state[i]['current'] instanceof Set) {
-        // this code will give us the value from the set to add to our newly created set
+        
+        // this code will give us the value from the existing set/map in component.state to add to our newly created set
         const it = component.state[i]['current'].values();
         let first = it.next();
         atomArr.add(first.value);
+
       }
+
+      //below code will convert the data in the create set to an array in component.atoms property, take out any duplicates, and delete the propert if no atoms exists for the component
       component.atoms = Array.from(atomArr);
       if (component.atoms.length === 0) {
         delete component.atoms;
@@ -120,8 +152,10 @@ function getAtom(component) {
       }
   }
 }
-function getChildren(node, component, arr) {
-  const children = [];
+
+//this is will get all the children and sibling components linked to the current component node and then run the recursive function getComponentData again on each child/sibling node
+function getChildren(node: any, component: Component, arr: any[]) {
+  const children: any[] = [];
   //check if the node has a child, if so then run the getComponentData on that child node(s)
   if (node.child) {
     getComponentData(node.child, children);
@@ -132,10 +166,12 @@ function getChildren(node, component, arr) {
   if (children.length > 0) component.children = children;
 }
 
-function getAtomValues(obj, prop) {
-  const arr = [];
+//this function populates atom values in the second position of the array that is sent to the front end
+function getAtomValues(obj: object, prop: string) {
+  const arr: any = [];
+  
   //this function populates the array with the data as map object that is found in tree
-  function recursivelyFindProp(o, keyToBeFound) {
+  function recursivelyFindProp(o: any, keyToBeFound: string) {
     if (typeof o !== 'object' || !o) {
       return;
     }
@@ -149,13 +185,20 @@ function getAtomValues(obj, prop) {
       }
     });
   }
-  recursivelyFindProp(obj, prop);
-  const result = {
-    'atomVal': {
 
-    }
+  //it recurses throught nested objects and arary to find the key 'atomValues' where the atom value data is stored (the atom values are in a map object)
+  recursivelyFindProp(obj, prop);
+
+  //the skeleton structure of how the data object will look stored in the array to send to the frontend
+  interface Result {
+    atomVal: any
+  }
+
+  const result: Result = {
+    atomVal: {}
   }
   
+  //converting map objects where the atom value is found into the result object with a key value pair
   for (let i = 0; i < arr.length; i++) {
     let mapData = arr[i]
     if (mapData) {
@@ -164,13 +207,14 @@ function getAtomValues(obj, prop) {
       }
     }
   }
-  return result;
 
+  return result;
 }
 
-function getSelectorAtomLink(obj, prop) {
-  let arr = [];
-  function recursivelyFindProp(o, keyToBeFound) {
+//this function creates and stores the data for the selector/atom tree and stores in the 3rd position in the array sent to the frontend
+function getSelectorAtomLink(obj: any, prop: string) {
+  let arr: any[] = [];
+  function recursivelyFindProp(o: any, keyToBeFound: string) {
     if (typeof o !== 'object' || !o) {
       return;
     }
@@ -184,12 +228,30 @@ function getSelectorAtomLink(obj, prop) {
       }
     });
   }
+
+  //this function recursively finds the key 'nodeToNodeSubscriptions' which has the data for atom to selector connections
   recursivelyFindProp(obj, prop);
-  const result = {
-    'name': 'Selector Tree',
-    'children': []
+
+  //skeleton structure of how the data will be stored in the array
+  interface SelectorTree {
+    name: string;
+    children: any[];
   }
-  result.children.push({ name: 'nonSelectorAtoms', children: []})
+
+  const result: SelectorTree = {
+    name: 'Selector Tree',
+    children: []
+  }
+
+  interface NonSelectorAtoms {
+    name: string;
+    children: any[];
+  }
+
+  const tempObj: NonSelectorAtoms = {name: 'nonSelectorAtoms', children: []}
+  result.children.push(tempObj)
+
+  //converting map data into object data to be stored
   const newArr = arr.filter((item, index) => arr.indexOf(item) === index)
   for (let i = 0; i < newArr.length; i++) {
     let mapData = newArr[i]
@@ -197,48 +259,58 @@ function getSelectorAtomLink(obj, prop) {
       for (let [key, value] of mapData) {
         let tempArr = [...value]
         for (let el of tempArr) {
-          let tempObj = {
+
+          let tempObj: SelectorTree = {
             name: '',
             children: []
           }
           tempObj.name = el;
-          tempObj.children.push({name: key, value: 100});
+
+          interface TreeValObj {
+            name: string;
+            value: number;
+          }
+          
+          const treeValObj = {
+            name: key,
+            value: 100
+          }
+
+          tempObj.children.push(treeValObj);
           result.children.push(tempObj);
         }
       }
     }
   }
 
-  let atomsAndSelectors = []
-  function getNonSelectorAtoms(result, obj) {
+  let atomsAndSelectors: any = [];
+  //finds all the atoms with selector connetions and compares if there are any atom names that exist in the component tree that do not show up in the 'nodeToComponentSubscriptions' because those are the atoms with no selectors
+  function getNonSelectorAtoms(result: any, obj: any) {
+    //below function finds the atom/selector data found in 'nodeToComponentSubscriptions' key
     findNested(obj, 'nodeToComponentSubscriptions')
     if(atomsAndSelectors.length > 0) {
-      let atomsAndSelectorsArr = [...atomsAndSelectors[0].keys()]
+      let atomsAndSelectorsArr = Array.from(atomsAndSelectors[0].keys());
       for (const el of atomsAndSelectorsArr) {
+
         if (!doesNestedValueExist(result, el)) {
           result.children[0].children.push({name: el, value: 100});
         } 
+
       }
     }
   }
 
-  function doesNestedValueExist(obj, text) {
-    var exists = false;
-    var keys = Object.keys(obj);
-    for(var i = 0; i < keys.length; i++) {
-      var key = keys[i];
-      var type = typeof obj[key];
+  //checks if a value exits in a nested object
+  function doesNestedValueExist(obj: any, text: any): boolean {
+    let exists = false;
+    let keys = Object.keys(obj);
+    for(let i = 0; i < keys.length; i++) {
+      let key = keys[i];
+      let type = typeof obj[key];
       if(type === 'object') {
         exists = doesNestedValueExist(obj[key], text);
-      } else if(type === 'array') {
-        for(var j = 0; j < obj[key].length; j++) {
-          exists = doesNestedValueExist(obj[key][j], text);
-      
-          if(exists) {
-            break;
-          }
-        }
-      } else if(type === 'string') {
+      } 
+      else if(type === 'string') {
         exists = obj[key].indexOf(text) > -1;
       }
       if(exists) {
@@ -248,7 +320,8 @@ function getSelectorAtomLink(obj, prop) {
     return exists;
   };
 
-  function findNested(o, keyToBeFound) {
+  //returns the data that exists for the key value that is in keyToBeFound input in a nested object
+  function findNested(o: any, keyToBeFound: string) {
     if (typeof o !== 'object' || !o) {
       return;
     }
@@ -262,12 +335,14 @@ function getSelectorAtomLink(obj, prop) {
       }
     });
   }
+  //this function recursively finds atoms that have no selectors
   getNonSelectorAtoms(result, obj)
   return result;
 }
 
-function cleanState(stateNode, depth = 0) {
-  let result;
+//this function cleans the state data for component.state property (this function is run inside getState function)
+function cleanState(stateNode: any, depth = 0) {
+  let result: any;
   if (depth > 10) return "Max recursion depth reached!"
   //checking if the stateNode is not an object or function, if it is not either return the stateNode
   if (typeof stateNode !== 'object' && typeof stateNode !== 'function') return stateNode;
@@ -284,8 +359,6 @@ function cleanState(stateNode, depth = 0) {
       return stateNode;
     }
     if (stateNode.$$typeof && typeof stateNode.$$typeof === 'symbol') {
-      //Realize includes edge case check for itemType!==string - when would this happen?
-      // return `<${stateNode.type.name} />`;
       return stateNode.type && typeof stateNode.type !== 'string' ? `<${stateNode.type.name} />` : 'React component';
     }
     if (Array.isArray(stateNode)) {
@@ -309,10 +382,12 @@ function cleanState(stateNode, depth = 0) {
     return `function: ${stateNode.name}()`;
   }
 }
-function sendToContentScript(obj) {
+
+//the function that sends the array with the necessary tree data to the frontend
+function sendToContentScript(obj: any) {
   const tree = JSON.parse(JSON.stringify(obj));
   window.postMessage({ tree }, '*');
 }
+
+//the patcher function is invoked one time when the app first runs to modify the onCommitFiberRoot function in React devTools to extract React Fiber
 patcher();
-// why is cleanState being exported is it being used anywhere?
-// export { cleanState };
