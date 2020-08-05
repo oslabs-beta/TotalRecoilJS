@@ -37,15 +37,15 @@ export const SelectorTree = (props) => {
       }
 
       // color number or stringNum input into rgb(num1, num2, num3)
-      const color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, props.tree[0].children.length + 1))
+      const color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, props.tree[2].children.length + 1))
       // console.log('color: ', color('12'));
 
       // formats number or stringNum input into chunks of 3 digits, 123456 -> '123,456'
       const format = d3.format(",d");
       // console.log('format: ', format('123456'))
 
-      const width = 932;
-      const radius = width / 6;
+      const width = 932; // 932/1200
+      const radius = width / 6; // always divide by 6
 
 
       const arc = d3.arc()
@@ -98,9 +98,10 @@ export const SelectorTree = (props) => {
       //  ----- create paths -----
 
       const path = g.append("g")
-        .selectAll("path")
+        .selectAll(".patharc")
         .data(root.descendants().slice(1))
         .join("path")
+        .attr('class', 'patharc')
         .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
         .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.6 : 0.4) : 0)
         .attr("d", d => arc(d.current));
@@ -111,7 +112,8 @@ export const SelectorTree = (props) => {
         .on("click", clicked);
 
       path.append("title")
-        .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
+        .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}`);
+        // .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
 
       //  ----- create paths ends -----    
 
@@ -125,12 +127,13 @@ export const SelectorTree = (props) => {
         .selectAll("text")
         .data(root.descendants().slice(1))
         .join("text")
-        .attr("dy", "0.35em")
-        .attr("fill-opacity", d => +labelVisible(d.current))
-        .attr("transform", d => labelTransform(d.current))
-        .text(d => d.data.name)
-
-        .style('font-size', '25px')
+          .attr("dy", "25")  // need dy for text wrapping
+          .attr("fill-opacity", d => +labelVisible(d.current))
+          .attr("transform", d => labelTransform(d.current))
+          .text(d => d.data.name)
+          .attr('class', 'arclabels')  // label for css styling
+          .call(wrap, 200)
+        // .style('font-size', '25px')
 
       //  ----- create labels ends -----
 
@@ -141,12 +144,16 @@ export const SelectorTree = (props) => {
       const parent = g.append("circle")
         .datum(root)
         .attr("r", radius)
+        .attr('class', 'selectorTreeHomeBtn')
         .attr("fill", "steelblue")
         .attr("pointer-events", "all")
         .on("click", clicked)
 
         // can work on getting name to center of parent circle
-        .text(d => d.data.name)
+        // .text(d => d.data.name)
+        // coming back to work on this
+      parent.append('title')
+        .text('Go Back');  
 
       //  ----- create top most level circle ends -----
 
@@ -201,6 +208,42 @@ export const SelectorTree = (props) => {
         const y = (d.y0 + d.y1) / 2 * radius;
         return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
       }
+
+      // line 230 238 toggle between px or em wrap
+      // extra personalized wrap util for wrapping text inside circular arc
+      function wrap(text, width) {
+        text.each(function() {
+          let text = d3.select(this),
+          // .text().match(/[A-Z][a-z]+|[0-9]+/g).join(" ");
+              // words is a string
+              words = text.text();
+              words = words.replace(words[0], words[0].toUpperCase());
+              console.log(words);
+              console.log(typeof words);
+              words = words
+              .match(/[A-Z][a-z]+|[0-9]+/g).join(" ")
+              .split(/\s+/).reverse();
+              // console.log(words);
+          let word,
+              line = [],
+              lineNumber = 0,
+              lineHeight = 1, // ems
+              y = text.attr("y"),
+              dy = parseFloat(text.attr("dy")),
+              tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "px");
+          while (word = words.pop()) {
+            line.push(word);
+            tspan.text(line.join(" "));
+            if (tspan.node().getComputedTextLength() > width) {
+              line.pop();
+              tspan.text(line.join(" "));
+              line = [word];
+              tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "px").text(word);
+            }
+          }
+        });
+      }
+
 
       //  ----- event handling functions ends -----
 
