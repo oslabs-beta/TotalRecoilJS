@@ -11,9 +11,9 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Stargazers][stars-shield]][stars-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+<!-- [![Contributors][contributors-shield]][contributors-url] -->
+<!-- [![Stargazers][stars-shield]][stars-url]
+[![LinkedIn][linkedin-shield]][linkedin-url] -->
 
 
 
@@ -21,10 +21,10 @@
 <br />
 <p align="center">
   <a href="https://github.com/oslabs-beta/TotalRecoilJS">
-    <img src="src/icons/Total Recoilv2.png" alt="Logo" width="200" >
+    <img src="src/icons/TotalRecoilv2.png" alt="Logo" width="200" >
   </a>
 
-  <h3 align="center">TotalRecoilJS</h3>
+  <!-- <h3 align="center">TotalRecoilJS</h3> -->
 
   <p align="center">
     A tool for Recoil developers
