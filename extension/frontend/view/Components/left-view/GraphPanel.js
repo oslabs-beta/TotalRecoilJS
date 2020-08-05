@@ -13,16 +13,16 @@ import TreeView from './treeView';
 
 const GraphPanel = (props) => {
   const [view, setView] = useState(true);
-  const [viewName, setviewName] = useState('Component Tree')
+  const [viewName, setviewName] = useState('COMPONENT TREE')
 
   const changeView = () => {
     setView(!view);
 
 
-    if (viewName === 'Component Tree') {
-      setviewName('Selector Tree')
+    if (viewName === 'COMPONENT TREE') {
+      setviewName('SELECTOR TREE')
     } else {
-      setviewName('Component Tree')
+      setviewName('COMPONENT TREE')
     }
   }
 

@@ -56,8 +56,8 @@ svg {
 circle {
   fill: #fff;
   /* fill: none; */
-  stroke: steelblue;
-  stroke-width: 3px;
+  stroke: #444857;
+  stroke-width: 1px;
   pointer-events: all;
 }
 
@@ -90,7 +90,7 @@ circle {
 
 .graph-button-1 {
   position: absolute;
-  top: 1%;
+  top: 2%;
   right: 36%;
   padding: 2px;
   background: none;
@@ -131,7 +131,7 @@ button:hover {
 .h1-absolute {
   position: absolute;
   left: 1%;
-  top: 1.5%;
+  top: 2%;
 
 }
 
