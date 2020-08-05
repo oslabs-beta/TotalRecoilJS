@@ -82,15 +82,16 @@ export const SelectorTree = (props) => {
       const svg = d3.select('#canvas')
         .append('svg')
         // .attr("viewBox", [0, 0, width * 10, width * 10])
-        .attr("viewBox", [0, 0, width + 70 , width + 70])
+        .attr("viewBox", [0, 0, width + 70, width + 70])
         .style("font", "10px sans-serif")
-        
+
+
       // g tag allows us to grab a whole of inner tags/elements 
       // then allowing us to do group transformation with them
       // as a 'group'
       // const g is the handle/variable name for that group of elements
       const g = svg.append("g")
-        .attr("transform", `translate(${width / 2 },${width / 2})`);
+        .attr("transform", `translate(${width / 2},${width / 2})`);
 
       //  ----- create svg ends -----
 
@@ -113,7 +114,7 @@ export const SelectorTree = (props) => {
 
       path.append("title")
         .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}`);
-        // .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
+      // .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
 
       //  ----- create paths ends -----    
 
@@ -127,13 +128,13 @@ export const SelectorTree = (props) => {
         .selectAll("text")
         .data(root.descendants().slice(1))
         .join("text")
-          .attr("dy", "25")  // need dy for text wrapping
-          .attr("fill-opacity", d => +labelVisible(d.current))
-          .attr("transform", d => labelTransform(d.current))
-          .text(d => d.data.name)
-          .attr('class', 'arclabels')  // label for css styling
-          .call(wrap, 200)
-        // .style('font-size', '25px')
+        .attr("dy", "25")  // need dy for text wrapping
+        .attr("fill-opacity", d => +labelVisible(d.current))
+        .attr("transform", d => labelTransform(d.current))
+        .text(d => d.data.name)
+        .attr('class', 'arclabels')  // label for css styling
+        .call(wrap, 200)
+      // .style('font-size', '25px')
 
       //  ----- create labels ends -----
 
@@ -149,11 +150,11 @@ export const SelectorTree = (props) => {
         .attr("pointer-events", "all")
         .on("click", clicked)
 
-        // can work on getting name to center of parent circle
-        // .text(d => d.data.name)
-        // coming back to work on this
+      // can work on getting name to center of parent circle
+      // .text(d => d.data.name)
+      // coming back to work on this
       parent.append('title')
-        .text('Go Back');  
+        .text('Go Back');
 
       //  ----- create top most level circle ends -----
 
@@ -212,25 +213,25 @@ export const SelectorTree = (props) => {
       // line 230 238 toggle between px or em wrap
       // extra personalized wrap util for wrapping text inside circular arc
       function wrap(text, width) {
-        text.each(function() {
+        text.each(function () {
           let text = d3.select(this),
-          // .text().match(/[A-Z][a-z]+|[0-9]+/g).join(" ");
-              // words is a string
-              words = text.text();
-              words = words.replace(words[0], words[0].toUpperCase());
-              console.log(words);
-              console.log(typeof words);
-              words = words
-              .match(/[A-Z][a-z]+|[0-9]+/g).join(" ")
-              .split(/\s+/).reverse();
-              // console.log(words);
+            // .text().match(/[A-Z][a-z]+|[0-9]+/g).join(" ");
+            // words is a string
+            words = text.text();
+          words = words.replace(words[0], words[0].toUpperCase());
+          console.log(words);
+          console.log(typeof words);
+          words = words
+            .match(/[A-Z][a-z]+|[0-9]+/g).join(" ")
+            .split(/\s+/).reverse();
+          // console.log(words);
           let word,
-              line = [],
-              lineNumber = 0,
-              lineHeight = 1, // ems
-              y = text.attr("y"),
-              dy = parseFloat(text.attr("dy")),
-              tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "px");
+            line = [],
+            lineNumber = 0,
+            lineHeight = 1, // ems
+            y = text.attr("y"),
+            dy = parseFloat(text.attr("dy")),
+            tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "px");
           while (word = words.pop()) {
             line.push(word);
             tspan.text(line.join(" "));

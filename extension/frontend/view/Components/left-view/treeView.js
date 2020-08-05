@@ -33,21 +33,21 @@ export const TreeView = (props) => {
 
                 .call(d3.zoom()
                     .scaleExtent([.25, 8])
-
+                    .translateExtent([[-3000, -4000], [3000, 4000]])
 
                     .on('zoom', function () {
                         svg.attr('transform', d3.event.transform)
                     }))
                 .attr('class', 'component-svg')
                 .append('g')
-                // .attr('transform', 'translate(20,40)scale(.5,.5)')
-                // 187,-49
-                if (window.innerHeight > 600){
-                    svg.attr('transform', 'translate(20,100)scale(.5,.5)')
-                  } else {
-                    svg.attr('transform', 'translate(200,-20)scale(.5,.5)')
-                  }
-  
+            // .attr('transform', 'translate(20,40)scale(.5,.5)')
+            // 187,-49
+            if (window.innerHeight > 600) {
+                svg.attr('transform', 'translate(20,100)scale(.5,.5)')
+            } else {
+                svg.attr('transform', 'translate(200,-20)scale(.5,.5)')
+            }
+
 
 
             let tree = d3.tree().size([panelWidth - 80, treeHeight]);
@@ -61,7 +61,7 @@ export const TreeView = (props) => {
                 .append('g')
                 .attr('class', 'node')
                 .attr('transform', (d) => 'translate(' + d.y + ',' + d.x + ')')
-                .attr('cursor','pointer')
+                .attr('cursor', 'pointer')
             // swap places of dx and dy, to change orientation of tree
 
             node.append('circle')
@@ -82,7 +82,7 @@ export const TreeView = (props) => {
                 const name = e.data.name
                 setatomhover([atoms, name])
             })
-            node.on('mouseout',(e) => {
+            node.on('mouseout', (e) => {
                 setatomhover([])
             })
 
@@ -112,7 +112,7 @@ export const TreeView = (props) => {
     return (
         <div>
             <div id='atom-hover'>
-                {atomhover[0] ? <h1> Atoms: {JSON.stringify(atomhover[0])}</h1> : <h1>No Atoms!</h1>}
+                {atomhover[0] ? <h1> Atoms: {JSON.stringify(atomhover[0])}</h1> : <h1> </h1>}
                 {atomhover[1] ? <h1> Name: {atomhover[1]}</h1> : <h1></h1>}
             </div>
             <div id='canvas'></div>

@@ -7,6 +7,10 @@ const History = ({ history }) => {
   const scrollToBottom = () => {
     messagesEnd.current.scrollIntoView({ block: 'end', behavior: 'smooth', inline: 'nearest' })
   }
+
+  // useEffect(() => {
+  //   messagesEnd.current.scrollTop = messagesEnd.current.scrollHeight;
+  // });
   useEffect(scrollToBottom, [history]);
 
 
