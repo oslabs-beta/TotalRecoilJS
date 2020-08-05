@@ -16,13 +16,23 @@ export const AtomView = ({ tree }) => {
     // traverses through D3 tree and if a node includes the h3 inner html tag, that node will light up
     function lightup(e) {
         let atom = e.target.innerHTML
-        d3.selectAll('circle').style('fill', originalColor).attr('r', 5)
+        d3.selectAll('.componentTreeNode').style('fill', originalColor).attr('r', 5)
         d3.select('#canvas').selectAll('.node').each(function (e) {
             if (!e.data.atoms) { }
             else if (e.data.atoms.includes(atom)) {
-                d3.select(this).select('circle').transition(t).style('fill', '#00FFFF').attr('r', 10)
+                d3.select(this).select('.componentTreeNode').transition(t).style('fill', 'rgb(240, 219, 79)').attr('r', 10.5)
             }
         })
+        atomValLightup(e);
+    }
+
+    function atomValLightup(e) {
+        Array.from(document.querySelectorAll('.h3-display-inline')).forEach(el => {
+            el.style.color = '#f4f4f4';
+        })
+        let atom = e.target
+        console.log('firing function: ', atom)
+        atom.style.color = '#F0DB4F';
     }
 
     // will iterate through atoms object and render it on screen 
@@ -40,7 +50,6 @@ export const AtomView = ({ tree }) => {
                             <p>{data}</p>
                         </details>
                     </div>
-
                 </div>
             )
         }

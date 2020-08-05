@@ -56,8 +56,8 @@ svg {
 circle {
   fill: #fff;
   /* fill: none; */
-  stroke: steelblue;
-  stroke-width: 3px;
+  stroke: #444857;
+  stroke-width: 1px;
   pointer-events: all;
 }
 
@@ -90,10 +90,11 @@ circle {
 
 .graph-button-1 {
   position: absolute;
-  top: 1%;
+  top: 2%;
   right: 36%;
   padding: 2px;
   background: none;
+  background-color: #444857;
   font-family: inherit;
   font-size: 14px;
   border: 2px solid rgb(0, 0, 0);
@@ -109,7 +110,10 @@ circle {
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
- 
+}
+
+.graph-button-1:focus {
+  outline:none;
 }
 
 button:hover {
@@ -127,7 +131,7 @@ button:hover {
 .h1-absolute {
   position: absolute;
   left: 1%;
-  top: 1.5%;
+  top: 2%;
 
 }
 
@@ -159,6 +163,7 @@ button:hover {
   margin: 0;
   width: 35%;
   border: 2px solid #333642;
+  border-left: 2px solid black;
 }
   
 .navbaritem {
@@ -178,19 +183,25 @@ button:hover {
 
 #link-container {
   display: flex;
-  width: 80%;
+  width: 100%;
   text-align: center;
   font-size: 20px;
   margin: auto;
+  padding-right: 15px;
+  justify-content: space-around;
+  padding-bottom: 10px;
+  /* border-bottom: 2px solid black; */
 }
 
 
 /* RIGHT VIEW ATOM.JS */
 .atom-values-tab {
-  /* height: 105vh; */
+  height: 105vh;
   margin: auto;
-  max-height: 80vh;
+  max-height: 87vh;
   overflow-y: scroll;
+  border-top: 2px solid black;
+  background-color: #444857;
 }
 
 .atom-container {
@@ -211,6 +222,7 @@ button:hover {
   text-align: left;
   margin-top: 5px;
   margin: auto;
+  background-color: #444857;
 }
 
 #atom-hover {
@@ -227,6 +239,10 @@ button:hover {
   cursor: pointer;
   color: #F0DB4F;
   transition: all .3s;
+}
+
+.h3-display-inline:active {
+  color: #F0DB4F;
 }
 
 .s-margin {
@@ -327,7 +343,7 @@ summary:hover {
 
 /* font-size does not work in arclabels */
 tspan {
-  font-size: 2em;
+  font-size: 1.25em;
 }
 
 
@@ -335,6 +351,6 @@ tspan {
 
 
 .blue {
-  color: #7289DA;
+  color: #F0DB4F;
 }
 
