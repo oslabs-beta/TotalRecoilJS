@@ -133,7 +133,7 @@ export const SelectorTree = (props) => {
         .attr("transform", d => labelTransform(d.current))
         .text(d => d.data.name)
         .attr('class', 'arclabels')  // label for css styling
-        .call(wrap, 200)
+        // .call(wrap, 200)
       // .style('font-size', '25px')
 
       //  ----- create labels ends -----
@@ -212,38 +212,38 @@ export const SelectorTree = (props) => {
 
       // line 230 238 toggle between px or em wrap
       // extra personalized wrap util for wrapping text inside circular arc
-      function wrap(text, width) {
-        text.each(function () {
-          let text = d3.select(this),
-            // .text().match(/[A-Z][a-z]+|[0-9]+/g).join(" ");
-            // words is a string
-            words = text.text();
-          words = words.replace(words[0], words[0].toUpperCase());
-          console.log(words);
-          console.log(typeof words);
-          words = words
-            .match(/[A-Z][a-z]+|[0-9]+/g).join(" ")
-            .split(/\s+/).reverse();
-          // console.log(words);
-          let word,
-            line = [],
-            lineNumber = 0,
-            lineHeight = 1, // ems
-            y = text.attr("y"),
-            dy = parseFloat(text.attr("dy")),
-            tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "px");
-          while (word = words.pop()) {
-            line.push(word);
-            tspan.text(line.join(" "));
-            if (tspan.node().getComputedTextLength() > width) {
-              line.pop();
-              tspan.text(line.join(" "));
-              line = [word];
-              tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "px").text(word);
-            }
-          }
-        });
-      }
+      // function wrap(text, width) {
+      //   text.each(function () {
+      //     let text = d3.select(this),
+      //       // .text().match(/[A-Z][a-z]+|[0-9]+/g).join(" ");
+      //       // words is a string
+      //       words = text.text();
+      //     words = words.replace(words[0], words[0].toUpperCase());
+      //     console.log(words);
+      //     console.log(typeof words);
+      //     words = words
+      //       .match(/[A-Z][a-z]+|[0-9]+/g).join(" ")
+      //       .split(/\s+/).reverse();
+      //     // console.log(words);
+      //     let word,
+      //       line = [],
+      //       lineNumber = 0,
+      //       lineHeight = 1, // ems
+      //       y = text.attr("y"),
+      //       dy = parseFloat(text.attr("dy")),
+      //       tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "px");
+      //     while (word = words.pop()) {
+      //       line.push(word);
+      //       tspan.text(line.join(" "));
+      //       if (tspan.node().getComputedTextLength() > width) {
+      //         line.pop();
+      //         tspan.text(line.join(" "));
+      //         line = [word];
+      //         tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "px").text(word);
+      //       }
+      //     }
+      //   });
+      // }
 
 
       //  ----- event handling functions ends -----
