@@ -21,53 +21,47 @@ export const TreeView = (props) => {
             const treeHeight = dataHeight * 200;
             const svgHeight = Math.max(treeHeight, window.innerHeight)
 
-
-
-
             const svg = d3.select('#canvas')
-
                 .append('svg')
                 .attr('width', panelWidth)
                 .attr('height', svgHeight + 80)
-
-
                 .call(d3.zoom()
                     .scaleExtent([.25, 8])
-
-
+                    // .translateExtent([[-3000, -4000], [3000, 4000]])
                     .on('zoom', function () {
                         svg.attr('transform', d3.event.transform)
-                    }))
+                    })
+                )
                 .attr('class', 'component-svg')
                 .append('g')
-                // .attr('transform', 'translate(20,40)scale(.5,.5)')
-                // 187,-49
-                if (window.innerHeight > 600){
-                    svg.attr('transform', 'translate(20,100)scale(.5,.5)')
-                  } else {
-                    svg.attr('transform', 'translate(200,-20)scale(.5,.5)')
-                  }
-  
 
+            // if windowheight is greater or less than 600, place tree in different place on screen
+            if (window.innerHeight > 600) {
+                svg.attr('transform', 'translate(20,100)scale(.5,.5)')
+            } else {
+                svg.attr('transform', 'translate(200,-20)scale(.5,.5)')
+            }
 
             let tree = d3.tree().size([panelWidth - 80, treeHeight]);
             tree(root)
 
+            // creates nodes
             const nodes = root.descendants()
-
             const node = svg.selectAll('.node')
                 .data(nodes)
                 .enter()
                 .append('g')
                 .attr('class', 'node')
                 .attr('transform', (d) => 'translate(' + d.y + ',' + d.x + ')')
-                .attr('cursor','pointer')
-            // swap places of dx and dy, to change orientation of tree
+                .attr('cursor', 'pointer')
 
+
+            // creates circle
             node.append('circle')
                 .attr('r', 10)
                 .attr('fill', 'steelblue')
 
+            // creates text
             node.append('text')
                 .attr("dy", "0.31em")
                 .attr("x", d => d._children ? -6 : 6)
@@ -77,16 +71,18 @@ export const TreeView = (props) => {
                 .text(function (d) {
                     return d.data.name
                 })
+
+            // on mouseover/mouseout set atomhover to an array with name of atoms/component
             node.on('mouseover', (e) => {
                 const atoms = e.data.atoms
                 const name = e.data.name
                 setatomhover([atoms, name])
             })
-            node.on('mouseout',(e) => {
+            node.on('mouseout', (e) => {
                 setatomhover([])
             })
 
-
+            // create links connecting all the nodes
             const links = root.links()
             const link = svg.selectAll('.link')
                 .data(links)
@@ -103,16 +99,11 @@ export const TreeView = (props) => {
         }
     }, [props.tree])
 
-    // let array = [];
-    // console.log(props.atomhover[0])
-    // props.atomhover[0].forEach((el) => {
-    //     array.push(<h1>{el}</h1>)
-    // })
 
     return (
         <div>
             <div id='atom-hover'>
-                {atomhover[0] ? <h1> Atoms: {JSON.stringify(atomhover[0])}</h1> : <h1>No Atoms!</h1>}
+                {atomhover[0] ? <h1> Atoms: {JSON.stringify(atomhover[0])}</h1> : <h1> </h1>}
                 {atomhover[1] ? <h1> Name: {atomhover[1]}</h1> : <h1></h1>}
             </div>
             <div id='canvas'></div>

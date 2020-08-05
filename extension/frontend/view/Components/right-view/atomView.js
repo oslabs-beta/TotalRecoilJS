@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef, Fragment } from 'react';
+import React from 'react';
 import * as d3 from '../../../../libraries/d3.js';
 import JSONPretty from 'react-json-pretty';
 
 
 
-export const AtomView2 = ({ tree }) => {
+export const AtomView = ({ tree }) => {
     const atomSelectors = []
     let originalColor;
 
@@ -35,7 +35,10 @@ export const AtomView2 = ({ tree }) => {
                 <div className='atom-container' >
                     <h3 className='h3-display-inline' onClick={lightup}>{prop}</h3>
                     <div className='atom-div'>
-                        <summary className='s-margin'> <details>{data}</details></summary>
+                        <details className='s-margin'>
+                            <summary>State</summary>
+                            <p>{data}</p>
+                        </details>
                     </div>
 
                 </div>
@@ -50,4 +53,4 @@ export const AtomView2 = ({ tree }) => {
     )
 }
 
-export default AtomView2;
+export default AtomView;
