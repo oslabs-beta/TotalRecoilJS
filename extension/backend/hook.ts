@@ -309,15 +309,6 @@ function getSelectorAtomLink(obj: any, prop: string) {
       if(type === 'object') {
         exists = doesNestedValueExist(obj[key], text);
       } 
-      // else if(type === 'array') {
-      //   for(let j = 0; j < obj[key].length; j++) {
-      //     exists = doesNestedValueExist(obj[key][j], text);
-      
-      //     if(exists) {
-      //       break;
-      //     }
-      //   }
-      // } 
       else if(type === 'string') {
         exists = obj[key].indexOf(text) > -1;
       }
@@ -367,8 +358,6 @@ function cleanState(stateNode: any, depth = 0) {
       return stateNode;
     }
     if (stateNode.$$typeof && typeof stateNode.$$typeof === 'symbol') {
-      //Realize includes edge case check for itemType!==string - when would this happen?
-      // return `<${stateNode.type.name} />`;
       return stateNode.type && typeof stateNode.type !== 'string' ? `<${stateNode.type.name} />` : 'React component';
     }
     if (Array.isArray(stateNode)) {
@@ -399,5 +388,5 @@ function sendToContentScript(obj: any) {
   window.postMessage({ tree }, '*');
 }
 
-//the patcher function is invoked one time when the app first runs to modify the onCommitFiberRoot function in React devTools
+//the patcher function is invoked one time when the app first runs to modify the onCommitFiberRoot function in React devTools to extract React Fiber
 patcher();
