@@ -21,7 +21,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/oslabs-beta/TotalRecoilJS">
-    <img src="images/Total Recoilv2.png" alt="Logo" width="200" >
+    <img src="src/icons/Total Recoilv2.png" alt="Logo" width="200" >
   </a>
 
   <h3 align="center">TotalRecoilJS</h3>
@@ -103,7 +103,7 @@ npm run dev
 
 5. Navigate to Extensions -> Load Unpacked -> Select Total-Recoil/build/extension
 
-![](/images/install.gif)
+![](/src/img/install.gif)
 
 
 
