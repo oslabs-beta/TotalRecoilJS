@@ -1,6 +1,5 @@
 import React from 'react';
 import GraphPanel from '../extension/frontend/view/Components/GraphPanel';
-// import ReactDOM from 'react-dom';
 import { tree } from '../mock/snapshot.js';
 import {
   render,
@@ -16,7 +15,7 @@ it('renders & matches snapshot - no props', () => {
   expect(asFragment()).toMatchSnapshot();
 });
 
-it('renders & matches snapshot - componetAtomTree props', () => {
+it('renders & matches snapshot - Tree props', () => {
   const {asFragment} = render(
     <GraphPanel
       tree={ tree }
