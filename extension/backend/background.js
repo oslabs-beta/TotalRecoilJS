@@ -1,4 +1,3 @@
-/* eslint-disable */
 const connectedTabs = {};
 
 //opens a long-running port connection between background script and content script
@@ -34,6 +33,7 @@ chrome.runtime.onConnect.addListener((port) => {
   
 });
 
+//runs after receiving message from the content script, it keeps track of the tab.id data when the recoil function in currently running on for reference
 function handleMessage(request, sender, sendResponse) {
   if(sender.tab) {
     const tabID = sender.tab.id;
@@ -42,7 +42,7 @@ function handleMessage(request, sender, sendResponse) {
     }
   }
   
-  return Promise.resolve('Dummy resolution for browser happiness');
+  return Promise.resolve('Filler resolution for the browser');
 }
 
 //listens for messages from content script

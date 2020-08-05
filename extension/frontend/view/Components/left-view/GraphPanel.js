@@ -18,6 +18,7 @@ const GraphPanel = (props) => {
   const changeView = () => {
     setView(!view);
 
+
     if (viewName === 'Component Tree') {
       setviewName('Selector Tree')
     } else {
