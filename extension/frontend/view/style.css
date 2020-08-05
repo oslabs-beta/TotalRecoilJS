@@ -187,8 +187,10 @@ button:hover {
 
 /* RIGHT VIEW ATOM.JS */
 .atom-values-tab {
-  height: 105vh;
+  /* height: 105vh; */
   margin: auto;
+  max-height: 80vh;
+  overflow-y: scroll;
 }
 
 .atom-container {
