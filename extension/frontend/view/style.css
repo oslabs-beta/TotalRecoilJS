@@ -154,11 +154,6 @@ button:hover {
 .a-right-active {
   color: #F0DB4F;
 }
-/* 
-.no-border-left {
-  border-left: 0;
-  border-radius: 10px;
-} */
 
 .navbar {
   margin: 0;
@@ -234,7 +229,7 @@ button:hover {
 
 .s-margin {
   width: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 
@@ -298,13 +293,15 @@ button:hover {
 
 summary {
   list-style-image: url(right-arrow.svg);
+  outline: none;
+}
+
+summary:hover {
+  cursor: pointer;
 }
 
 
-/* summary::-webkit-details-marker {
-  background: url(right-arrow.svg);
-  color: transparent;
-} */
+
 
 
 /* selector tree css vvv */
