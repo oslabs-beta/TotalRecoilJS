@@ -27,7 +27,7 @@ export const TreeView = (props) => {
                 .attr('height', svgHeight + 80)
                 .call(d3.zoom()
                     .scaleExtent([.25, 8])
-                    .translateExtent([[-3000, -4000], [3000, 4000]])
+                    // .translateExtent([[-3000, -4000], [3000, 4000]])
                     .on('zoom', function () {
                         svg.attr('transform', d3.event.transform)
                     })

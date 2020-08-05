@@ -7,10 +7,13 @@ const History = ({ history }) => {
   const scrollToBottom = () => {
     messagesEnd.current.scrollIntoView({ block: 'end', behavior: 'smooth', inline: 'nearest' })
   }
-  // useEffect(() => {
-  //   messagesEnd.current.scrollTop = messagesEnd.current.scrollHeight;
-  // });
-  useEffect(scrollToBottom, []);
+
+  useEffect(() => {
+    const historyInfo = document.getElementById('history-info');
+    historyInfo.scrollTop = historyInfo.scrollHeight;
+  }, []);
+
+  useEffect(scrollToBottom, [history]);
 
   const historyMap = history.map((hist) => {
     // get the atoms and state data 
