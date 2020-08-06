@@ -115,14 +115,14 @@ Visualize your component tree and see which components are subscribed to which a
 
 Troubleshoot by seeing the current state held in each atom. 
 
-![](/src/img/showState.gif)
+![](/src/img/showState-tab.gif)
 
 <insert gif of atom state>
 
 View list of previous states to track changes. 
 On the history tab, you can see up to 10 previous state snapshots.
 
-![](/src/img/history.gif)
+![](/src/img/history-tab.gif)
 
 <insert gif of history>
 
