@@ -110,6 +110,7 @@ circle {
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
+  box-shadow: 1px 1px black;
 }
 
 .graph-button-1:focus {
@@ -147,6 +148,7 @@ button:hover {
   padding: 4px;
   font-size: 25px;
   background-color: #444857;
+  box-shadow: 1px 1px black;
 }
 
 .a-right:hover {
@@ -205,6 +207,7 @@ button:hover {
 }
 
 .atom-container {
+  box-shadow: 1px 1px black;
   border: 2px black solid;
   border-radius: 10px;
   padding: 10px;
@@ -222,6 +225,8 @@ button:hover {
   text-align: left;
   margin-top: 5px;
   margin: auto;
+  padding-left: 5px;
+  padding-right: 5px;
   background-color: #444857;
 }
 
@@ -325,9 +330,9 @@ summary:hover {
 /* selector tree css vvv */
 
 .patharc {
-  fill: #7289DA;
-  opacity: 0.3;
-  stroke: #F0DB4F;
+  /* fill: #7289DA; */
+  /* opacity: 0.3; */
+  stroke: #f4f4f4;
   stroke-width: 3px;
 }
 
@@ -337,7 +342,7 @@ summary:hover {
 
 .selectorTreeHomeBtn {
   fill: none;
-  stroke: #F0DB4F;
+  stroke: #f4f4f4;
   stroke-width: 5px;
 }
 
@@ -352,5 +357,17 @@ tspan {
 
 .blue {
   color: #F0DB4F;
+}
+
+.legend {
+  position: absolute;
+  left: 1%;
+  top: 10%;
+}
+
+.box {
+  width: 15px;
+  height: 15px;
+  border: 1px solid black;
 }
 
