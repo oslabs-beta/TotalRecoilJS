@@ -21,7 +21,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/oslabs-beta/TotalRecoilJS">
-    <img src="src/icons/TotalRecoilv2.png" alt="Logo" width="200" >
+    <img src="src/icons/Recoil-PNG-Gray.png" alt="Logo" width="200" >
   </a>
 
   <!-- <h3 align="center">TotalRecoilJS</h3> -->
@@ -29,10 +29,10 @@
   <p align="center">
     A tool for Recoil developers
     <br />
-    <a href="https://github.com/oslabs-beta/TotalRecoilJS"><strong>Download Chrome Extension »</strong></a>
+    <a href="https://github.com/oslabs-beta/TotalRecoilJS"><strong>Download Chrome Extension (Pending Approval) »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/oslabs-beta/TotalRecoilJS/blob/master/README.md">View Demo  App (Recoil Application)</a>
+    <a href="https://github.com/silvia-miranda/RecoilTravel">View Demo App (Recoil Application)</a>
     
   </p>
 </p>
@@ -57,10 +57,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-
-
 Total RecoilJS is a tool created to help developers visualize and track their Recoil state via a Chrome extension.
-
 
 
 ### Built With
