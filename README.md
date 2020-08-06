@@ -115,16 +115,22 @@ Visualize your component tree and see which components are subscribed to which a
 
 Troubleshoot by seeing the current state held in each atom. 
 
+![](/src/img/showState.gif)
+
 <insert gif of atom state>
 
 View list of previous states to track changes. 
 On the history tab, you can see up to 10 previous state snapshots.
+
+![](/src/img/history.gif)
 
 <insert gif of history>
 
  View all selector-atom subscriptions using our interactive sunburst and click on any selector to see all subscribed atoms.
 
 <insert gif of sunburst image>
+  
+  ![](/src/img/selector.gif)
 
 
 
