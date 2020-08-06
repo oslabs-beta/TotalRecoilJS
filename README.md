@@ -103,7 +103,7 @@ npm run dev
 
 5. Navigate to Extensions -> Load Unpacked -> Select Total-Recoil/build/extension
 
-![](/src/img/install.gif)
+![](/src/img/installApp.gif)
 
 
 
