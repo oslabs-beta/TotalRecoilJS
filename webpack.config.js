@@ -90,6 +90,10 @@ module.exports = {
           from: 'extension/backend/content_script.js',
           to: '../extension/content_script.js',
         },
+        {
+          from: 'extension/icon.png',
+          to: '../extension/icon.png',
+        }
       ],
     }),
     // Enables hot reloading - use npm run dev command
