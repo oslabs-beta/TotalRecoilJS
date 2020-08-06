@@ -13,14 +13,44 @@ export const SelectorTree = (props) => {
   useEffect(() => {
     if (props.tree) {
 
-
       console.log('props tree', props.tree[2])
       document.querySelector('#canvas').innerHTML = ''
 
-      // const h1 = document.querySelector('#canvas');
+      // const colorLegends = document.querySelector('#canvas');
       // const title = document.createElement('h1');
-      // title.innerHTML = 'short';
-      // h1.appendChild(title);
+      // title.innerHTML = 'blue: selectors \n ligherblue: subscribers';
+      // colorLegends.appendChild(title);
+
+      var colorList = {Selectors: '#7289da', Subscribers: '#7289da'};
+
+      const colorize = function(colorList) {
+          var container = document.querySelector('#canvas');
+          var parentContainer = document.createElement("DIV");
+          parentContainer.className = 'legend';
+          for (var key in colorList) {
+              var boxContainer = document.createElement("DIV");
+              var box = document.createElement("DIV");
+              var label = document.createElement("DIV");
+
+              label.innerHTML = key;
+              box.className = "box";
+              box.style.backgroundColor = colorList[key];
+              if(key === 'Selectors') {
+                box.style.opacity = 1;
+              } else {
+                box.style.opacity = 0.3;
+              }
+
+              boxContainer.appendChild(box);
+              boxContainer.appendChild(label);
+
+              parentContainer.appendChild(boxContainer);
+              container.appendChild(parentContainer);
+
+        }
+      }
+
+      colorize(colorList);
 
       // -------------------------------------------
 
@@ -36,8 +66,10 @@ export const SelectorTree = (props) => {
           (root);
       }
 
+      const myColor = d3.scaleOrdinal().domain(props.tree[2]).range(['#7289da']);
+
       // color number or stringNum input into rgb(num1, num2, num3)
-      const color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, props.tree[2].children.length + 1))
+      // const color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, props.tree[2].children.length + 1))
       // console.log('color: ', color('12'));
 
       // formats number or stringNum input into chunks of 3 digits, 123456 -> '123,456'
@@ -103,8 +135,8 @@ export const SelectorTree = (props) => {
         .data(root.descendants().slice(1))
         .join("path")
         .attr('class', 'patharc')
-        .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
-        .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.6 : 0.4) : 0)
+        .attr("fill", d => { while (d.depth > 1) d = d.parent; return myColor(d.data.name); })
+        .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 1 : 0.35) : 0)
         .attr("d", d => arc(d.current));
 
       // ----- filters into inner elements, allows 'zoom' -----
@@ -185,7 +217,7 @@ export const SelectorTree = (props) => {
           .filter(function (d) {
             return +this.getAttribute("fill-opacity") || arcVisible(d.target);
           })
-          .attr("fill-opacity", d => arcVisible(d.target) ? (d.children ? 0.6 : 0.4) : 0)
+          .attr("fill-opacity", d => arcVisible(d.target) ? (d.children ? 1 : 0.35) : 0)
           .attrTween("d", d => () => arc(d.current));
 
         label.filter(function (d) {

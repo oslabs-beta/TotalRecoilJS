@@ -330,9 +330,9 @@ summary:hover {
 /* selector tree css vvv */
 
 .patharc {
-  fill: #7289DA;
-  opacity: 0.3;
-  stroke: #F0DB4F;
+  /* fill: #7289DA; */
+  /* opacity: 0.3; */
+  stroke: #f4f4f4;
   stroke-width: 3px;
 }
 
@@ -342,7 +342,7 @@ summary:hover {
 
 .selectorTreeHomeBtn {
   fill: none;
-  stroke: #F0DB4F;
+  stroke: #f4f4f4;
   stroke-width: 5px;
 }
 
@@ -357,5 +357,17 @@ tspan {
 
 .blue {
   color: #F0DB4F;
+}
+
+.legend {
+  position: absolute;
+  left: 1%;
+  top: 10%;
+}
+
+.box {
+  width: 15px;
+  height: 15px;
+  border: 1px solid black;
 }
 
