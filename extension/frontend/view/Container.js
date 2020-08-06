@@ -33,7 +33,7 @@ const Container = () => {
       lastHistory = JSON.stringify(history[history.length - 1].tree[1].atomVal);
     }
     if (lastHistory == stringTree) return;
-    if (history.length === 7) {
+    if (history.length === 10) {
       const historyCopy = [...history]
       historyCopy.shift();
       setHistory([...historyCopy, { count, tree }]);

@@ -39,6 +39,7 @@ function patcher() {
   devTools.onCommitFiberRoot = (function (original) {
     function newFunc(...args:any) {
       const fiberDOM = args[1];
+      console.log(fiberDOM);
       const rootNode = fiberDOM.current.stateNode.current;
       //create a new array that will be sent to the frontend after being populated with necessary data
       const treeArr: any[] = [];

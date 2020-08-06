@@ -58,14 +58,17 @@ export const TreeView = (props) => {
 
             // creates circle
             node.append('circle')
-                .attr('r', 10)
-                .attr('fill', 'steelblue')
+                .attr('class', 'componentTreeNode')
+                .attr('r', 5)
+                // .attr('fill', 'steelblue')
+                .attr('fill', 'rgb(244, 244, 244)')
 
             // creates text
             node.append('text')
                 .attr("dy", "0.31em")
                 .attr("x", d => d._children ? -6 : 6)
-                .attr('fill', '#F0DB4F')
+                // .attr('fill', '#F0DB4F')
+                .attr('fill', 'rgb(244, 244, 244)')
                 .style('font-size', '22px')
                 .attr("text-anchor", d => d._children ? "end" : "start")
                 .text(function (d) {

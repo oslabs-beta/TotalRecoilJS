@@ -2,7 +2,7 @@ const connectedTabs = {};
 
 //opens a long-running port connection between background script and content script
 //adds tab info for any tab that has our extension open
-//executes content script on connect (aka adding hook.js script)
+//executes content script on connect (aka adding hook.js script)cd ..
 chrome.runtime.onConnect.addListener((port) => {
 
   const panelListener = (request, sender, sendResponse) => {
