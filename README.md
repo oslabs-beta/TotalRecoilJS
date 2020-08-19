@@ -29,7 +29,7 @@
   <p align="center">
     A tool for Recoil developers
     <br />
-    <a href="https://github.com/oslabs-beta/TotalRecoilJS"><strong>Download Chrome Extension (Pending Approval) »</strong></a>
+    <a href="https://chrome.google.com/webstore/detail/recoil-dev-tools/dhjcdlmklldodggmleehadpjephfgflc"><strong>Download Chrome Extension»</strong></a>
     <br />
     <br />
     <a href="https://github.com/silvia-miranda/RecoilTravel">View Demo App (Recoil Application)</a>
