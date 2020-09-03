@@ -129,7 +129,7 @@ function getAtom(component: Component) {
 
   // this will loop through component.state to get the atom data
   for (let i = 0; i < component.state.length; i++) {
-      if (component.state[i]['current'] instanceof Set || component.state[i]['current'] instanceof Map) {
+       if (component.state[i] && (component.state[i]['current'] instanceof Set || component.state[i]['current'] instanceof Map)) {
         
         // this code will give us the value from the existing set/map in component.state to add to our newly created set
         const it = component.state[i]['current'].values();
